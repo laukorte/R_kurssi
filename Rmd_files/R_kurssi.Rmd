@@ -1,0 +1,29 @@
+---
+title: "Sosiaalitieteiden tilastollisten menetelmien R-harjoituskurssi, 2 op"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(knitr)
+library(kableExtra)
+library(tidyverse)
+knitr::opts_chunk$set(echo = FALSE)
+dataset <- readRDS(paste0("C:/Users/laukorte/OneDrive - ",  
+                    "University of Eastern Finland/Documents/",   
+                    "R_opetus/dataset"))
+df <- readRDS(paste0("C:/Users/laukorte/OneDrive - ",  
+                    "University of Eastern Finland/Documents/",   
+                    "R_opetus/dataset2"))
+```
+
+
+<!-- Lisätään eri harjoituskerrat yksitellen runkoon. Tämä siksi, että 
+voidaan pitää harjoituskerrat omina tiedostoinaan -->
+
+```{r harjoitus1, child = '1-harjoituskerta.Rmd'}
+```
+
+```{r harjoitus2, child = '2-harjoituskerta.Rmd'}
+```

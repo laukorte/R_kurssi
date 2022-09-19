@@ -1,0 +1,80 @@
+## Harjoituskerta 2
+```{r}
+DiagrammeR::grViz("digraph {
+  graph [layout = dot, rankdir = TB]
+  
+  node [shape = rectangle]        
+  rec1 [label = 'Luokittelu']
+  rec2 [label = 'Järjestys']
+  rec3 [label =  'Välimatka']
+  rec4 [label = 'Suhde']
+  rec5 [label = 'Epäjatkuvat']
+  rec6 [label = 'Jatkuvat']
+  
+  rec7[label = 
+    <
+    <br/> &#8226; Frekvenssit <br ALIGN = 'LEFT'/> &#8226; Sijaintiluvut: moodi, mediaani<br ALIGN = 'LEFT'/> &#8226; Pylväsdiagrammi <br ALIGN = 'LEFT' />
+    >
+]
+
+rec8[label = 
+    <
+    <br/> &#8226; Sijaintiluvut: moodi, mediaani, keskiarvo<br ALIGN = 'LEFT'/> &#8226; Hajontaluvut: vaihteluväli, keskihajonta, vinous, huipukkuus<br ALIGN = 'LEFT'/> &#8226; Histogrammi <br ALIGN = 'LEFT' />
+    >
+]
+
+
+  
+  # edge definitions with the node IDs
+  rec1 -> rec5; rec2 -> rec5; rec3 -> rec6; rec4 -> rec6;
+  rec5 -> rec7; rec6 -> rec8
+  }",
+  height = 500)
+```
+
+
+### Frekvenssijakaumat
+
+Muuttujan frekvenssijakaumaa voi tutkia funktiolla table
+
+```{r, echo=TRUE}
+table(df$F11, useNA = "always")
+```
+
+
+### Exercise with Hint
+
+*Here's an exercise where the chunk is pre-evaulated via the `exercise.eval` option (so the user can see the default output we'd like them to customize). We also add a "hint" to the correct solution via the chunk immediate below labeled `print-limit-hint`.*
+
+Modify the following code to limit the number of rows printed to 5:
+
+```{r print-limit, exercise=TRUE, exercise.eval=TRUE}
+mtcars
+```
+
+```{r print-limit-hint}
+head(mtcars)
+```
+
+### Quiz
+
+*You can include any number of single or multiple choice questions as a quiz. Use the `question` function to define a question and the `quiz` function for grouping multiple questions together.*
+
+Some questions to verify that you understand the purposes of various base and recommended R packages:
+
+```{r quiz}
+quiz(
+  question("Which package contains functions for installing other R packages?",
+    answer("base"),
+    answer("tools"),
+    answer("utils", correct = TRUE),
+    answer("codetools")
+  ),
+  question("Which of the R packages listed below are used to create plots?",
+    answer("lattice", correct = TRUE),
+    answer("tools"),
+    answer("stats"),
+    answer("grid", correct = TRUE)
+  )
+)
+```
