@@ -18,6 +18,11 @@ df <- readRDS(paste0("C:/Users/laukorte/OneDrive - ",
                     "R_opetus/dataset2"))
 ```
 
+```{css, echo=FALSE}
+svg { pointer-events: none; }
+
+```
+
 
 <!-- Lisätään eri harjoituskerrat yksitellen runkoon. Tämä siksi, että 
 voidaan pitää harjoituskerrat omina tiedostoinaan -->
@@ -26,4 +31,7 @@ voidaan pitää harjoituskerrat omina tiedostoinaan -->
 ```
 
 ```{r harjoitus2, child = '2-harjoituskerta.Rmd'}
+```
+
+```{r harjoitus3, child = '3-harjoituskerta.Rmd'}
 ```
