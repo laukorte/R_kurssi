@@ -1,0 +1,16 @@
+harjoituskerta-1
+yleiset-asiat
+kurssilla-käytettävä-aineisto
+kyselytutkimus
+r-ja-rstudio
+aineiston-syöttäminen-rään
+tietorakenteet
+vektorit
+datakehikko
+harjoituskerta-2
+valmiin-aineiston-tuominen-rään
+aineiston-kuvailu
+harjoituskerta-3
+muuttujien-muunnokset
+ristiintaulukointi
+ristiintaulukointi-ja-chi2-testi

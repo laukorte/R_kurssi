@@ -1,0 +1,101 @@
+
+# Harjoituskerta 2
+
+```{r, echo = FALSE}
+luo_kurssiaikataulu(3)
+```
+
+
+<center>
+
+```{r, fig.align='center', dev='png', echo = FALSE}
+DiagrammeR::grViz("digraph {
+  graph [layout = dot, rankdir = TB, center=TRUE,
+  label=
+  <
+  <br/> Jakauman tarkastelu  <br/>
+    <font point-size='30'>Minkälainen muuttuja on kyseessä?</font>
+  <br/>
+  >, labelloc=top,
+  fontsize = '40', margin='1.5']
+  
+  node [shape = rectangle, style='filled', fontname = Helvetica, fontsize = '20']        
+  rec1 [label = 'Luokittelu', fillcolor='#077d9e', fontcolor='white']
+  rec2 [label = 'Järjestys', fillcolor='#077d9e', fontcolor='white']
+  rec3 [label =  'Välimatka', fillcolor='#077d9e', fontcolor='white']
+  rec4 [label = 'Suhde', fillcolor='#077d9e', fontcolor='white']
+  rec5 [label = 'Epäjatkuvat', fillcolor='#ccd8df']
+  rec6 [label = 'Jatkuvat', fillcolor='#ccd8df']
+  rec7[label = 
+    <
+    <br/> &#8226; Frekvenssit <br ALIGN = 'LEFT'/> &#8226; Sijaintiluvut: moodi, mediaani<br ALIGN = 'LEFT'/> &#8226; Pylväsdiagrammi <br ALIGN = 'LEFT' />
+    >, fillcolor='#e7ecf0'
+]
+
+rec8[label = 
+    <
+    <br/> &#8226; Sijaintiluvut: moodi, mediaani, keskiarvo<br ALIGN = 'LEFT'/> &#8226; Hajontaluvut: vaihteluväli, keskihajonta, vinous, huipukkuus<br ALIGN = 'LEFT'/> &#8226; Histogrammi <br ALIGN = 'LEFT' />
+    >, fillcolor='#e7ecf0'
+]
+
+
+  
+  # edge definitions with the node IDs
+  rec1 -> rec5; rec2 -> rec5; rec3 -> rec6; rec4 -> rec6;
+  rec5 -> rec7; rec6 -> rec8
+  }",
+  height = '100%', width = '100%')
+```
+
+</center>
+
+
+## Valmiin aineiston tuominen R:ään
+
+- Ohjeet löytyvät [täältä](https://www.fsd.tuni.fi/fi/aineistot/taustatietoa/spss-portable-r/)
+```{r eval = FALSE}
+# Asennetaan "memisc"-niminen paketti
+install.packages('memisc')
+
+# Otetaan käyttöön kyseinen paketti
+library(memisc)
+
+# Ladataan aineisto R:ään, korjaa polku tiedostoon oikeaksi eli
+# laita "D:/data.por" tilalle se tiedostopolku, johon talletit datan
+ds <- as.data.set(spss.portable.file("D:/data.por")) 
+
+# Muutetaan heti useammin käytettyyn dataframe-muotoon
+df <- as.data.frame(ds)
+
+
+```
+
+## Aineiston kuvailu
+
+### Frekvenssijakaumat {-}
+
+Muuttujan frekvenssijakaumaa voi tutkia funktiolla **table**. Prosenttijakauman saa
+näkymään funktiolla **prop.table**, jolle annetaan argumentiksi table-objekti.
+
+```{r, out.width="100%"}
+frekvenssitaulu <- table(df$F11, useNA = "always")
+frekvenssitaulu
+prop.table(frekvenssitaulu)
+
+```
+
+### Pylväsdiagrammi {-}
+
+```{r out.width="100%"}
+# Muutetaan kuvan marginaaleja
+par(mar=c(10, 4, 4, 4))
+# Jaetaan merkkijonot useammalle riville, niin näkyvät paremmin kuvassa
+levels(df$F11) <- str_wrap(levels(df$F11), 20)
+
+frekvenssitaulu <- table(df$F11, useNA = "always")
+# las-parametri vaihtaa x-akselin labeleiden suunnan, space-parametrilla muutetaan
+# pylväiden etäisyyksiä, cex.names-parametrilla muutetaan x-akselin tekstin kokoa
+barplot(frekvenssitaulu, las = 2, space = c(0.5), cex.names = 0.75)
+```
+
+

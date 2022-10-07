@@ -1,0 +1,141 @@
+# Harjoituskerta 3
+
+```{r, echo=FALSE}
+luo_kurssiaikataulu(4)
+```
+
+
+## Muuttujien muunnokset 
+
+<!-- - Muunnoksista tarkemmin [Tietoarkiston](https://www.fsd.tuni.fi/fi/palvelut/menetelmaopetus/kvanti/muunnokset/muunnokset/) sivuilla -->
+
+- Alkuperäisiä muuttujia muunnetaan tai luokitellaan uudelleen
+  - Tavoitteena on esim. aineiston kuvailun tai analysoinnin helpottuminen / mahdollistaminen ja tulkintojen helpottuminen
+  - Esimerkiksi: aineistossa saatavilla oleva muuttuja on vastaajan syntymävuosi, mutta haluamme raportoida vastaajan iän → syntymävuosimuuttuja muunnetaan kuvaamaan vastaajan ikää
+  - Toinen esimerkki 2: muuttuja tulee luokitella ennen ristiintaulukointia → jatkuva ikämuuttuja muunnetaan ikäryhmiä kuvaavaksi muuttujaksi
+- Usein käytettyjä muuttujamuunnoksia on myös [uudelleenkoodaus](https://www.fsd.tuni.fi/fi/palvelut/menetelmaopetus/kvanti/muunnokset/muunnokset/#uudelleenkoodaus) (recode)    
+  - Uudelleenkoodatessa muuttujia alkuperäisen muuttujan arvot vaihdetaan uusiin arvoihin
+    - Tarpeen esim. kun halutaan kääntää alkuperäisen muuttujan "suunta" = pienet arvot muutetaan suuriksi arvoiksi ja päinvastoin. Huom! tärkeää summamuuttujia luodessa
+  - Muuttujan uudelleenluokittelu (yhdistetään muuttujan luokkia)
+  - Muuttujan luokkia yhdistetään usein silloin, kun luokassa on liian vähän havaintoja
+    - Esim. Khiin nekiön testin oletukset eivät toteudu → Yhdistetään frekvenssiltään pienimmät luokat
+    - Luokkien yhdistämisellä täytyy aina olla myös sisällöllisiä / teoreettisia perusteluja
+    
+#### Harjoitus a:{-}
+
+Uudelleenluokitellaan muuttuja **C7**.
+
+```{r, echo=TRUE}
+
+library(tidyverse)
+# Varmistetaan, että muuttuja C7 on luokaltaan faktori
+class(df$C7)
+# Muuttujan frekvenssijakauma
+table(df$C7, useNA = "always")
+# Tehdään aineistoon kopio muuttujasta C7 ja asetetaan sen nimeksi terveys
+df$terveys <- df$C7
+# Tutkitaan funktion levels-avulla faktorin tasoja
+levels(df$terveys)
+# Yhdistetään luokat Huono ja Erittäin huono
+levels(df$terveys)[c(4, 5)] <- "Huono tai erittäin huono"
+table(df$terveys, useNA = "always")
+
+```
+#### Harjoitus b:{-}
+
+Muodostetaan kurssin harjoitusainestoon ikämuuttuja, joka kertoo henkilön iän vuonna 2022.
+
+```{r, echo = TRUE}
+
+df$ika_v22 <- 2022 - df$F3_1
+
+
+```
+
+```{r, echo = FALSE}
+
+summary(df$ika_v22)
+hist(df$ika_v22) 
+
+```
+
+#### Harjoitus c: {-}
+
+Luokitellaan juuri luotu ikämuuttuja neljään luokkaan.
+
+```{r}
+
+# Käytetään cut-funktiota tähän
+# Kts. ?cut
+
+df$ika_kategorinen <- cut(df$ika_v22, breaks = c(0, 30, 50, 65, Inf), labels = c("luokka1_30_tai_alle", "luokka2_31_50", "luokka3_51_65", "luokka4_yli66"),  include.lowest = TRUE) 
+# Piirretään kuvaaja
+plot(df$ika_kategorinen)
+# Frekvenssijakauma
+
+table(df$ika_kategorinen)
+prop.table(table(df$ika_kategorinen))
+
+```
+
+    
+## Ristiintaulukointi
+
+
+#### Harjoitus: {-}
+
+Tarkastellaan,o onko miesten ja naisten välillä eroa sen suhteen, mikä on korkein koulutus, jonka vastaaja on suorittanut
+
+```{r}
+koul_sp <- table(df$F15, df$F2_1)
+koul_sp
+# Huom. margin-argumentin arvo 2, jonka avulla lasketaan koulutuksen prosentuaalinen
+# jakautuminen sukupuolittain
+# ?prop.table
+prop.table(koul_sp, margin = 2)
+
+# Koulutus muuttujan frekvenssijakauma - onko syytä yhdistellä luokkia?
+table(df$F15, useNA = "always")
+
+# Tehdään uusi koulutus-muuttuja, jossa luokkia on yhdistelty
+df$koulutus <- df$F15
+# Luokitellaan uudelleen
+levels(df$koulutus) <- c("Perusaste", "Perusaste", "Perusaste",
+                    "Toinen_aste","Toinen_aste", "Toinen_aste","Toinen_aste",  "Toinen_aste",
+                     "Alempi_korkea", "Alempi_korkea",
+                    "Ylempi_korkea","Ylempi_korkea",
+                    "Lisensiaatti_tohtori", "Lisensiaatti_tohtori", 
+                    NA, NA, NA)
+
+# Uuden koulutusmuuttujan ja sukupuolen ristiintaulkointi
+uusi_koul_sp <- table(df$koulutus, df$F2_1)
+prop.table(uusi_koul_sp, 2)
+```
+### Ristiintaulukointi ja $\chi^2$-testi
+
+- Tutkitaan onko parisuhdestatuksella (tilastollista) yhteyttä siihen, miten kokee kotitalouden tulojen riittävyyden.
+- Tee ristiintaulukko muuttujista: 
+  - [F2_1] Vastaajan sukupuoli ja [C6] Kuinka turvalliseksi tunnet olosi kävellessäsi yksin illalla asuinalueellasi? ja testaa mahdollisen eron tilastollinen merkitsevyys Khiin neliön testillä
+- Jos testitulos antaa aihetta uskoa, että nollahypoteesi voidaan hylätä (jos p<0.05), todetaan, että muuttujien välillä on yhteys perusjoukossa.
+  - H0: Muuttujat ovat toisistaan riippumattomia
+  - H1: Muuttujien välillä on riippuvuutta
+- Lue myös [Ristiintaulukon riippumattomuustesti](Tietoarkisto)
+
+```{r}
+table(df$C6)
+# Tiputetaan tässä vaiheessa pois faktoritaso "Kieltäytyy", koska siinä ei ole havaintoja
+levels(df$C6)[5] <- NA
+turv_sp <- table(df$C6, df$F2_1)
+# Tehdään khiin neliötesi
+chisq.test(turv_sp)
+# Huomaa varoitus
+# Poistetaan myös luokka EOS
+levels(df$C6)[5] <- NA
+
+turv_sp <- table(df$C6, df$F2_1)
+prop.table(turv_sp, 2)
+
+# Tehdään testi uudestaan
+chisq.test(turv_sp)
+```
+

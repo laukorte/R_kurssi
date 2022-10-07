@@ -1,0 +1,165 @@
+# Harjoituskerta 1
+
+
+
+```{r, echo=FALSE}
+luo_kurssiaikataulu <- function(bold_row = 1) {
+  asiat <- c("Käsiteltävät asiat (viitteellinen asiasisältö, muutoksia voi tulla)",
+    "RStudioon ja R-kieleen tutustuminen",
+             "Aineiston kuvailu: frekvenssijakauma, tunnusluvut, kuviot, osa-aineiston poimiminen ja aineston ryhmittäinen tarkastelu",
+             "Yksinkertaiset muuttujamuunnokset, kahden muuttujan välinen yhteisvaihtelu, ristiintaulukointi",
+             "Korrelaatiot ja hajotakuvio, summamuuttujan tekeminen",
+             "Keskiarvotestit: t-testi ja ANOVA",
+             "Kertausta ja ohjausta ryhmätehtävään")
+  taul1 <- tibble(c("Osa", 1:6), col2 = asiat)
+  taul1 %>% kable(col.names = NULL) %>% 
+    row_spec(1, bold = TRUE, color = "white", background="#077d9e") %>% 
+    row_spec(seq(2,nrow(taul1),2), background="#ccd8df") %>% 
+    row_spec(seq(3,nrow(taul1),2), background="#e7ecf0") %>% 
+    row_spec(bold_row, bold=TRUE, font_size = 17) %>% 
+    kableExtra::kable_styling()
+}
+
+luo_kurssiaikataulu(2)
+```
+
+
+#### Ohjelmassa tänään {-}
+
+- Päivän aikataulu
+- Muita käytännön asioita
+- Kurssin suorittaminen ja sisältö
+- RStudion toimintojen esittely ja R-kielen perusteita
+- Harjoitus / kotitehtävän tehtävänanto
+
+## Yleiset asiat
+
+### Kurssilla käytettävä aineisto
+
+- Kurssin opetuksessa käytetään European Socia Survey (ESS) Suomen aineistoa vuodelta 2016.
+  - Haastattelututkimus, joka kartoittaa yhteiskunnalliseen kehitykseen liittyvää arvojen, asenteiden ja käyttäytymisen muutosta. ESS kerää vertailukelpoista surveydataa noin 30 Euroopan maasta. [Lisätietoja](https://www.fsd.tuni.fi/fi/aineistot/kansainvalisia-aineistosarjoja/european-social-survey/)
+- Uusin saatavissa oleva Suomen aineisto on 8. kierrokselta (vuosi 2016). Sen teemoina on mm. ilmastonmuutos, energiavarmuus ja hyvinvointi
+  - FSD3217 European Social Survey 2016: Suomen aineiston on Tietoarkiston kautta vapaasti käytettävissä ilman rekisteröitymistä.
+- **Lataa aineisto [täältä](http://urn.fi/urn:nbn:fi:fsd:T-FSD3217) ** seuraavaan harjoituskertaan mennessä 
+- Aineisto kannattaa tallentaa omaan (UEFin) o365 OneDriveen, jolloin se on käytettävissä kaikilla työasemilla
+
+
+## Kyselytutkimus
+ 
+```{=html}
+<p>Tilastollisen tutkimuksen (kyselytutkimuksen) perusjutuista harkiten kertausmateriaalia luentotallenteeksi</p>
+<iframe width="100%" height="400"
+  src="https://www.youtube.com/embed/cNXO6znx7PI"
+  frameborder="0" allow="autoplay; encrypted-media"
+  allowfullscreen></iframe>
+```
+
+## R ja RStudio
+
+
+```{=html}
+<p>Tähän Rstudion esittelyvideo</p>
+<iframe width="100%" height="400"
+  src="https://www.youtube.com/embed/lVKMsaWju8w"
+  frameborder="0" allow="autoplay; encrypted-media"
+  allowfullscreen></iframe>
+```
+
+
+## Aineiston syöttäminen R:ään
+
+Arvon tallettaminen muuttujaan tapahtuu sijoitusoperaattorilla "<-". Luodaan 
+muuttuja nimeltään *luku*, jolle annetaan arvo yksi. Tämän jälkeen tulostetaan muuttujan 
+sisältö kirjoittamalla muuttujan nimi ja ajamalla tämä komento. Monessa muussa ohjelmointikielessä
+muuttujan arvon tulostamiseen pitäisi kutsua erikseen tulostusfunktiota (kuten print), 
+mutta R:ssä tämä ei ole tarpeellista.
+
+```{r}
+luku <- 1
+luku
+```
+Muuttuja *luku* sisältää nyt arvon 1 ja sitä voidaan käyttää viittamalla sen nimeen.
+
+Tulostetaan muuttujan arvo lisättynä kahdella.
+```{r}
+luku + 2
+```
+
+Alkuperäisen muuttujan arvo on edelleen yksi, koska yllä tehtiin vain tulostus.
+
+```{r}
+luku
+```
+
+Tehdään uusi muuttuja *lukuplus2*, johon talletetaan uusi tulos.
+
+```{r}
+
+lukuplus2 <- luku + 2
+lukuplus2
+```
+
+## Tietorakenteet
+
+Seuraavassa esitellään kurssin kannalta tärkeimpiä tietorakenteita. Näitä ovat erityisesti vektorit (vector) ja datakehikot (data.frame). Taulukkomuotoiset tilastolliset aineistot luetaan R:ään usein datakehikoksi, joiden sarakkeet ovat vektori-tietorakenteita. 
+
+### Vektorit
+
+Vektori on R:n yksinkertaisin tietorakenne. Vektorit koostuvat alkioista ja alkiot ovat
+vektorissa tietyssä järjestyksessä. Vektori luodaan funktiolla **c**. Itse asiassa yllä
+luotu muuttujat ja *luku* ja *lukuplus2* ovat vektoreita (ns. skalaarivektoreita),
+joiden pituus on yksi. Tällöin ei tarvitse käyttää funktiota **c**.
+
+Luodaan vektori, jossa on luvut 1, 5.5 ja 10 ja talletetaan se muuttujaan *vektori1*.
+```{r}
+vektori1 <- c(1, 5.5, 10)
+```
+
+Vektorin alkioihin viitataan hakasulkeilla. Tulostetaan edellä luodun vektorin toinen alkio.
+
+```{r}
+vektori1[2]
+```
+
+Vektorin alkioiden täytyy olla aina samaa tietotyyppiä. Keskeisimmät tietotyypit
+ovat numeerinen eli reaaliluku (numeric), merkkijono (character) sekä looginen (logical). Edellä luodut
+vektorit olivat tietotyyppiä numeric. Vektori, joka on tietotyyppiä looginen, saa arvoja TRUE tai FALSE. 
+Alla esimerkkejä vektoreista, jotka ovat tyypiltään merkkijonoja ja loogisia.
+Vektorin tietotyypin voi kätevästi selvitää funktion **typeof** avulla. Vektorin pituus
+saadaan selville käyttämällä funktiota **length**.
+
+
+```{r}
+library(tidyverse)
+# Selvitetään edellä luomamme vektori1:sen tietotyyppi
+typeof(vektori1)
+# Luodaan vektori, joka on tyypiltään merkkijono
+elaimet <- c("kissa", "koira", "hiiri", "elefantti")
+# varmistetaan tietotyyppi typeof-funktiolla
+typeof(elaimet)
+# Looginen tietotyyppi
+looginen <- c(TRUE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE)
+looginen
+typeof(looginen)
+
+# Selvitetään aiemmin luotujen vektorien pituudet
+length(luku)
+length(vektori1)
+length(elaimet)
+length(looginen)
+```
+
+:::{.tehtava}
+[Harjoitus:]{.harj_teksti} Kokeile R-studiossa luoda uusia vektoreita. 
+Tutki niiden tietotyyppejä ja pituuksia. Mitä tapahtuu, jos luot vektorin arvoilla 2, "kissa", 5?
+::: 
+
+```{r harj1, exercise=TRUE}
+c(1, "kissa")
+
+```
+
+
+### Datakehikko
+
+

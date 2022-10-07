@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>2 Harjoituskerta 2 | Sosiaalitieteiden tilastollisten menetelmien R-harjoituskurssi, 2 op</title>
+  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="2 Harjoituskerta 2 | Sosiaalitieteiden tilastollisten menetelmien R-harjoituskurssi, 2 op" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="2 Harjoituskerta 2 | Sosiaalitieteiden tilastollisten menetelmien R-harjoituskurssi, 2 op" />
+  
+  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  
+
+<meta name="author" content="Terhi Auvinen, Samuli Koponen, Lauri Kortelainen" />
+
+
+<meta name="date" content="2022-10-07" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="harjoituskerta-1.html"/>
+<link rel="next" href="harjoituskerta-3.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="libs/viz-1.8.2/viz.js"></script>
+<link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
+<script src="libs/grViz-binding-1.0.9/grViz.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R-kurssi</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>R-harjoituskurssi</a></li>
+<li class="chapter" data-level="1" data-path="harjoituskerta-1.html"><a href="harjoituskerta-1.html"><i class="fa fa-check"></i><b>1</b> Harjoituskerta 1</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="harjoituskerta-1.html"><a href="harjoituskerta-1.html#yleiset-asiat"><i class="fa fa-check"></i><b>1.1</b> Yleiset asiat</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="harjoituskerta-1.html"><a href="harjoituskerta-1.html#kurssilla-käytettävä-aineisto"><i class="fa fa-check"></i><b>1.1.1</b> Kurssilla käytettävä aineisto</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="harjoituskerta-1.html"><a href="harjoituskerta-1.html#kyselytutkimus"><i class="fa fa-check"></i><b>1.2</b> Kyselytutkimus</a></li>
+<li class="chapter" data-level="1.3" data-path="harjoituskerta-1.html"><a href="harjoituskerta-1.html#r-ja-rstudio"><i class="fa fa-check"></i><b>1.3</b> R ja RStudio</a></li>
+<li class="chapter" data-level="1.4" data-path="harjoituskerta-1.html"><a href="harjoituskerta-1.html#aineiston-syöttäminen-rään"><i class="fa fa-check"></i><b>1.4</b> Aineiston syöttäminen R:ään</a></li>
+<li class="chapter" data-level="1.5" data-path="harjoituskerta-1.html"><a href="harjoituskerta-1.html#tietorakenteet"><i class="fa fa-check"></i><b>1.5</b> Tietorakenteet</a>
+<ul>
+<li class="chapter" data-level="1.5.1" data-path="harjoituskerta-1.html"><a href="harjoituskerta-1.html#vektorit"><i class="fa fa-check"></i><b>1.5.1</b> Vektorit</a></li>
+<li class="chapter" data-level="1.5.2" data-path="harjoituskerta-1.html"><a href="harjoituskerta-1.html#datakehikko"><i class="fa fa-check"></i><b>1.5.2</b> Datakehikko</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="harjoituskerta-2.html"><a href="harjoituskerta-2.html"><i class="fa fa-check"></i><b>2</b> Harjoituskerta 2</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="harjoituskerta-2.html"><a href="harjoituskerta-2.html#valmiin-aineiston-tuominen-rään"><i class="fa fa-check"></i><b>2.1</b> Valmiin aineiston tuominen R:ään</a></li>
+<li class="chapter" data-level="2.2" data-path="harjoituskerta-2.html"><a href="harjoituskerta-2.html#aineiston-kuvailu"><i class="fa fa-check"></i><b>2.2</b> Aineiston kuvailu</a>
+<ul>
+<li class="chapter" data-level="" data-path="harjoituskerta-2.html"><a href="harjoituskerta-2.html#frekvenssijakaumat"><i class="fa fa-check"></i>Frekvenssijakaumat</a></li>
+<li class="chapter" data-level="" data-path="harjoituskerta-2.html"><a href="harjoituskerta-2.html#pylväsdiagrammi"><i class="fa fa-check"></i>Pylväsdiagrammi</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="harjoituskerta-3.html"><a href="harjoituskerta-3.html"><i class="fa fa-check"></i><b>3</b> Harjoituskerta 3</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="harjoituskerta-3.html"><a href="harjoituskerta-3.html#muuttujien-muunnokset"><i class="fa fa-check"></i><b>3.1</b> Muuttujien muunnokset</a></li>
+<li class="chapter" data-level="3.2" data-path="harjoituskerta-3.html"><a href="harjoituskerta-3.html#ristiintaulukointi"><i class="fa fa-check"></i><b>3.2</b> Ristiintaulukointi</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="harjoituskerta-3.html"><a href="harjoituskerta-3.html#ristiintaulukointi-ja-chi2-testi"><i class="fa fa-check"></i><b>3.2.1</b> Ristiintaulukointi ja <span class="math inline">\(\chi^2\)</span>-testi</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Sosiaalitieteiden tilastollisten menetelmien R-harjoituskurssi, 2 op</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="harjoituskerta-2" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">2</span> Harjoituskerta 2<a href="harjoituskerta-2.html#harjoituskerta-2" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<tbody>
+<tr>
+<td style="text-align:left;font-weight: bold;color: white !important;background-color: #077d9e !important;">
+Osa
+</td>
+<td style="text-align:left;font-weight: bold;color: white !important;background-color: #077d9e !important;">
+Käsiteltävät asiat (viitteellinen asiasisältö, muutoksia voi tulla)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: #ccd8df !important;">
+1
+</td>
+<td style="text-align:left;background-color: #ccd8df !important;">
+RStudioon ja R-kieleen tutustuminen
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: #e7ecf0 !important;font-weight: bold;font-size: 17px;">
+2
+</td>
+<td style="text-align:left;background-color: #e7ecf0 !important;font-weight: bold;font-size: 17px;">
+Aineiston kuvailu: frekvenssijakauma, tunnusluvut, kuviot, osa-aineiston poimiminen ja aineston ryhmittäinen tarkastelu
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: #ccd8df !important;">
+3
+</td>
+<td style="text-align:left;background-color: #ccd8df !important;">
+Yksinkertaiset muuttujamuunnokset, kahden muuttujan välinen yhteisvaihtelu, ristiintaulukointi
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: #e7ecf0 !important;">
+4
+</td>
+<td style="text-align:left;background-color: #e7ecf0 !important;">
+Korrelaatiot ja hajotakuvio, summamuuttujan tekeminen
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: #ccd8df !important;">
+5
+</td>
+<td style="text-align:left;background-color: #ccd8df !important;">
+Keskiarvotestit: t-testi ja ANOVA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: #e7ecf0 !important;">
+6
+</td>
+<td style="text-align:left;background-color: #e7ecf0 !important;">
+Kertausta ja ohjausta ryhmätehtävään
+</td>
+</tr>
+</tbody>
+</table>
+<center>
+<div id="htmlwidget-b5c156d026160e1710dd" style="width:100%;height:100%;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-b5c156d026160e1710dd">{"x":{"diagram":"digraph {\n  graph [layout = dot, rankdir = TB, center=TRUE,\n  label=\n  <\n  <br/> Jakauman tarkastelu  <br/>\n    <font point-size=\"30\">Minkälainen muuttuja on kyseessä?<\/font>\n  <br/>\n  >, labelloc=top,\n  fontsize = \"40\", margin=\"1.5\"]\n  \n  node [shape = rectangle, style=\"filled\", fontname = Helvetica, fontsize = \"20\"]        \n  rec1 [label = \"Luokittelu\", fillcolor=\"#077d9e\", fontcolor=\"white\"]\n  rec2 [label = \"Järjestys\", fillcolor=\"#077d9e\", fontcolor=\"white\"]\n  rec3 [label =  \"Välimatka\", fillcolor=\"#077d9e\", fontcolor=\"white\"]\n  rec4 [label = \"Suhde\", fillcolor=\"#077d9e\", fontcolor=\"white\"]\n  rec5 [label = \"Epäjatkuvat\", fillcolor=\"#ccd8df\"]\n  rec6 [label = \"Jatkuvat\", fillcolor=\"#ccd8df\"]\n  rec7[label = \n    <\n    <br/> &#8226; Frekvenssit <br ALIGN = \"LEFT\"/> &#8226; Sijaintiluvut: moodi, mediaani<br ALIGN = \"LEFT\"/> &#8226; Pylväsdiagrammi <br ALIGN = \"LEFT\" />\n    >, fillcolor=\"#e7ecf0\"\n]\n\nrec8[label = \n    <\n    <br/> &#8226; Sijaintiluvut: moodi, mediaani, keskiarvo<br ALIGN = \"LEFT\"/> &#8226; Hajontaluvut: vaihteluväli, keskihajonta, vinous, huipukkuus<br ALIGN = \"LEFT\"/> &#8226; Histogrammi <br ALIGN = \"LEFT\" />\n    >, fillcolor=\"#e7ecf0\"\n]\n\n\n  \n  # edge definitions with the node IDs\n  rec1 -> rec5; rec2 -> rec5; rec3 -> rec6; rec4 -> rec6;\n  rec5 -> rec7; rec6 -> rec8\n  }","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+</center>
+<div id="valmiin-aineiston-tuominen-rään" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> Valmiin aineiston tuominen R:ään<a href="harjoituskerta-2.html#valmiin-aineiston-tuominen-rään" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>Ohjeet löytyvät <a href="https://www.fsd.tuni.fi/fi/aineistot/taustatietoa/spss-portable-r/">täältä</a></li>
+</ul>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="harjoituskerta-2.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Asennetaan &quot;memisc&quot;-niminen paketti</span></span>
+<span id="cb30-2"><a href="harjoituskerta-2.html#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&#39;memisc&#39;</span>)</span>
+<span id="cb30-3"><a href="harjoituskerta-2.html#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-4"><a href="harjoituskerta-2.html#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Otetaan käyttöön kyseinen paketti</span></span>
+<span id="cb30-5"><a href="harjoituskerta-2.html#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(memisc)</span>
+<span id="cb30-6"><a href="harjoituskerta-2.html#cb30-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-7"><a href="harjoituskerta-2.html#cb30-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Ladataan aineisto R:ään, korjaa polku tiedostoon oikeaksi eli</span></span>
+<span id="cb30-8"><a href="harjoituskerta-2.html#cb30-8" aria-hidden="true" tabindex="-1"></a><span class="co"># laita &quot;D:/data.por&quot; tilalle se tiedostopolku, johon talletit datan</span></span>
+<span id="cb30-9"><a href="harjoituskerta-2.html#cb30-9" aria-hidden="true" tabindex="-1"></a>ds <span class="ot">&lt;-</span> <span class="fu">as.data.set</span>(<span class="fu">spss.portable.file</span>(<span class="st">&quot;D:/data.por&quot;</span>)) </span>
+<span id="cb30-10"><a href="harjoituskerta-2.html#cb30-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-11"><a href="harjoituskerta-2.html#cb30-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Muutetaan heti useammin käytettyyn dataframe-muotoon</span></span>
+<span id="cb30-12"><a href="harjoituskerta-2.html#cb30-12" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(ds)</span></code></pre></div>
+</div>
+<div id="aineiston-kuvailu" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> Aineiston kuvailu<a href="harjoituskerta-2.html#aineiston-kuvailu" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="frekvenssijakaumat" class="section level3 unnumbered hasAnchor">
+<h3>Frekvenssijakaumat<a href="harjoituskerta-2.html#frekvenssijakaumat" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Muuttujan frekvenssijakaumaa voi tutkia funktiolla <strong>table</strong>. Prosenttijakauman saa
+näkymään funktiolla <strong>prop.table</strong>, jolle annetaan argumentiksi table-objekti.</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="harjoituskerta-2.html#cb31-1" aria-hidden="true" tabindex="-1"></a>frekvenssitaulu <span class="ot">&lt;-</span> <span class="fu">table</span>(df<span class="sc">$</span>F11, <span class="at">useNA =</span> <span class="st">&quot;always&quot;</span>)</span>
+<span id="cb31-2"><a href="harjoituskerta-2.html#cb31-2" aria-hidden="true" tabindex="-1"></a>frekvenssitaulu</span></code></pre></div>
+<pre><code>## 
+##                                              Avioliitto 
+##                                                      24 
+##                                  Rekisteröity parisuhde 
+##                                                      11 
+##                 Asumusero (yhä virallisesti naimisissa) 
+##                                                       7 
+##                  Eronnut/rekisteröity parisuhde purettu 
+##                                                     230 
+## Leski/rekisteröidyn parisuhteen toinen osapuoli kuollut 
+##                                                     122 
+##                            Ei mikään edellä mainituista 
+##                                                     630 
+##                                              Kieltäytyy 
+##                                                       0 
+##                                                     EOS 
+##                                                       2 
+##                                                    &lt;NA&gt; 
+##                                                     899</code></pre>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="harjoituskerta-2.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.table</span>(frekvenssitaulu)</span></code></pre></div>
+<pre><code>## 
+##                                              Avioliitto 
+##                                             0.012467532 
+##                                  Rekisteröity parisuhde 
+##                                             0.005714286 
+##                 Asumusero (yhä virallisesti naimisissa) 
+##                                             0.003636364 
+##                  Eronnut/rekisteröity parisuhde purettu 
+##                                             0.119480519 
+## Leski/rekisteröidyn parisuhteen toinen osapuoli kuollut 
+##                                             0.063376623 
+##                            Ei mikään edellä mainituista 
+##                                             0.327272727 
+##                                              Kieltäytyy 
+##                                             0.000000000 
+##                                                     EOS 
+##                                             0.001038961 
+##                                                    &lt;NA&gt; 
+##                                             0.467012987</code></pre>
+</div>
+<div id="pylväsdiagrammi" class="section level3 unnumbered hasAnchor">
+<h3>Pylväsdiagrammi<a href="harjoituskerta-2.html#pylväsdiagrammi" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="harjoituskerta-2.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Muutetaan kuvan marginaaleja</span></span>
+<span id="cb35-2"><a href="harjoituskerta-2.html#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar=</span><span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">4</span>))</span>
+<span id="cb35-3"><a href="harjoituskerta-2.html#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Jaetaan merkkijonot useammalle riville, niin näkyvät paremmin kuvassa</span></span>
+<span id="cb35-4"><a href="harjoituskerta-2.html#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(df<span class="sc">$</span>F11) <span class="ot">&lt;-</span> <span class="fu">str_wrap</span>(<span class="fu">levels</span>(df<span class="sc">$</span>F11), <span class="dv">20</span>)</span>
+<span id="cb35-5"><a href="harjoituskerta-2.html#cb35-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-6"><a href="harjoituskerta-2.html#cb35-6" aria-hidden="true" tabindex="-1"></a>frekvenssitaulu <span class="ot">&lt;-</span> <span class="fu">table</span>(df<span class="sc">$</span>F11, <span class="at">useNA =</span> <span class="st">&quot;always&quot;</span>)</span>
+<span id="cb35-7"><a href="harjoituskerta-2.html#cb35-7" aria-hidden="true" tabindex="-1"></a><span class="co"># las-parametri vaihtaa x-akselin labeleiden suunnan, space-parametrilla muutetaan</span></span>
+<span id="cb35-8"><a href="harjoituskerta-2.html#cb35-8" aria-hidden="true" tabindex="-1"></a><span class="co"># pylväiden etäisyyksiä, cex.names-parametrilla muutetaan x-akselin tekstin kokoa</span></span>
+<span id="cb35-9"><a href="harjoituskerta-2.html#cb35-9" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(frekvenssitaulu, <span class="at">las =</span> <span class="dv">2</span>, <span class="at">space =</span> <span class="fu">c</span>(<span class="fl">0.5</span>), <span class="at">cex.names =</span> <span class="fl">0.75</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-15-1.png" width="100%" /></p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="harjoituskerta-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="harjoituskerta-3.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/02-harjoituskerta-2.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
