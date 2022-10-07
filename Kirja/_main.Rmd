@@ -43,3 +43,53 @@ knitr::write_bib(c(
   .packages(), 'bookdown', 'knitr', 'rmarkdown', 'tidyverse', 'magrittr'
 ), 'packages.bib')
 ```
+
+<!--chapter:end:index.Rmd-->
+
+
+# Harjoituskerta 1
+
+Placeholder
+
+
+#### Ohjelmassa tänään {-}
+## Yleiset asiat
+### Kurssilla käytettävä aineisto
+## Kyselytutkimus
+## R ja RStudio
+## Aineiston syöttäminen R:ään
+## Tietorakenteet
+### Vektorit
+### Datakehikko
+
+<!--chapter:end:01-harjoituskerta-1.Rmd-->
+
+
+# Harjoituskerta 2
+
+Placeholder
+
+
+## Valmiin aineiston tuominen R:ään
+## Aineiston kuvailu
+### Frekvenssijakaumat {-}
+### Pylväsdiagrammi {-}
+
+<!--chapter:end:02-harjoituskerta-2.Rmd-->
+
+
+# Harjoituskerta 3
+
+Placeholder
+
+
+## Muuttujien muunnokset 
+#### Harjoitus a:{-}
+#### Harjoitus b:{-}
+#### Harjoitus c: {-}
+## Ristiintaulukointi
+#### Harjoitus: {-}
+### Ristiintaulukointi ja $\chi^2$-testi
+
+<!--chapter:end:03-harjoituskerta-3.Rmd-->
+
