@@ -14,3 +14,6 @@ harjoituskerta-3
 muuttujien-muunnokset
 ristiintaulukointi
 ristiintaulukointi-ja-chi2-testi
+harjoituskerta-4
+harjoituskerta-5
+harjoituskerta-6

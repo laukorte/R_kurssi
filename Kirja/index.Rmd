@@ -31,6 +31,23 @@ dataset <- readRDS(paste0("C:/Users/laukorte/OneDrive - ",
 df <- readRDS(paste0("C:/Users/laukorte/OneDrive - ",  
                     "University of Eastern Finland/Documents/",   
                     "R_opetus/dataset2"))
+
+luo_kurssiaikataulu <- function(bold_row = 1) {
+  asiat <- c("Käsiteltävät asiat (viitteellinen asiasisältö, muutoksia voi tulla)",
+    "RStudioon ja R-kieleen tutustuminen",
+             "Aineiston kuvailu: frekvenssijakauma, tunnusluvut, kuviot, osa-aineiston poimiminen ja aineston ryhmittäinen tarkastelu",
+             "Yksinkertaiset muuttujamuunnokset, kahden muuttujan välinen yhteisvaihtelu, ristiintaulukointi",
+             "Korrelaatiot ja hajotakuvio, summamuuttujan tekeminen",
+             "Keskiarvotestit: t-testi ja ANOVA",
+             "Kertausta ja ohjausta ryhmätehtävään")
+  taul1 <- tibble(c("Osa", 1:6), col2 = asiat)
+  taul1 %>% kable(col.names = NULL) %>% 
+    row_spec(1, bold = TRUE, color = "white", background="#077d9e") %>% 
+    row_spec(seq(2,nrow(taul1),2), background="#ccd8df") %>% 
+    row_spec(seq(3,nrow(taul1),2), background="#e7ecf0") %>% 
+    row_spec(bold_row, bold=TRUE, font_size = 17) %>% 
+    kableExtra::kable_styling()
+}
 ```
 
 
