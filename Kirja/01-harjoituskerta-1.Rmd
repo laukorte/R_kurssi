@@ -20,7 +20,7 @@ luo_kurssiaikataulu(2)
 
 ### Kurssilla käytettävä aineisto
 
-- Kurssin opetuksessa käytetään European Socia Survey (ESS) Suomen aineistoa vuodelta 2016.
+- Kurssin opetuksessa käytetään European Social Survey (ESS) Suomen aineistoa vuodelta 2016.
   - Haastattelututkimus, joka kartoittaa yhteiskunnalliseen kehitykseen liittyvää arvojen, asenteiden ja käyttäytymisen muutosta. ESS kerää vertailukelpoista surveydataa noin 30 Euroopan maasta. [Lisätietoja](https://www.fsd.tuni.fi/fi/aineistot/kansainvalisia-aineistosarjoja/european-social-survey/)
 - Uusin saatavissa oleva Suomen aineisto on 8. kierrokselta (vuosi 2016). Sen teemoina on mm. ilmastonmuutos, energiavarmuus ja hyvinvointi
   - FSD3217 European Social Survey 2016: Suomen aineiston on Tietoarkiston kautta vapaasti käytettävissä ilman rekisteröitymistä.
@@ -107,7 +107,7 @@ vektori1[2]
 
 Vektorin alkioiden täytyy olla aina samaa tietotyyppiä. Keskeisimmät tietotyypit
 ovat numeerinen eli reaaliluku (numeric), merkkijono (character) sekä looginen (logical). Edellä luodut
-vektorit olivat tietotyyppiä numeric. Vektori, joka on tietotyyppiä looginen, saa arvoja TRUE tai FALSE. 
+vektorit olivat tietotyyppiä **numeric**. Vektori, joka on tietotyyppiä looginen, saa arvoja TRUE tai FALSE. 
 Alla esimerkkejä vektoreista, jotka ovat tyypiltään merkkijonoja ja loogisia.
 Vektorin tietotyypin voi kätevästi selvitää funktion **typeof** avulla. Vektorin pituus
 saadaan selville käyttämällä funktiota **length**.
