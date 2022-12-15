@@ -78,7 +78,6 @@ luku
 Tehdään uusi muuttuja *lukuplus2*, johon talletetaan uusi tulos.
 
 ```{r}
-
 lukuplus2 <- luku + 2
 lukuplus2
 ```
@@ -112,7 +111,6 @@ Alla esimerkkejä vektoreista, jotka ovat tyypiltään merkkijonoja ja loogisia.
 Vektorin tietotyypin voi kätevästi selvitää funktion **typeof** avulla. Vektorin pituus
 saadaan selville käyttämällä funktiota **length**.
 
-
 ```{r}
 library(tidyverse)
 # Selvitetään edellä luomamme vektori1:sen tietotyyppi
@@ -132,6 +130,9 @@ length(vektori1)
 length(elaimet)
 length(looginen)
 ```
+
+Tietotyypin ja vektorin pituuden voi tarkistaa myös *environment*-välilehden alta, jossa on listattu kaikki vektorit, muuttujat, yms. 
+![](_book/images/tietorakenteet.png)
 
 :::{.tehtava}
 [Harjoitus:]{.harj_teksti} Kokeile R-studiossa luoda uusia vektoreita. 
