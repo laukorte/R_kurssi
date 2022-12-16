@@ -17,3 +17,7 @@ ristiintaulukointi-ja-chi2-testi
 harjoituskerta-4
 harjoituskerta-5
 harjoituskerta-6
+plot
+boxplot
+aineiston-kuvailu-1
+ristiintaulukointi-1

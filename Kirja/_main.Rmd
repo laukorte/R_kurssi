@@ -1,3 +1,28 @@
+--- 
+title: "Sosiaalitieteiden tilastollisten menetelmien R-harjoituskurssi, 2 op"
+author: "Terhi Auvinen, Samuli Koponen, Lauri Kortelainen & Antti Kouvo"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib, packages.bib]
+# url: your book url like https://bookdown.org/yihui/bookdown
+# cover-image: path to the social sharing image like images/cover.jpg
+description: |
+  This is a minimal example of using the bookdown package to write a book.
+  The HTML output format for this example is bookdown::gitbook,
+  set in the _output.yml file.
+link-citations: yes
+github-repo: rstudio/bookdown-demo
+---
+
+# url: your book url like https://bookdown.org/yihui/bookdown
+
+Placeholder
+
+
+
+<!--chapter:end:index.Rmd-->
+
 # Harjoituskerta 1
 
 ```{r, echo=FALSE}
@@ -48,6 +73,9 @@ luo_kurssiaikataulu(2)
 
 
 ## Aineiston syöttäminen R:ään
+
+Siinä missä muissa tilasto-ohjelmissa (esim. SPSS ja Stata) voi olla auki vain yksi aineisto kerrallaan, R:ssä voi olla samanaikaisesti auki monta aineistoa, muuttujaa ja matriisia. R käsittää aineiston matriisina. Esimerkiksi tällä kurssilla käytettävän ESS-aineiston R käsittää 1925*309 matriisina.
+
 
 Arvon tallettaminen muuttujaan tapahtuu sijoitusoperaattorilla "<-". Luodaan 
 muuttuja nimeltään *luku*, jolle annetaan arvo yksi. Tämän jälkeen tulostetaan muuttujan 
@@ -154,21 +182,14 @@ getwd()
 
 Työskentelyn helpottamiseksi tiedostot kannattaa siirtää työkansioon tai työkansio voidaan muuttaa *setwd*-komennolla:
 ``` {r}
-setwd("../R-kurssi")
-```
-
-```{r harj2, exercise=TRUE}
-Luo tietokoneellesi kurssin työkansio ja aseta se R:ssä työkansioksesi.
+setwd("~/R-kurssi")
 ```
 
 ## Aineiston tuominen R:ään
 
 ``` {r}
-read.csv2("../R_kurssi/FSD3217/Study/Data/daF3217.csv")
+read.csv2("~/data/daF3217.csv")
 ```
-## Aineiston käsitteleminen
-
-Siinä missä muissa tilasto-ohjelmissa (esim. SPSS ja Stata) voi olla auki vain yksi aineisto kerrallaan, R:ssä voi olla samanaikaisesti auki monta aineistoa, muuttujaa ja matriisia. R käsittää aineiston matriisina. Esimerkiksi tällä kurssilla käytettävän ESS-aineiston R käsittää 1925*309 matriisina.
 
 ## Aineiston kuvailu
 
@@ -186,3 +207,64 @@ table(ess$a2)
 intenet <- ess$a2
 table(internet)
 ```
+
+<!--chapter:end:01-harjoituskerta-1.Rmd-->
+
+
+# Harjoituskerta 2
+
+Placeholder
+
+
+## Valmiin aineiston tuominen R:ään
+## Aineiston kuvailu
+### Frekvenssijakaumat {-}
+### Pylväsdiagrammi {-}
+
+<!--chapter:end:02-harjoituskerta-2.Rmd-->
+
+
+# Harjoituskerta 3
+
+Placeholder
+
+
+## Muuttujien muunnokset 
+#### Harjoitus a:{-}
+#### Harjoitus b:{-}
+#### Harjoitus c: {-}
+## Ristiintaulukointi
+#### Harjoitus: {-}
+### Ristiintaulukointi ja $\chi^2$-testi
+
+<!--chapter:end:03-harjoituskerta-3.Rmd-->
+
+# Harjoituskerta 4
+
+
+```{r, echo=FALSE}
+
+luo_kurssiaikataulu(5)
+```
+
+<!--chapter:end:04-harjoituskerta-4.Rmd-->
+
+# Harjoituskerta 5
+
+
+```{r, echo=FALSE}
+
+luo_kurssiaikataulu(6)
+```
+
+<!--chapter:end:05-harjoituskerta-5.Rmd-->
+
+# Harjoituskerta 6
+
+
+```{r, echo=FALSE}
+luo_kurssiaikataulu(7)
+```
+
+<!--chapter:end:06-harjoituskerta-6.Rmd-->
+
