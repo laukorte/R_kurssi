@@ -4,33 +4,28 @@ author: "Terhi Auvinen, Samuli Koponen, Lauri Kortelainen & Antti Kouvo"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
-bibliography: [book.bib, packages.bib]
-# url: your book url like https://bookdown.org/yihui/bookdown
-# cover-image: path to the social sharing image like images/cover.jpg
+bibliography:
+- book.bib
+- packages.bib
 description: |
   This is a minimal example of using the bookdown package to write a book.
-  The HTML output format for this example is bookdown::gitbook,
   set in the _output.yml file.
+  The HTML output format for this example is bookdown::gitbook,
 link-citations: yes
-github-repo: rstudio/bookdown-demo
+github-repo: "rstudio/bookdown-demo"
 ---
 
 # R-harjoituskurssi {-}
 
-
-```{r echo =FALSE, message = FALSE, warning = FALSE}
+```{r echo = FALSE, message = FALSE, warning = FALSE}
 
 knitr::opts_chunk$set(echo = TRUE)
 library(magrittr)
 library(tidyverse)
 library(kableExtra)
 
-# dataset <- readRDS(paste0("C:/Users/laukorte/OneDrive - ",  
-#                     "University of Eastern Finland/Documents/",   
-#                     "R_opetus/dataset"))
-# df <- readRDS(paste0("C:/Users/laukorte/OneDrive - ",  
-#                     "University of Eastern Finland/Documents/",   
-#                     "R_opetus/dataset2"))
+#dataset <- readRDS(paste0("./dataset"))
+#df <- readRDS(paste0("./dataset2"))
 
 luo_kurssiaikataulu <- function(bold_row = 1) {
   asiat <- c("Käsiteltävät asiat (viitteellinen asiasisältö, muutoksia voi tulla)",

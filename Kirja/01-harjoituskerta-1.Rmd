@@ -15,16 +15,6 @@ luo_kurssiaikataulu(2)
 
 ## Yleiset asiat
 
-### Kurssilla käytettävä aineisto
-
-- Kurssin opetuksessa käytetään European Social Survey (ESS) Suomen aineistoa vuodelta 2016.
-  - Haastattelututkimus, joka kartoittaa yhteiskunnalliseen kehitykseen liittyvää arvojen, asenteiden ja käyttäytymisen muutosta. ESS kerää vertailukelpoista surveydataa noin 30 Euroopan maasta. [Lisätietoja](https://www.fsd.tuni.fi/fi/aineistot/kansainvalisia-aineistosarjoja/european-social-survey/)
-- Uusin saatavissa oleva Suomen aineisto on 8. kierrokselta (vuosi 2016). Sen teemoina on mm. ilmastonmuutos, energiavarmuus ja hyvinvointi
-  - FSD3217 European Social Survey 2016: Suomen aineiston on Tietoarkiston kautta vapaasti käytettävissä ilman rekisteröitymistä.
-- **Lataa aineisto [täältä](http://urn.fi/urn:nbn:fi:fsd:T-FSD3217) ** seuraavaan harjoituskertaan mennessä 
-- Aineisto kannattaa tallentaa omaan (UEFin) o365 OneDriveen, jolloin se on käytettävissä kaikilla työasemilla
-
-
 ## Kyselytutkimus
  
 ```{=html}
@@ -36,7 +26,6 @@ luo_kurssiaikataulu(2)
 ```
 
 ## R ja RStudio
-
 
 ```{=html}
 <p>Tähän Rstudion esittelyvideo</p>
@@ -154,18 +143,24 @@ getwd()
 
 Työskentelyn helpottamiseksi tiedostot kannattaa siirtää työkansioon tai työkansio voidaan muuttaa *setwd*-komennolla:
 ``` {r}
-setwd("../R-kurssi")
-```
-
-```{r harj2, exercise=TRUE}
-Luo tietokoneellesi kurssin työkansio ja aseta se R:ssä työkansioksesi.
+#setwd("C:/Users/samuliko/OneDrive - University of Eastern Finland/Documents/R_kurssi")
 ```
 
 ## Aineiston tuominen R:ään
 
+### European Social Survey 2016
+
+- Kurssin opetuksessa käytetään European Social Survey (ESS) Suomen aineistoa vuodelta 2016.
+  - Haastattelututkimus, joka kartoittaa yhteiskunnalliseen kehitykseen liittyvää arvojen, asenteiden ja käyttäytymisen muutosta. ESS kerää vertailukelpoista surveydataa noin 30 Euroopan maasta. [Lisätietoja](https://www.fsd.tuni.fi/fi/aineistot/kansainvalisia-aineistosarjoja/european-social-survey/)
+- Uusin saatavissa oleva Suomen aineisto on 8. kierrokselta (vuosi 2016). Sen teemoina on mm. ilmastonmuutos, energiavarmuus ja hyvinvointi
+  - FSD3217 European Social Survey 2016: Suomen aineiston on Tietoarkiston kautta vapaasti käytettävissä ilman rekisteröitymistä.
+- **Lataa aineisto [täältä](http://urn.fi/urn:nbn:fi:fsd:T-FSD3217) ** seuraavaan harjoituskertaan mennessä 
+- Aineisto kannattaa tallentaa omaan (UEFin) o365 OneDriveen, jolloin se on käytettävissä kaikilla työasemilla
+
 ``` {r}
-read.csv2("../R_kurssi/FSD3217/Study/Data/daF3217.csv")
+#read.csv2("./FSD3217/Study/Data/daF3217.csv")
 ```
+
 ## Aineiston käsitteleminen
 
 Siinä missä muissa tilasto-ohjelmissa (esim. SPSS ja Stata) voi olla auki vain yksi aineisto kerrallaan, R:ssä voi olla samanaikaisesti auki monta aineistoa, muuttujaa ja matriisia. R käsittää aineiston matriisina. Esimerkiksi tällä kurssilla käytettävän ESS-aineiston R käsittää 1925*309 matriisina.
@@ -179,10 +174,10 @@ Siinä missä muissa tilasto-ohjelmissa (esim. SPSS ja Stata) voi olla auki vain
 ### Ristiintaulukointi
 
 ```{r}
-table(ess$a2)
+#table(ess$a2)
 
 # Yksittäinen muuttuja voidaan myös kopioda omaksi muuttujakseen ja ottaa frekvenssit siitä
 
-intenet <- ess$a2
-table(internet)
+#intenet <- ess$a2
+#table(internet)
 ```
