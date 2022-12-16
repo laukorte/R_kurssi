@@ -24,8 +24,8 @@ library(magrittr)
 library(tidyverse)
 library(kableExtra)
 
-#dataset <- readRDS(paste0("./dataset"))
-#df <- readRDS(paste0("./dataset2"))
+dataset <- readRDS(paste0("dataset"))
+df <- readRDS(paste0("dataset2"))
 
 luo_kurssiaikataulu <- function(bold_row = 1) {
   asiat <- c("Käsiteltävät asiat (viitteellinen asiasisältö, muutoksia voi tulla)",

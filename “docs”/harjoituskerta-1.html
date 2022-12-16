@@ -387,7 +387,7 @@ Tutki niiden tietotyyppejä ja pituuksia. Mitä tapahtuu, jos luot vektorin arvo
 <h2><span class="header-section-number">1.6</span> Työskentely R:ssä<a href="harjoituskerta-1.html#työskentely-rssä" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>R käyttää työkansiota, johon se oletusarvoisesti tallentaa tiedostot ja joita se käyttää “juurena”. Esimerkiksi aineistoa tuodessa viitataan tähän kansioon, joten sen sijainti tulee olla selvillä. Työkansion polku voidaan tarkistaa <em>getwd</em>-komennolla:</p>
 <div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="harjoituskerta-1.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span></code></pre></div>
-<pre><code>## [1] &quot;C:/Users/laukorte/OneDrive - University of Eastern Finland/Documents/R_opetus/R_kurssi/Kirja&quot;</code></pre>
+<pre><code>## [1] &quot;C:/Users/laukorte/OneDrive - University of Eastern Finland/Documents/R_opetus/R_kurssi&quot;</code></pre>
 <p>Työskentelyn helpottamiseksi tiedostot kannattaa siirtää työkansioon tai työkansio voidaan muuttaa <em>setwd</em>-komennolla:</p>
 <div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="harjoituskerta-1.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co">#setwd(&quot;C:/Users/samuliko/OneDrive - University of Eastern Finland/Documents/R_kurssi&quot;)</span></span></code></pre></div>
 </div>
@@ -407,7 +407,7 @@ Tutki niiden tietotyyppejä ja pituuksia. Mitä tapahtuu, jos luot vektorin arvo
 <li><strong>Lataa aineisto <a href="http://urn.fi/urn:nbn:fi:fsd:T-FSD3217">täältä</a> </strong> seuraavaan harjoituskertaan mennessä</li>
 <li>Aineisto kannattaa tallentaa omaan (UEFin) o365 OneDriveen, jolloin se on käytettävissä kaikilla työasemilla</li>
 </ul>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="harjoituskerta-1.html#cb33-1" aria-hidden="true" tabindex="-1"></a>ess <span class="ot">&lt;-</span> <span class="fu">read.csv2</span>(<span class="st">&quot;../FSD3217/Study/Data/daF3217.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="harjoituskerta-1.html#cb33-1" aria-hidden="true" tabindex="-1"></a>ess <span class="ot">&lt;-</span> <span class="fu">read.csv2</span>(<span class="st">&quot;FSD3217/Study/Data/daF3217.csv&quot;</span>)</span></code></pre></div>
 </div>
 </div>
 <div id="aineiston-käsitteleminen" class="section level2 hasAnchor" number="1.8">
