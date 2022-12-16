@@ -158,7 +158,7 @@ Työskentelyn helpottamiseksi tiedostot kannattaa siirtää työkansioon tai ty�
 - Aineisto kannattaa tallentaa omaan (UEFin) o365 OneDriveen, jolloin se on käytettävissä kaikilla työasemilla
 
 ``` {r}
-#read.csv2("./FSD3217/Study/Data/daF3217.csv")
+ess <- read.csv2("../FSD3217/Study/Data/daF3217.csv")
 ```
 
 ## Aineiston käsitteleminen
@@ -174,10 +174,10 @@ Siinä missä muissa tilasto-ohjelmissa (esim. SPSS ja Stata) voi olla auki vain
 ### Ristiintaulukointi
 
 ```{r}
-#table(ess$a2)
+table(ess$a2)
 
 # Yksittäinen muuttuja voidaan myös kopioda omaksi muuttujakseen ja ottaa frekvenssit siitä
 
-#intenet <- ess$a2
-#table(internet)
+internet <- ess$a2
+table(internet)
 ```
