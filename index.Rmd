@@ -55,3 +55,14 @@ knitr::write_bib(c(
   .packages(), 'bookdown', 'knitr', 'rmarkdown', 'tidyverse', 'magrittr'
 ), 'packages.bib')
 ```
+
+# Tervetuloa sosiaalitieteiden R-kurssille!
+
+Miksi R?
+
+1. R on ilmainen! If you are a teacher or a student, the benefits are obvious.
+2. Se toimii kaikissa tietokoneissa!
+3. Markkinoiden parhaat graafit!
+4. Ennennäkemättömän laaja vertaistukiverkosto!
+5. Sillä voi tehdä *kaikki* tilastolliset testit!
+

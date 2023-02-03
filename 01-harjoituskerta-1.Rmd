@@ -35,14 +35,18 @@ luo_kurssiaikataulu(2)
   allowfullscreen></iframe>
 ```
 
+### Konsoli
 
-## Aineiston syöttäminen R:ään
+R:n on komentopohjainen ohjelma, jonka käyttöliittymänä toimii komentoikkuna (Console). Siihen kirjoitetaan komennot ja komentojen tulokset tulostuvat myös komentoikkunaan. R:ää voidaan pitää "interaktiivisena laskukoneena" (Rajala 2001) ja komentojen lisäksi konsolia voidaankin käyttää laskimena.
 
-Arvon tallettaminen muuttujaan tapahtuu sijoitusoperaattorilla "<-". Luodaan 
-muuttuja nimeltään *luku*, jolle annetaan arvo yksi. Tämän jälkeen tulostetaan muuttujan 
-sisältö kirjoittamalla muuttujan nimi ja ajamalla tämä komento. Monessa muussa ohjelmointikielessä
-muuttujan arvon tulostamiseen pitäisi kutsua erikseen tulostusfunktiota (kuten print), 
-mutta R:ssä tämä ei ole tarpeellista.
+```{r}
+1+2
+```
+
+### Aineiston syöttäminen R:ään
+
+Edellä annettu komento laski yhteen luvut 1 ja 2 ja tulosti näiden summan. Näin toimien tulos ei kuitenkaan jää muistiin, vaan se pitää tallentaa erikseen. Arvon tallettaminen muuttujaan tapahtuu sijoitusoperaattorilla "<-". Luodaan seuraavaksi muuttuja nimeltään *luku*, jolle annetaan arvo yksi. Tämän jälkeen tulostetaan muuttujan 
+sisältö kirjoittamalla muuttujan nimi ja ajamalla tämä komento. Monessa muussa ohjelmointikielessä muuttujan arvon tulostamiseen pitäisi kutsua erikseen tulostusfunktiota (kuten print), mutta R:ssä tämä ei ole tarpeellista.
 
 ```{r}
 luku <- 1
@@ -61,12 +65,53 @@ Alkuperäisen muuttujan arvo on edelleen yksi, koska yllä tehtiin vain tulostus
 luku
 ```
 
-Tehdään uusi muuttuja *lukuplus2*, johon talletetaan uusi tulos.
+Tehdään uusi muuttuja *luku2*, johon talletetaan uusi tulos.
 
 ```{r}
-lukuplus2 <- luku + 2
-lukuplus2
+luku2 <- luku + 2
+luku2
 ```
+
+HUOM! Jos samaan muuttujaan talletaan jokin muu luku tai tulos, R ei kysele lupia, vaan tekee mitä pyydetään. Ole siis tarkkana, kun teet muuttujia!
+
+```{r}
+luku2 <- luku + 5
+luku2
+```
+
+Muuttuja voidaan kopioida yksinkertaisesti sijoittamalla vanha muuttuja uuteen muuttujaan.
+
+```{r}
+luku4 <- luku2
+```
+
+### Muuttujien poistaminen
+
+Muuttujia voidaan poistaa komennolla rm()
+
+```{r}
+rm(luku, luku4)
+```
+
+### Esimerkki
+
+Komentoja voidaan käyttää myös funktion sisällä. Seuraavassa luodaan ensin tuhat havaintoa normaalijakautuneesta muuttujasta, jonka keskiarvo on 100 ja keskihajonta on 15. Sen jälkeen lasketaan muuttujan keskivirhe (= sd / n^0.5) käyttämällä hyväksi komentoja.
+
+```{r}
+aly <- rnorm(1000, 100, 15)
+sd(aly)
+length(aly)
+sqrt(length(aly))
+se <- sd(aly) / sqrt(length(aly))
+se
+```
+
+
+### R script
+
+Edellä komennot on annettu komentoikkunan kautta. Komennot voidaan suorittaa myös 
+
+
 
 ## Tietorakenteet
 
@@ -79,15 +124,34 @@ vektorissa tietyssä järjestyksessä. Vektori luodaan funktiolla **c**. Itse as
 luotu muuttujat ja *luku* ja *lukuplus2* ovat vektoreita (ns. skalaarivektoreita),
 joiden pituus on yksi. Tällöin ei tarvitse käyttää funktiota **c**.
 
-Luodaan vektori, jossa on luvut 1, 5.5 ja 10 ja talletetaan se muuttujaan *vektori1*.
+Luodaan vektori, jossa on luvut 1, 3 ja 10 ja talletetaan se muuttujaan *v1*.
 ```{r}
-vektori1 <- c(1, 5.5, 10)
+v1 <- c(1, 3, 10)
+v1
+```
+
+Edellä luotujen muuttujien tapaan myös vektoriin voidaan viitata pelkästään sen nimellä.
+
+```{r}
+v1 * 3
+```
+
+Tai..
+
+```{r}
+v1 * luku2
 ```
 
 Vektorin alkioihin viitataan hakasulkeilla. Tulostetaan edellä luodun vektorin toinen alkio.
 
 ```{r}
-vektori1[2]
+v1[2]
+```
+
+Alkioihin viittaamalla voidaan myös korvata vektorin arvoja.
+```{r}
+v1[2] <- 4
+v1
 ```
 
 Vektorin alkioiden täytyy olla aina samaa tietotyyppiä. Keskeisimmät tietotyypit
