@@ -1,8 +1,13 @@
+tervetuloa-sosiaalitieteiden-r-kurssille
 harjoituskerta-1
 yleiset-asiat
 kyselytutkimus
 r-ja-rstudio
+konsoli
 aineiston-syöttäminen-rään
+muuttujien-poistaminen
+esimerkki
+r-script
 tietorakenteet
 vektorit
 datakehikko

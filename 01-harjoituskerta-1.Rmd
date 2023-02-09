@@ -1,3 +1,9 @@
+---
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
 # Harjoituskerta 1
 
 ```{r, echo=FALSE}
@@ -5,18 +11,18 @@
 luo_kurssiaikataulu(2)
 ```
 
-#### Ohjelmassa tänään {-}
+#### Ohjelmassa tänään {.unnumbered}
 
-- Päivän aikataulu
-- Muita käytännön asioita
-- Kurssin suorittaminen ja sisältö
-- RStudion toimintojen esittely ja R-kielen perusteita
-- Harjoitus / kotitehtävän tehtävänanto
+-   Päivän aikataulu
+-   Muita käytännön asioita
+-   Kurssin suorittaminen ja sisältö
+-   RStudion toimintojen esittely ja R-kielen perusteita
+-   Harjoitus / kotitehtävän tehtävänanto
 
 ## Yleiset asiat
 
 ## Kyselytutkimus
- 
+
 ```{=html}
 <p>Tilastollisen tutkimuksen (kyselytutkimuksen) perusjutuista harkiten kertausmateriaalia luentotallenteeksi</p>
 <iframe width="100%" height="400"
@@ -24,7 +30,6 @@ luo_kurssiaikataulu(2)
   frameborder="0" allow="autoplay; encrypted-media"
   allowfullscreen></iframe>
 ```
-
 ## R ja RStudio
 
 ```{=html}
@@ -34,10 +39,13 @@ luo_kurssiaikataulu(2)
   frameborder="0" allow="autoplay; encrypted-media"
   allowfullscreen></iframe>
 ```
-
 ### Konsoli
 
-R:n on komentopohjainen ohjelma, jonka käyttöliittymänä toimii komentoikkuna (Console). Siihen kirjoitetaan komennot ja komentojen tulokset tulostuvat myös komentoikkunaan. R:ää voidaan pitää "interaktiivisena laskukoneena" (Rajala 2001) ja komentojen lisäksi konsolia voidaankin käyttää laskimena.
+R:n on komentopohjainen ohjelma, jonka käyttöliittymänä toimii
+komentoikkuna (Console). Siihen kirjoitetaan komennot ja komentojen
+tulokset tulostuvat myös komentoikkunaan. R:ää voidaan pitää
+"interaktiivisena laskukoneena" (Rajala 2001) ja komentojen lisäksi
+konsolia voidaankin käyttää laskimena.
 
 ```{r}
 1+2
@@ -45,21 +53,32 @@ R:n on komentopohjainen ohjelma, jonka käyttöliittymänä toimii komentoikkuna
 
 ### Aineiston syöttäminen R:ään
 
-Edellä annettu komento laski yhteen luvut 1 ja 2 ja tulosti näiden summan. Näin toimien tulos ei kuitenkaan jää muistiin, vaan se pitää tallentaa erikseen. Arvon tallettaminen muuttujaan tapahtuu sijoitusoperaattorilla "<-". Luodaan seuraavaksi muuttuja nimeltään *luku*, jolle annetaan arvo yksi. Tämän jälkeen tulostetaan muuttujan 
-sisältö kirjoittamalla muuttujan nimi ja ajamalla tämä komento. Monessa muussa ohjelmointikielessä muuttujan arvon tulostamiseen pitäisi kutsua erikseen tulostusfunktiota (kuten print), mutta R:ssä tämä ei ole tarpeellista.
+Edellä annettu komento laski yhteen luvut 1 ja 2 ja tulosti näiden
+summan. Näin toimien tulos ei kuitenkaan jää muistiin, vaan se pitää
+tallentaa erikseen. Arvon tallettaminen muuttujaan tapahtuu
+sijoitusoperaattorilla "\<-". Luodaan seuraavaksi muuttuja nimeltään
+*luku*, jolle annetaan arvo yksi. Tämän jälkeen tulostetaan muuttujan
+sisältö kirjoittamalla muuttujan nimi ja ajamalla tämä komento. Monessa
+muussa ohjelmointikielessä muuttujan arvon tulostamiseen pitäisi kutsua
+erikseen tulostusfunktiota (kuten print), mutta R:ssä tämä ei ole
+tarpeellista.
 
 ```{r}
 luku <- 1
 luku
 ```
-Muuttuja *luku* sisältää nyt arvon 1 ja sitä voidaan käyttää viittamalla sen nimeen.
+
+Muuttuja *luku* sisältää nyt arvon 1 ja sitä voidaan käyttää viittamalla
+sen nimeen.
 
 Tulostetaan muuttujan arvo lisättynä kahdella.
+
 ```{r}
 luku + 2
 ```
 
-Alkuperäisen muuttujan arvo on edelleen yksi, koska yllä tehtiin vain tulostus.
+Alkuperäisen muuttujan arvo on edelleen yksi, koska yllä tehtiin vain
+tulostus.
 
 ```{r}
 luku
@@ -72,14 +91,17 @@ luku2 <- luku + 2
 luku2
 ```
 
-HUOM! Jos samaan muuttujaan talletaan jokin muu luku tai tulos, R ei kysele lupia, vaan tekee mitä pyydetään. Ole siis tarkkana, kun teet muuttujia!
+HUOM! Jos samaan muuttujaan talletaan jokin muu luku tai tulos, R ei
+kysele käyttäjän tahtotilaa tai lupia, vaan tekee mitä pyydetään. Ole
+siis tarkkana, kun teet muuttujia!
 
 ```{r}
 luku2 <- luku + 5
 luku2
 ```
 
-Muuttuja voidaan kopioida yksinkertaisesti sijoittamalla vanha muuttuja uuteen muuttujaan.
+Muuttuja voidaan kopioida yksinkertaisesti sijoittamalla vanha muuttuja
+uuteen muuttujaan.
 
 ```{r}
 luku4 <- luku2
@@ -90,12 +112,14 @@ luku4 <- luku2
 Muuttujia voidaan poistaa komennolla rm()
 
 ```{r}
-rm(luku, luku4)
+rm(luku4)
 ```
 
 ### Esimerkki
 
-Komentoja voidaan käyttää myös funktion sisällä. Seuraavassa luodaan ensin tuhat havaintoa normaalijakautuneesta muuttujasta, jonka keskiarvo on 100 ja keskihajonta on 15. Sen jälkeen lasketaan muuttujan keskivirhe (= sd / n^0.5) käyttämällä hyväksi komentoja.
+Komentoja voidaan käyttää myös funktion sisällä. Seuraavassa luodaan
+ensin tuhat havaintoa normaalijakautuneesta muuttujasta, jonka keskiarvo
+on 100 ja keskihajonta on 15. Sen jälkeen lasketaan muuttujan keskivirhe (= sd / n\^0.5) käyttämällä hyväksi komentoja.
 
 ```{r}
 aly <- rnorm(1000, 100, 15)
@@ -106,31 +130,36 @@ se <- sd(aly) / sqrt(length(aly))
 se
 ```
 
-
 ### R script
 
-Edellä komennot on annettu komentoikkunan kautta. Komennot voidaan suorittaa myös 
-
-
+Edellä komennot on annettu komentoikkunan kautta. Komennot voidaan
+suorittaa myös R scriptin avulla. Se vastaa SPSS:n syntaksia tai Stata do-filea.
 
 ## Tietorakenteet
 
-Seuraavassa esitellään kurssin kannalta tärkeimpiä tietorakenteita. Näitä ovat erityisesti vektorit (vector) ja datakehikot (data.frame). Taulukkomuotoiset tilastolliset aineistot luetaan R:ään usein datakehikoksi, joiden sarakkeet ovat vektori-tietorakenteita. 
+Seuraavassa esitellään kurssin kannalta tärkeimpiä tietorakenteita.
+Näitä ovat erityisesti vektorit (vector) ja datakehikot (data.frame).
+Taulukkomuotoiset tilastolliset aineistot luetaan R:ään usein
+datakehikoksi, joiden sarakkeet ovat vektori-tietorakenteita.
 
 ### Vektorit
 
-Vektori on R:n yksinkertaisin tietorakenne. Vektorit koostuvat alkioista ja alkiot ovat
-vektorissa tietyssä järjestyksessä. Vektori luodaan funktiolla **c**. Itse asiassa yllä
-luotu muuttujat ja *luku* ja *lukuplus2* ovat vektoreita (ns. skalaarivektoreita),
-joiden pituus on yksi. Tällöin ei tarvitse käyttää funktiota **c**.
+Vektori on R:n yksinkertaisin tietorakenne. Vektorit koostuvat alkioista
+ja alkiot ovat vektorissa tietyssä järjestyksessä. Vektori luodaan
+funktiolla **c**. Itse asiassa yllä luotu muuttujat ja *luku* ja
+*lukuplus2* ovat vektoreita (ns. skalaarivektoreita), joiden pituus on
+yksi. Tällöin ei tarvitse käyttää funktiota **c**.
 
-Luodaan vektori, jossa on luvut 1, 3 ja 10 ja talletetaan se muuttujaan *v1*.
+Luodaan vektori, jossa on luvut 1, 3 ja 10 ja talletetaan se muuttujaan
+*v1*.
+
 ```{r}
 v1 <- c(1, 3, 10)
 v1
 ```
 
-Edellä luotujen muuttujien tapaan myös vektoriin voidaan viitata pelkästään sen nimellä.
+Edellä luotujen muuttujien tapaan myös vektoriin voidaan viitata
+pelkästään sen nimellä.
 
 ```{r}
 v1 * 3
@@ -142,29 +171,33 @@ Tai..
 v1 * luku2
 ```
 
-Vektorin alkioihin viitataan hakasulkeilla. Tulostetaan edellä luodun vektorin toinen alkio.
+Vektorin alkioihin viitataan hakasulkeilla. Tulostetaan edellä luodun
+vektorin toinen alkio.
 
 ```{r}
 v1[2]
 ```
 
 Alkioihin viittaamalla voidaan myös korvata vektorin arvoja.
+
 ```{r}
 v1[2] <- 4
 v1
 ```
 
-Vektorin alkioiden täytyy olla aina samaa tietotyyppiä. Keskeisimmät tietotyypit
-ovat numeerinen eli reaaliluku (numeric), merkkijono (character) sekä looginen (logical). Edellä luodut
-vektorit olivat tietotyyppiä **numeric**. Vektori, joka on tietotyyppiä looginen, saa arvoja TRUE tai FALSE. 
-Alla esimerkkejä vektoreista, jotka ovat tyypiltään merkkijonoja ja loogisia.
-Vektorin tietotyypin voi kätevästi selvitää funktion **typeof** avulla. Vektorin pituus
-saadaan selville käyttämällä funktiota **length**.
+Vektorin alkioiden täytyy olla aina samaa tietotyyppiä. Keskeisimmät
+tietotyypit ovat numeerinen eli reaaliluku (numeric), merkkijono
+(character) sekä looginen (logical). Edellä luodut vektorit olivat
+tietotyyppiä **numeric**. Vektori, joka on tietotyyppiä looginen, saa
+arvoja TRUE tai FALSE. Alla esimerkkejä vektoreista, jotka ovat
+tyypiltään merkkijonoja ja loogisia. Vektorin tietotyypin voi kätevästi
+selvitää funktion **typeof** avulla. Vektorin pituus saadaan selville
+käyttämällä funktiota **length**.
 
 ```{r}
 library(tidyverse)
 # Selvitetään edellä luomamme vektori1:sen tietotyyppi
-typeof(vektori1)
+typeof(v1)
 # Luodaan vektori, joka on tyypiltään merkkijono
 elaimet <- c("kissa", "koira", "hiiri", "elefantti")
 # varmistetaan tietotyyppi typeof-funktiolla
@@ -176,37 +209,43 @@ typeof(looginen)
 
 # Selvitetään aiemmin luotujen vektorien pituudet
 length(luku)
-length(vektori1)
+length(v1)
 length(elaimet)
 length(looginen)
 ```
 
-Tietotyypin ja vektorin pituuden voi tarkistaa myös *environment*-välilehden alta, jossa on listattu kaikki vektorit, muuttujat, yms. 
-![](_book/images/tietorakenteet.png)
+Tietotyypin ja vektorin pituuden voi tarkistaa myös
+*environment*-välilehden alta, jossa on listattu kaikki vektorit,
+muuttujat, yms. ![](_book/images/tietorakenteet.png)
 
-:::{.tehtava}
-[Harjoitus:]{.harj_teksti} Kokeile R-studiossa luoda uusia vektoreita. 
-Tutki niiden tietotyyppejä ja pituuksia. Mitä tapahtuu, jos luot vektorin arvoilla 2, "kissa", 5?
-::: 
+::: tehtava
+[Harjoitus:]{.harj_teksti} Kokeile R-studiossa luoda uusia vektoreita.
+Tutki niiden tietotyyppejä ja pituuksia. Mitä tapahtuu, jos luot
+vektorin arvoilla 2, "kissa", 5?
+:::
 
 ```{r harj1, exercise=TRUE}
 c(1, "kissa")
 
 ```
 
-
 ### Datakehikko
 
 ## Työskentely R:ssä
 
-R käyttää työkansiota, johon se oletusarvoisesti tallentaa tiedostot ja joita se käyttää "juurena". Esimerkiksi aineistoa tuodessa viitataan tähän kansioon, joten sen sijainti tulee olla selvillä. Työkansion polku voidaan tarkistaa *getwd*-komennolla:
+R käyttää työkansiota, johon se oletusarvoisesti tallentaa tiedostot ja
+joita se käyttää "juurena". Esimerkiksi aineistoa tuodessa viitataan
+tähän kansioon, joten sen sijainti tulee olla selvillä. Työkansion polku
+voidaan tarkistaa *getwd*-komennolla:
 
-``` {r}
+```{r}
 getwd()
 ```
 
-Työskentelyn helpottamiseksi tiedostot kannattaa siirtää työkansioon tai työkansio voidaan muuttaa *setwd*-komennolla:
-``` {r}
+Työskentelyn helpottamiseksi tiedostot kannattaa siirtää työkansioon tai
+työkansio voidaan muuttaa *setwd*-komennolla:
+
+```{r}
 #setwd("C:/Users/samuliko/OneDrive - University of Eastern Finland/Documents/R_kurssi")
 ```
 
@@ -214,20 +253,35 @@ Työskentelyn helpottamiseksi tiedostot kannattaa siirtää työkansioon tai ty�
 
 ### European Social Survey 2016
 
-- Kurssin opetuksessa käytetään European Social Survey (ESS) Suomen aineistoa vuodelta 2016.
-  - Haastattelututkimus, joka kartoittaa yhteiskunnalliseen kehitykseen liittyvää arvojen, asenteiden ja käyttäytymisen muutosta. ESS kerää vertailukelpoista surveydataa noin 30 Euroopan maasta. [Lisätietoja](https://www.fsd.tuni.fi/fi/aineistot/kansainvalisia-aineistosarjoja/european-social-survey/)
-- Uusin saatavissa oleva Suomen aineisto on 8. kierrokselta (vuosi 2016). Sen teemoina on mm. ilmastonmuutos, energiavarmuus ja hyvinvointi
-  - FSD3217 European Social Survey 2016: Suomen aineiston on Tietoarkiston kautta vapaasti käytettävissä ilman rekisteröitymistä.
-- **Lataa aineisto [täältä](http://urn.fi/urn:nbn:fi:fsd:T-FSD3217) ** seuraavaan harjoituskertaan mennessä 
-- Aineisto kannattaa tallentaa omaan (UEFin) o365 OneDriveen, jolloin se on käytettävissä kaikilla työasemilla
+-   Kurssin opetuksessa käytetään European Social Survey (ESS) Suomen
+    aineistoa vuodelta 2016.
+    -   Haastattelututkimus, joka kartoittaa yhteiskunnalliseen
+        kehitykseen liittyvää arvojen, asenteiden ja käyttäytymisen
+        muutosta. ESS kerää vertailukelpoista surveydataa noin 30
+        Euroopan maasta.
+        [Lisätietoja](https://www.fsd.tuni.fi/fi/aineistot/kansainvalisia-aineistosarjoja/european-social-survey/)
+-   Uusin saatavissa oleva Suomen aineisto on 8. kierrokselta (vuosi
+    2016). Sen teemoina on mm. ilmastonmuutos, energiavarmuus ja
+    hyvinvointi
+    -   FSD3217 European Social Survey 2016: Suomen aineiston on
+        Tietoarkiston kautta vapaasti käytettävissä ilman
+        rekisteröitymistä.
+-   **Lataa aineisto [täältä](http://urn.fi/urn:nbn:fi:fsd:T-FSD3217)**
+    seuraavaan harjoituskertaan mennessä
+-   Aineisto kannattaa tallentaa omaan (UEFin) o365 OneDriveen, jolloin
+    se on käytettävissä kaikilla työasemilla
 
-``` {r}
+```{r}
 ess <- read.csv2("FSD3217/Study/Data/daF3217.csv")
 ```
 
 ## Aineiston käsitteleminen
 
-Siinä missä muissa tilasto-ohjelmissa (esim. SPSS ja Stata) voi olla auki vain yksi aineisto kerrallaan, R:ssä voi olla samanaikaisesti auki monta aineistoa, muuttujaa ja matriisia. R käsittää aineiston matriisina. Esimerkiksi tällä kurssilla käytettävän ESS-aineiston R käsittää 1925*309 matriisina.
+Siinä missä muissa tilasto-ohjelmissa (esim. SPSS ja Stata) voi olla
+auki vain yksi aineisto kerrallaan, R:ssä voi olla samanaikaisesti auki
+monta aineistoa, muuttujaa ja matriisia. R käsittää aineiston
+matriisina. Esimerkiksi tällä kurssilla käytettävän ESS-aineiston R
+käsittää 1925\*309 matriisina.
 
 ## Aineiston kuvailu
 
