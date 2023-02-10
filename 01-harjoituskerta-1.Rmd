@@ -11,6 +11,9 @@ editor_options:
 luo_kurssiaikataulu(2)
 ```
 
+
+
+
 #### Ohjelmassa tänään {.unnumbered}
 
 -   Päivän aikataulu
@@ -18,6 +21,19 @@ luo_kurssiaikataulu(2)
 -   Kurssin suorittaminen ja sisältö
 -   RStudion toimintojen esittely ja R-kielen perusteita
 -   Harjoitus / kotitehtävän tehtävänanto
+
+<!-- Muistutuksena ensimmäisen harjoituskerran 
+
+1.1. Tilastollisen tutkimuksen (kyselytutkimuksen) perusjutuista harkiten kertausmateriaalia luentotallenteeksi (Antti toteuttaa tallenteet)
+
+1.2. R-ohjelman esittely. Esittelyvideo? <-- etsitään ensisijaisesti valmis/ jo olemassa oleva SUOMENKIELINEN R-tutoriaali, jos ei löydy, tehdään itse. (Samuli tekee, Lauri avustaa koodin kanssa ja Terhi editoi).
+
+1.3. yksinkertaistettu versio havaintomatriisista/ aineiston syöttämisestä manuaalisesti, ks. mallia Nummenmaan kirjasta miten toteutettu (sis. Vektorit ja tietotyypit) (Terhi + Samuli tekee)
+
+1.4. UUTTA: Aineiston tuominen Esim. Excelistä (Terhi + Samuli tekee)
+
+1.5. UUTTA: R-koodi tutuksi (riveihin, sarakkeisiin ym. Viittaaminen, ks. Mallia Nummenmaan kirjasta) (Terhi + Samuli tekee) -->
+
 
 ## Yleiset asiat
 
@@ -45,7 +61,7 @@ R:n on komentopohjainen ohjelma, jonka käyttöliittymänä toimii
 komentoikkuna (Console). Siihen kirjoitetaan komennot ja komentojen
 tulokset tulostuvat myös komentoikkunaan. R:ää voidaan pitää
 "interaktiivisena laskukoneena" (Rajala 2001) ja komentojen lisäksi
-konsolia voidaankin käyttää laskimena.
+konsolia voidaankin käyttää yksinkertaisena laskimena.
 
 ```{r}
 1+2
@@ -54,8 +70,9 @@ konsolia voidaankin käyttää laskimena.
 ### Aineiston syöttäminen R:ään
 
 Edellä annettu komento laski yhteen luvut 1 ja 2 ja tulosti näiden
-summan. Näin toimien tulos ei kuitenkaan jää muistiin, vaan se pitää
-tallentaa erikseen. Arvon tallettaminen muuttujaan tapahtuu
+summan. Näin toimittaessa tulos ainoastaan tulostetaan eikä se jää
+muistiin. R:lle pitääkin kertoa erikseen milloin tulos halutaan
+tallentaa muistiin. Arvon tallettaminen muuttujaan tapahtuu
 sijoitusoperaattorilla "\<-". Luodaan seuraavaksi muuttuja nimeltään
 *luku*, jolle annetaan arvo yksi. Tämän jälkeen tulostetaan muuttujan
 sisältö kirjoittamalla muuttujan nimi ja ajamalla tämä komento. Monessa
@@ -64,14 +81,17 @@ erikseen tulostusfunktiota (kuten print), mutta R:ssä tämä ei ole
 tarpeellista.
 
 ```{r}
+# Sijoitetaan luku 1 muuttujaan 'luku'
 luku <- 1
-luku
+
+# Tulostetaan muuttujan 'luku' sisältö
+luku 
 ```
 
 Muuttuja *luku* sisältää nyt arvon 1 ja sitä voidaan käyttää viittamalla
-sen nimeen.
-
-Tulostetaan muuttujan arvo lisättynä kahdella.
+sen nimeen. Muuttujia voidaan käyttää laskuoperaatioissa numeroiden
+sijaan. Seuraavassa tulostetaan edellä luodun muuttujan arvo lisättynä
+kahdella.
 
 ```{r}
 luku + 2
@@ -84,7 +104,8 @@ tulostus.
 luku
 ```
 
-Tehdään uusi muuttuja *luku2*, johon talletetaan uusi tulos.
+Tehdään uusi muuttuja *luku2*, johon talletetaan uusi tulos ja
+tulostetaan uuden muuttujan arvo.
 
 ```{r}
 luku2 <- luku + 2
@@ -100,40 +121,41 @@ luku2 <- luku + 5
 luku2
 ```
 
-Muuttuja voidaan kopioida yksinkertaisesti sijoittamalla vanha muuttuja
-uuteen muuttujaan.
+Samalla logiikalla voidaan myös kopioida muuttuja sijoittamalla vanha
+muuttuja uuteen muuttujaan.
 
 ```{r}
+luku3 <- luku2
 luku4 <- luku2
 ```
 
-### Muuttujien poistaminen
-
-Muuttujia voidaan poistaa komennolla rm()
+Muuttujia voidaan poistaa komennolla **rm()**
 
 ```{r}
-rm(luku4)
+rm(luku3, luku4)
 ```
 
 ### Esimerkki
 
 Komentoja voidaan käyttää myös funktion sisällä. Seuraavassa luodaan
 ensin tuhat havaintoa normaalijakautuneesta muuttujasta, jonka keskiarvo
-on 100 ja keskihajonta on 15. Sen jälkeen lasketaan muuttujan keskivirhe (= sd / n\^0.5) käyttämällä hyväksi komentoja.
+on 100 ja keskihajonta on 15. Sen jälkeen lasketaan muuttujan keskivirhe
+(= sd / n\^0.5) käyttämällä hyväksi komentoja.
 
 ```{r}
 aly <- rnorm(1000, 100, 15)
 sd(aly)
 length(aly)
 sqrt(length(aly))
-se <- sd(aly) / sqrt(length(aly))
+se <- sd(aly) / sqrt(length(aly)) # Huomaa, ettei tässä käytetä lukua 1000, vaan vektorin pituutta
 se
 ```
 
 ### R script
 
 Edellä komennot on annettu komentoikkunan kautta. Komennot voidaan
-suorittaa myös R scriptin avulla. Se vastaa SPSS:n syntaksia tai Stata do-filea.
+suorittaa myös R scriptin avulla. Se vastaa SPSS:n syntaksia tai Stata
+do-filea.
 
 ## Tietorakenteet
 
@@ -186,8 +208,8 @@ v1
 ```
 
 Vektorin alkioiden täytyy olla aina samaa tietotyyppiä. Keskeisimmät
-tietotyypit ovat numeerinen eli reaaliluku (numeric), merkkijono
-(character) sekä looginen (logical). Edellä luodut vektorit olivat
+tietotyypit ovat **numeerinen** eli reaaliluku (numeric), **merkkijono**
+(character) sekä **looginen** (logical). Edellä luodut vektorit olivat
 tietotyyppiä **numeric**. Vektori, joka on tietotyyppiä looginen, saa
 arvoja TRUE tai FALSE. Alla esimerkkejä vektoreista, jotka ovat
 tyypiltään merkkijonoja ja loogisia. Vektorin tietotyypin voi kätevästi
@@ -239,15 +261,24 @@ tähän kansioon, joten sen sijainti tulee olla selvillä. Työkansion polku
 voidaan tarkistaa *getwd*-komennolla:
 
 ```{r}
-getwd()
+getwd() # Tulostaa tämänhetkisen työkansion
 ```
 
 Työskentelyn helpottamiseksi tiedostot kannattaa siirtää työkansioon tai
 työkansio voidaan muuttaa *setwd*-komennolla:
 
 ```{r}
-#setwd("C:/Users/samuliko/OneDrive - University of Eastern Finland/Documents/R_kurssi")
+# setwd("C:/foo/bar/R_kurssi")
 ```
+
+::: tehtava
+[Harjoitus:]{.harj_teksti} Luo itsellesi työkansio, johon tallennat tämän kurssin materiaalit ja aseta se työkansioksi
+:::
+
+### Funktiot
+
+Edellä on jo suoritettu joitakin funktioita. Funktiot ovat muotoa
+**nimi(parametri 1, parametri2..)**.
 
 ## Aineiston tuominen R:ään
 
@@ -279,9 +310,27 @@ ess <- read.csv2("FSD3217/Study/Data/daF3217.csv")
 
 Siinä missä muissa tilasto-ohjelmissa (esim. SPSS ja Stata) voi olla
 auki vain yksi aineisto kerrallaan, R:ssä voi olla samanaikaisesti auki
-monta aineistoa, muuttujaa ja matriisia. R käsittää aineiston
+monta aineistoa, muuttujaa ja matriisia. R käsittelee aineistoa
 matriisina. Esimerkiksi tällä kurssilla käytettävän ESS-aineiston R
 käsittää 1925\*309 matriisina.
+
+## Arvojen korvaaminen
+
+Tarkastellaan ESS:n muuttujaa b30, "Kuinka tyytyväinen olet siihen, kuinka demokratia toimii Suomessa?". Vastausvaihtoehtojen tulisi vaihdella välillä 0-10, mutta havaitaan joukossa olevan myös muitakin arvoja.
+
+```{r}
+table(ess$b30)
+```
+
+Ohjekirjan mukaan arvo 99 on koodattu tarkoittamaan "En osaa sanoa" -vaihtoehtoa. Sijoitetaan arvo NA niihin soluihin, joiden arvo on  99.
+
+```{r}
+ess$b30[ess$b30 == 99] <- NA
+```
+Sama operaatio voidaan tehdä hiukan mutkikkaamin replace-komennolla. Komento sijoittaa aineiston sarakkeeseen b30 (ess$b30) kyseisen sarakkeen, jonka arvot 99 on korvattu NA:lla.
+```{r}
+ess$b30 <- replace(ess$b30, ess$b30 == 99, NA)
+```
 
 ## Aineiston kuvailu
 
