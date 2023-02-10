@@ -53,7 +53,7 @@ knitr::write_bib(c(
 ), 'packages.bib')
 ```
 
-# Tervetuloa sosiaalitieteiden R-kurssille!
+# Tervetuloa sosiaalitieteiden R-kurssille! {-}
 
 Miksi R?
 

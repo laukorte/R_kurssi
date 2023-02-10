@@ -1,4 +1,3 @@
-tervetuloa-sosiaalitieteiden-r-kurssille
 harjoituskerta-1
 yleiset-asiat
 kyselytutkimus
