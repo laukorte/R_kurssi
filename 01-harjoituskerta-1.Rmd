@@ -55,6 +55,15 @@ luo_kurssiaikataulu(2)
   frameborder="0" allow="autoplay; encrypted-media"
   allowfullscreen></iframe>
 ```
+Oheisessa kuvassa on esitetty Rstudion neljä tärkeintä kenttää:
+
+* Vasemmassa ylänurkassa on konsoli (tai komentokehoite), johon käskyt kirjoitetaan ja tulostetaan
+* Oikeassa ylänurkassa on projektin ympäristö, jossa näkyy kaikki projektin aineistot, muuttujat, vektorit, yms.
+* Vasemmassa alanurkassa on projektin tiedostot
+* Oikeassa alanurkassa on skripti, johon voidaan dokumentoida projektin kulkua, komennot, yms.
+
+![Rstudion perusnäkymä](images/Rstudio.png)
+
 ### Konsoli
 
 R:n on komentopohjainen ohjelma, jonka käyttöliittymänä toimii
