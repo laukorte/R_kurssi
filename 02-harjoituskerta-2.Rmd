@@ -1,10 +1,8 @@
-
 # Harjoituskerta 2
 
 ```{r, echo = FALSE}
 luo_kurssiaikataulu(3)
 ```
-
 
 <center>
 
@@ -49,33 +47,70 @@ rec8[label =
 
 </center>
 
+Tarkastellaan onko miesten ja naisten (f2_1) välillä eroa sen suhteen, mikä on korkein koulutus, jonka vastaaja on suorittanut (f15). HUOM! Sukupuoli 1 = mies, 2 = nainen. Koulutus on välillä 1-15. Poistetaan siis ensin puuttuvat arvot (=99).
 
-## Valmiin aineiston tuominen R:ään
+```{r}
+ess$f15[ess$f15 == 99] <- NA
+```
 
-- Ohjeet löytyvät [täältä](https://www.fsd.tuni.fi/fi/aineistot/taustatietoa/spss-portable-r/)
-```{r eval = FALSE}
-# Asennetaan "memisc"-niminen paketti
-install.packages('memisc')
+```{r}
+table(ess$a2, ess$b30)
 
-# Otetaan käyttöön kyseinen paketti
-library(memisc)
+# Yksittäinen muuttuja voidaan myös kopioda omaksi muuttujakseen ja ottaa frekvenssit siitä
 
-# Ladataan aineisto R:ään, korjaa polku tiedostoon oikeaksi eli
-# laita "D:/data.por" tilalle se tiedostopolku, johon talletit datan
-ds <- as.data.set(spss.portable.file("D:/data.por")) 
-
-# Muutetaan heti useammin käytettyyn dataframe-muotoon
-df <- as.data.frame(ds)
-
+internet <- ess$a2
+table(internet)
 
 ```
 
 ## Aineiston kuvailu
 
-### Frekvenssijakaumat {-}
+### Histogrammi
 
-Muuttujan frekvenssijakaumaa voi tutkia funktiolla **table**. Prosenttijakauman saa
-näkymään funktiolla **prop.table**, jolle annetaan argumentiksi table-objekti.
+Histogrammin, joka kuvaa havaintojen jakaumaa saa helposti hist-komennolla.
+
+```{r}
+hist(ess$b30)
+```
+
+
+### Plot
+
+Erilaisia yhden tai kahden muuttujan kuvaajia saa tehtyä plot-komennolla. Esimerkiksi ensimmäisellä harjoituskerralla tehty älykkyysosamäärä voidaan kuvata yksinkertaisella komennolla:
+
+```{r}
+plot(aly,
+     main = "Vastaajien ÄO",
+     xlab = "ID",
+     ylab = "Älykkyysosamäärä")
+
+abline(h = c(70, 130), col = "red")
+```
+
+Huomaa, että komennossa on paljon "ylimääräistä", pelkkä `plot(aly)` olisi tuottanut kuvion ilman tekstejä ja viivoja.
+R tunnistaa muuttujan tyypin ja tekee kuvion sen mukaisesti. Edellisessä kuviossa käytetty muuttuja oli numeraalinen,
+jonka takia kuviosta tuli hajontakuvio. Seuraavassa tehdään uusi muuttuja sukupuolesta ja muutetaan se samalla
+luokkamuuttujaksi.
+
+```{r}
+sukupuoli <- as.factor(ess$f2_1)
+plot(sukupuoli)
+```
+
+
+### Boxplot
+
+### Ristiintaulukointi
+
+```{r}
+taulukko <- table(ess$f2_1, ess$b30)
+taulukko
+  prop.table(taulukko)
+```
+
+### Frekvenssijakaumat {.unnumbered}
+
+Muuttujan frekvenssijakaumaa voi tutkia funktiolla **table**. Prosenttijakauman saa näkymään funktiolla **prop.table**, jolle annetaan argumentiksi table-objekti.
 
 ```{r, out.width="100%"}
 frekvenssitaulu <- table(df$F11, useNA = "always")
@@ -84,7 +119,7 @@ prop.table(frekvenssitaulu)
 
 ```
 
-### Pylväsdiagrammi {-}
+### Pylväsdiagrammi {.unnumbered}
 
 ```{r out.width="100%"}
 # Muutetaan kuvan marginaaleja
@@ -97,5 +132,3 @@ frekvenssitaulu <- table(df$F11, useNA = "always")
 # pylväiden etäisyyksiä, cex.names-parametrilla muutetaan x-akselin tekstin kokoa
 barplot(frekvenssitaulu, las = 2, space = c(0.5), cex.names = 0.75)
 ```
-
-

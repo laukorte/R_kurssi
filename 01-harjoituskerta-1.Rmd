@@ -11,9 +11,6 @@ editor_options:
 luo_kurssiaikataulu(2)
 ```
 
-
-
-
 #### Ohjelmassa tänään {.unnumbered}
 
 -   Päivän aikataulu
@@ -22,6 +19,14 @@ luo_kurssiaikataulu(2)
 -   RStudion toimintojen esittely ja R-kielen perusteita
 -   Harjoitus / kotitehtävän tehtävänanto
 
+Tällä kerralla opimme perusteet:
+* mikä on R
+* miten luodaan muuttujia
+* miten muuttujia käsitellään
+* miten aineisto tuodaan R:ään
+* miten aineistoa käsitellään
+
+```{=html}
 <!-- Muistutuksena ensimmäisen harjoituskerran 
 
 1.1. Tilastollisen tutkimuksen (kyselytutkimuksen) perusjutuista harkiten kertausmateriaalia luentotallenteeksi (Antti toteuttaa tallenteet)
@@ -33,8 +38,7 @@ luo_kurssiaikataulu(2)
 1.4. UUTTA: Aineiston tuominen Esim. Excelistä (Terhi + Samuli tekee)
 
 1.5. UUTTA: R-koodi tutuksi (riveihin, sarakkeisiin ym. Viittaaminen, ks. Mallia Nummenmaan kirjasta) (Terhi + Samuli tekee) -->
-
-
+```
 ## Yleiset asiat
 
 ## Kyselytutkimus
@@ -57,10 +61,13 @@ luo_kurssiaikataulu(2)
 ```
 Oheisessa kuvassa on esitetty Rstudion neljä tärkeintä kenttää:
 
-* Vasemmassa ylänurkassa on konsoli (tai komentokehoite), johon käskyt kirjoitetaan ja tulostetaan
-* Oikeassa ylänurkassa on projektin ympäristö, jossa näkyy kaikki projektin aineistot, muuttujat, vektorit, yms.
-* Vasemmassa alanurkassa on projektin tiedostot
-* Oikeassa alanurkassa on skripti, johon voidaan dokumentoida projektin kulkua, komennot, yms.
+-   Vasemmassa ylänurkassa on konsoli (tai komentokehoite), johon käskyt
+    kirjoitetaan ja tulostetaan
+-   Oikeassa ylänurkassa on projektin ympäristö, jossa näkyy kaikki
+    projektin aineistot, muuttujat, vektorit, yms.
+-   Vasemmassa alanurkassa on projektin tiedostot
+-   Oikeassa alanurkassa on skripti, johon voidaan dokumentoida
+    projektin kulkua, komennot, yms.
 
 ![Rstudion perusnäkymä](images/Rstudio.png)
 
@@ -216,6 +223,13 @@ v1[2] <- 4
 v1
 ```
 
+Vektoreita voidaan luoda myös yhdistelemällä vektoreita.
+
+```{r}
+vektori <- c(luku, luku2, v1)
+vektori
+```
+
 Vektorin alkioiden täytyy olla aina samaa tietotyyppiä. Keskeisimmät
 tietotyypit ovat **numeerinen** eli reaaliluku (numeric), **merkkijono**
 (character) sekä **looginen** (logical). Edellä luodut vektorit olivat
@@ -262,6 +276,11 @@ c(1, "kissa")
 
 ### Datakehikko
 
+Edellä esitettyjä tietotyyppejä ei voi yhdistää yhdeksi matriisiksi. Sen sijaan
+datakehikossa tämä on mahdollista ja sen takia sitä onkin järkevä käyttää
+ihmistieteellisessä tutkimuksessa, jossa vastaukset voivat olla niin numeraalisia kuin
+tekstiäkin.
+
 ## Työskentely R:ssä
 
 R käyttää työkansiota, johon se oletusarvoisesti tallentaa tiedostot ja
@@ -281,7 +300,8 @@ työkansio voidaan muuttaa *setwd*-komennolla:
 ```
 
 ::: tehtava
-[Harjoitus:]{.harj_teksti} Luo itsellesi työkansio, johon tallennat tämän kurssin materiaalit ja aseta se työkansioksi
+[Harjoitus:]{.harj_teksti} Luo itsellesi työkansio, johon tallennat
+tämän kurssin materiaalit ja aseta se työkansioksi
 :::
 
 ### Funktiot
@@ -315,45 +335,125 @@ Edellä on jo suoritettu joitakin funktioita. Funktiot ovat muotoa
 ess <- read.csv2("FSD3217/Study/Data/daF3217.csv")
 ```
 
+## Valmiin aineiston tuominen R:ään
+
+-   Ohjeet löytyvät
+    [täältä](https://www.fsd.tuni.fi/fi/aineistot/taustatietoa/spss-portable-r/)
+
+```{r eval = FALSE}
+# Asennetaan "memisc"-niminen paketti
+install.packages('memisc')
+
+# Otetaan käyttöön kyseinen paketti
+library(memisc)
+
+# Ladataan aineisto R:ään, korjaa polku tiedostoon oikeaksi eli
+# laita "D:/data.por" tilalle se tiedostopolku, johon talletit datan
+ds <- as.data.set(spss.portable.file("D:/data.por")) 
+
+# Muutetaan heti useammin käytettyyn dataframe-muotoon
+df <- as.data.frame(ds)
+
+
+```
+
 ## Aineiston käsitteleminen
 
 Siinä missä muissa tilasto-ohjelmissa (esim. SPSS ja Stata) voi olla
 auki vain yksi aineisto kerrallaan, R:ssä voi olla samanaikaisesti auki
-monta aineistoa, muuttujaa ja matriisia. R käsittelee aineistoa
-matriisina. Esimerkiksi tällä kurssilla käytettävän ESS-aineiston R
-käsittää 1925\*309 matriisina.
+monta aineistoa, muuttujaa ja matriisia. Tästä syystä komennoissa pitää
+myös viitata siihen aineistoon, jolla analyysin haluaa tehdä. R
+käsittelee aineistoa matriisina. Esimerkiksi tällä kurssilla käytettävän
+ESS-aineiston R käsittää 1925\*309 matriisina.
 
-## Arvojen korvaaminen
+```{r}
+dim(ess)
+```
 
-Tarkastellaan ESS:n muuttujaa b30, "Kuinka tyytyväinen olet siihen, kuinka demokratia toimii Suomessa?". Vastausvaihtoehtojen tulisi vaihdella välillä 0-10, mutta havaitaan joukossa olevan myös muitakin arvoja.
+## Valmiin aineiston tarkastelu
+
+Juuri tuotu aineisto on täysin koskematon eikä R tiedä, mitkä arvot ovat
+esimerkiksi puuttuvia arvoja. Tarkastellaan seuraavassa muuttujaa b30,
+"Kuinka tyytyväinen olet siihen, kuinka demokratia toimii Suomessa?".
+Vastausvaihtoehtojen tulisi vaihdella välillä 0-10, mutta havaitaan
+joukossa olevan myös muitakin arvoja.
 
 ```{r}
 table(ess$b30)
 ```
 
-Ohjekirjan mukaan arvo 99 on koodattu tarkoittamaan "En osaa sanoa" -vaihtoehtoa. Sijoitetaan arvo NA niihin soluihin, joiden arvo on  99.
+Huomataan, että arvot vaihtelevat välillä 1--99. ESS:n ohjekirjan mukaan
+arvo 99 on koodattu tarkoittamaan "En osaa sanoa" -vaihtoehtoa.
+Sijoitetaan arvo NA niihin soluihin, joiden arvo on 99.
 
 ```{r}
 ess$b30[ess$b30 == 99] <- NA
 ```
-Sama operaatio voidaan tehdä hiukan mutkikkaamin replace-komennolla. Komento sijoittaa aineiston sarakkeeseen b30 (ess$b30) kyseisen sarakkeen, jonka arvot 99 on korvattu NA:lla.
+
+Sama operaatio voidaan tehdä hiukan mutkikkaamin replace-komennolla.
+Komento sijoittaa aineiston sarakkeeseen b30 (ess\$b30) kyseisen
+sarakkeen, jonka arvot 99 on korvattu NA:lla.
+
 ```{r}
 ess$b30 <- replace(ess$b30, ess$b30 == 99, NA)
+table(ess$b30)
 ```
+
+## Uuden muuttujan luominen aineistoon
+
+Aineistoon voidaan luoda uusia muuttujia helposti. Seuraavassa luodaan ensin muuttuja sukupuoli,
+jolle asetetaan arvoksi vain puuttuvia vastauksia, jonka jälkeen se lisätään ess-data kehikkoon.
+```{r}
+sukupuoli <- NA
+ess$sukupuoli <- sukupuoli
+```
+
+## Muuttujan poistaminen aineistosta
+
+Muuttuja tai muuttujia voidaan poistaa aineistosta samalla logiikalla.
+
+```{r}
+ess$sukupuoli <- NULL
+```
+
+
+<!-- LAURI! Tähän väliin voisi sopia se muuttujien arvojen tekeminen. -->
 
 ## Aineiston kuvailu
 
-### Plot
-
-### Boxplot
-
-### Ristiintaulukointi
+Lasketaan muuttujalle B30 keskiarvo ja -hajonta
 
 ```{r}
-table(ess$a2)
-
-# Yksittäinen muuttuja voidaan myös kopioda omaksi muuttujakseen ja ottaa frekvenssit siitä
-
-internet <- ess$a2
-table(internet)
+mean(ess$b30)
+sd(ess$b30)
 ```
+
+R on varovainen puuttuvien arvojen suhteen eikä laske keskiarvoa, jos
+mukana on puuttuvia arvoja (NA = Not Available). R siis pitää huolen
+siitä, ettei käyttäjä hölmöile. On mietittävä, vaikuttavatko puuttuvat
+arvot tulokseen ja/tai tulkintaan. Jos ei, R:n voi käskeä laskemaan
+keskiarvon ja -hajonnan ilman puuttuvia arvoja na.rm = TRUE
+-asetuksella. Tämä jättää puuttuvat arvot huomiotta.
+
+```{r}
+mean(ess$b30, na.rm = TRUE)
+sd(ess$b30, na.rm = TRUE)
+```
+
+Puuttuvia arvoja voidaan kartoittaa esimerkiksi is.na-komennolla. Se on
+looginen funktio, joka palauttaa arvon FALSE, kun arvo ei puutu, ja
+arvon TRUE, kun arvo puuttuu. Huomaa, että puuttuvia arvoja löytyy vain
+tästä muuttujasta, koska se on ainoa muuttuja jolle ne on määritelty.
+
+```{r}
+is.na(ess$b30)
+```
+
+Tällainen lista ei kuitenkaan ole kovin käyttökelpoinen. Summataan
+puuttuvat havainnot yhteen lukuun, jolloin nähdään suoraan puuttuvien
+havaintojen määrä.
+
+```{r}
+sum(is.na(ess$b30))
+```
+►
