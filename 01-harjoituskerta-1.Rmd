@@ -409,7 +409,7 @@ R:ssä ei kuitenkaan ole tähän helppoa keinoa, vaan nimet on muutettava käsin
 seuraavanlaisella koodilla.
 
 ```{r}
-names(ess)[names(ess) == "f2_1"] <- "sukupuoli"
+# names(ess)[names(ess) == "f2_1"] <- "sukupuoli"
 ```
 
 Puretaan edellinen osiin selkeyden vuoksi. Käytännössä komennossa on kyse arvojen sijoittamisesta ess-aineistoon.
