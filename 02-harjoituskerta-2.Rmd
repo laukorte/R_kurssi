@@ -67,16 +67,27 @@ table(internet)
 
 ### Histogrammi
 
-Histogrammin, joka kuvaa havaintojen jakaumaa saa helposti hist-komennolla.
+Histogrammin, joka kuvaa havaintojen jakaumaa saa helposti `hist`-komennolla.
 
 ```{r}
 hist(ess$b30)
 ```
 
+Mikäli histogrammi on liian karkea tai hienojakoinen, palkkien määrää voidaan muuttaa `break` -asetuksella.
+Vaaka- ja pystyakselien pituutta `xlim` ja `ylim` -asetuksilla.
 
-### Plot
+```{r}
+hist(aly,
+     breaks = 20,
+     xlim = c(0, 200),
+     ylim = c(0, 200)
+     )
+```
 
-Erilaisia yhden tai kahden muuttujan kuvaajia saa tehtyä plot-komennolla. Esimerkiksi ensimmäisellä harjoituskerralla tehty älykkyysosamäärä voidaan kuvata yksinkertaisella komennolla:
+
+### Hajontakuvio (plot)
+
+Erilaisia yhden tai kahden muuttujan kuvaajia saa tehtyä plot-komennolla. Esimerkiksi ensimmäisellä harjoituskerralla tehty älykkyysosamäärä voidaan kuvata seuraavalla komennolla:
 
 ```{r}
 plot(aly,
@@ -87,7 +98,8 @@ plot(aly,
 abline(h = c(70, 130), col = "red")
 ```
 
-Huomaa, että komennossa on paljon "ylimääräistä", pelkkä `plot(aly)` olisi tuottanut kuvion ilman tekstejä ja viivoja.
+Huomaa, että komennossa on paljon "ylimääräistä", pelkkä `plot(aly)` olisi tuottanut kuvion ilman selitystekstejä ja viivoja.
+Komennot `main`, `xlab` ja `ylab` ovat yleisesti käytettyjä asetuksia kaikissa R:n grafiikkakomennoissa.
 R tunnistaa muuttujan tyypin ja tekee kuvion sen mukaisesti. Edellisessä kuviossa käytetty muuttuja oli numeraalinen,
 jonka takia kuviosta tuli hajontakuvio. Seuraavassa tehdään uusi muuttuja sukupuolesta ja muutetaan se samalla
 luokkamuuttujaksi.
