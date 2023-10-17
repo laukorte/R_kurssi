@@ -11,7 +11,7 @@ editor_options:
 luo_kurssiaikataulu(2)
 ```
 
-#### Ohjelmassa tänään {.unnumbered}
+### Ohjelmassa tänään
 
 -   Päivän aikataulu
 -   Muita käytännön asioita
@@ -235,9 +235,12 @@ tietotyypit ovat **numeerinen** eli reaaliluku (numeric), **merkkijono**
 (character) sekä **looginen** (logical). Edellä luodut vektorit olivat
 tietotyyppiä **numeric**. Vektori, joka on tietotyyppiä looginen, saa
 arvoja TRUE tai FALSE. Alla esimerkkejä vektoreista, jotka ovat
-tyypiltään merkkijonoja ja loogisia. Vektorin tietotyypin voi kätevästi
-selvitää funktion **typeof** avulla. Vektorin pituus saadaan selville
-käyttämällä funktiota **length**.
+tyypiltään merkkijonoja ja loogisia.
+
+Vektorien tietotyyppi vaikuttaa siihen, miten R niitä käsittelee esimerkiksi
+nalyyseissa ja kuvioiden tulostamisessa. On siis hyvä olla selvillä käytettävien muuttujien tietotyypeistä. Vektorin
+tietotyypin voi kätevästi selvitää funktion **typeof** avulla. Vektorin pituus
+saadaan selville käyttämällä funktiota **length**.
 
 ```{r}
 library(tidyverse)
@@ -309,7 +312,26 @@ tämän kurssin materiaalit ja aseta se työkansioksi
 Edellä on jo suoritettu joitakin funktioita. Funktiot ovat muotoa
 **nimi(parametri 1, parametri2..)**.
 
+
+<!-- Aineiston tuominen alkaa -->
+
 ## Aineiston tuominen R:ään
+
+### R:n valmiit aineistot
+
+R sisältää useita esimerkkiaineistoja, joiden avulla R:n käyttöä voi harjoitella. Listan aineistoista saa `data()`-komennolla, joka
+listaa kaikki valmiit aineistot. Haluamansa aineiston saa käyttöön `data()`-komennolla. Esimerkiksi Sveitsin sosioekonomisia indikaattoreita ja syntyvyystilastoja vuodelta 1888 voidaan tarkastella seuraavan komennen avulla. Tietoa aineistosta ja sen muuttujista saa `?swiss`-komennon avulla.
+
+```{r}
+data(swiss)
+swiss
+```
+
+Tietoa aineistosta ja sen muuttujista saa `?swiss`-komennon avulla.
+
+```{r}
+?swiss
+```
 
 ### European Social Survey 2016
 
@@ -326,19 +348,16 @@ Edellä on jo suoritettu joitakin funktioita. Funktiot ovat muotoa
     -   FSD3217 European Social Survey 2016: Suomen aineiston on
         Tietoarkiston kautta vapaasti käytettävissä ilman
         rekisteröitymistä.
--   **Lataa aineisto [täältä](http://urn.fi/urn:nbn:fi:fsd:T-FSD3217)**
+-   **[Lataa aineisto](http://urn.fi/urn:nbn:fi:fsd:T-FSD3217)**
     seuraavaan harjoituskertaan mennessä
 -   Aineisto kannattaa tallentaa omaan (UEFin) o365 OneDriveen, jolloin
     se on käytettävissä kaikilla työasemilla
 
-```{r}
-ess <- read.csv2("FSD3217/Study/Data/daF3217.csv")
-```
 
-## Valmiin aineiston tuominen R:ään
 
--   Ohjeet löytyvät
-    [täältä](https://www.fsd.tuni.fi/fi/aineistot/taustatietoa/spss-portable-r/)
+-   Ohjeet löytyvät [täältä](https://www.fsd.tuni.fi/fi/aineistot/taustatietoa/spss-portable-r/)
+
+### Aineiston ottaminen käyttöön
 
 ```{r eval = FALSE}
 # Asennetaan "memisc"-niminen paketti
@@ -354,10 +373,9 @@ ds <- as.data.set(spss.portable.file("D:/data.por"))
 # Muutetaan heti useammin käytettyyn dataframe-muotoon
 df <- as.data.frame(ds)
 
-
 ```
 
-## Aineiston käsitteleminen
+## Valmiin aineiston tarkastelu
 
 Siinä missä muissa tilasto-ohjelmissa (esim. SPSS ja Stata) voi olla
 auki vain yksi aineisto kerrallaan, R:ssä voi olla samanaikaisesti auki
@@ -370,7 +388,43 @@ ESS-aineiston R käsittää 1925\*309 matriisina.
 dim(ess)
 ```
 
-## Valmiin aineiston tarkastelu
+Aineiston sisältämät muuttujat voidaan listata `str()`-komennolla. Tuloksena saadaan
+muuttujien nimet, tietotyypit ja kymmenen ensimmäisen havainnon arvot.
+
+```{r}
+str(ess)
+```
+
+Lista on puutteellinen, koska aineisto on niin suuri. Aineistolla operoiminen on kuitenkin vaikeaa jos muuttujien nimiä ei
+tiedetä. Ne saadaan esille `names()`-komennolla.
+
+```{r}
+names(ess)
+```
+
+### Muuttujien uudelleennimeäminen
+
+Tarvittaessa sarakkeiden nimet (= muuttujien nimet) voidaan muuttaa vastaamaan sisältöä.
+R:ssä ei kuitenkaan ole tähän helppoa keinoa, vaan nimet on muutettava käsin esimerkiksi
+seuraavanlaisella koodilla.
+
+```{r}
+names(ess)[names(ess) == "f2_1"] <- "sukupuoli"
+```
+
+Puretaan edellinen osiin selkeyden vuoksi. Käytännössä komennossa on kyse arvojen sijoittamisesta ess-aineistoon.
+Kun hakasulkeet poistetaan komennosta, jäljelle jää helpommin ymmärrettävä `names(ess) <- "sukupuoli"`.
+Kaikkien sarakkeiden nimi ei kuitenkaan voi olla 'sukupuoli', joten nimiä on rajattava hakasulkeilla.
+Rajaus tehdään hakasulkeilla, jossa `[names(ess) == "f2_1]` rajaa halutun joukon niihin sarakkaisiin, jonka nimi on 'f2_1'.
+
+HUOM! Hakasulkeissa voisi yhtä hyvin käyttää sarakkeen numeroa (=176), mutta myös niiden etsiminen on työlästä.
+Muuttujan sarakkeen numeron saa etsittyä esimerkiksi seuraavalla komennolla:
+
+```{r}
+which(names(ess) == "b30")
+```
+
+## Muuttujien arvojen muuttaminen
 
 Juuri tuotu aineisto on täysin koskematon eikä R tiedä, mitkä arvot ovat
 esimerkiksi puuttuvia arvoja. Tarkastellaan seuraavassa muuttujaa b30,
@@ -403,6 +457,7 @@ table(ess$b30)
 
 Aineistoon voidaan luoda uusia muuttujia helposti. Seuraavassa luodaan ensin muuttuja sukupuoli,
 jolle asetetaan arvoksi vain puuttuvia vastauksia, jonka jälkeen se lisätään ess-data kehikkoon.
+
 ```{r}
 sukupuoli <- NA
 ess$sukupuoli <- sukupuoli
@@ -418,42 +473,3 @@ ess$sukupuoli <- NULL
 
 
 <!-- LAURI! Tähän väliin voisi sopia se muuttujien arvojen tekeminen. -->
-
-## Aineiston kuvailu
-
-Lasketaan muuttujalle B30 keskiarvo ja -hajonta
-
-```{r}
-mean(ess$b30)
-sd(ess$b30)
-```
-
-R on varovainen puuttuvien arvojen suhteen eikä laske keskiarvoa, jos
-mukana on puuttuvia arvoja (NA = Not Available). R siis pitää huolen
-siitä, ettei käyttäjä hölmöile. On mietittävä, vaikuttavatko puuttuvat
-arvot tulokseen ja/tai tulkintaan. Jos ei, R:n voi käskeä laskemaan
-keskiarvon ja -hajonnan ilman puuttuvia arvoja na.rm = TRUE
--asetuksella. Tämä jättää puuttuvat arvot huomiotta.
-
-```{r}
-mean(ess$b30, na.rm = TRUE)
-sd(ess$b30, na.rm = TRUE)
-```
-
-Puuttuvia arvoja voidaan kartoittaa esimerkiksi is.na-komennolla. Se on
-looginen funktio, joka palauttaa arvon FALSE, kun arvo ei puutu, ja
-arvon TRUE, kun arvo puuttuu. Huomaa, että puuttuvia arvoja löytyy vain
-tästä muuttujasta, koska se on ainoa muuttuja jolle ne on määritelty.
-
-```{r}
-is.na(ess$b30)
-```
-
-Tällainen lista ei kuitenkaan ole kovin käyttökelpoinen. Summataan
-puuttuvat havainnot yhteen lukuun, jolloin nähdään suoraan puuttuvien
-havaintojen määrä.
-
-```{r}
-sum(is.na(ess$b30))
-```
-►

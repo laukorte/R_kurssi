@@ -63,11 +63,56 @@ table(internet)
 
 ```
 
-## Aineiston kuvailu
+## Kuvailevat tunnusluvut
+
+Seuraavassa käydään läpi aineiston kuvailua sekä graafisesti että numeroin.
+
+### Keskiarvon ja -hajonnan laskeminen
+
+Yritetään laskea muuttujalle B30 keskiarvo ja -hajonta
+
+```{r}
+mean(ess$b30)
+sd(ess$b30)
+```
+
+R on varovainen puuttuvien arvojen suhteen eikä laske keskiarvoa, jos
+mukana on puuttuvia arvoja (NA = Not Available). R siis pitää huolen
+siitä, ettei käyttäjä hölmöile. On mietittävä, vaikuttavatko puuttuvat
+arvot tulokseen ja/tai tulkintaan. Jos ei, R:n voi käskeä laskemaan
+keskiarvon ja -hajonnan ilman puuttuvia arvoja na.rm = TRUE
+-asetuksella. Tämä jättää puuttuvat arvot huomiotta.
+
+```{r}
+mean(ess$b30, na.rm = TRUE)
+sd(ess$b30, na.rm = TRUE)
+```
+
+Puuttuvia arvoja voidaan kartoittaa esimerkiksi is.na-komennolla. Se on
+looginen funktio, joka palauttaa arvon FALSE, kun arvo ei puutu, ja
+arvon TRUE, kun arvo puuttuu. Huomaa, että puuttuvia arvoja löytyy vain
+tästä muuttujasta, koska se on ainoa muuttuja jolle ne on määritelty.
+
+```{r}
+is.na(ess$b30)
+```
+
+Tällainen lista ei kuitenkaan ole kovin käyttökelpoinen. Summataan
+puuttuvat havainnot yhteen lukuun, jolloin nähdään suoraan puuttuvien
+havaintojen määrä.
+
+```{r}
+sum(is.na(ess$b30))
+```
+
+
+<!-- Aineiston graafinen kuvaaminen alkaa -->
+
+## Aineiston graafinen kuvailu
 
 ### Histogrammi
 
-Histogrammin, joka kuvaa havaintojen jakaumaa saa helposti `hist`-komennolla.
+Histogrammin, joka kuvaa havaintojen jakaumaa saa helposti `hist()`-komennolla.
 
 ```{r}
 hist(ess$b30)
@@ -143,4 +188,41 @@ frekvenssitaulu <- table(df$F11, useNA = "always")
 # las-parametri vaihtaa x-akselin labeleiden suunnan, space-parametrilla muutetaan
 # pylväiden etäisyyksiä, cex.names-parametrilla muutetaan x-akselin tekstin kokoa
 barplot(frekvenssitaulu, las = 2, space = c(0.5), cex.names = 0.75)
+```
+
+<!-- Osa-aineiston poimiminen alkaa -->
+
+## Osa-aineiston poimiminen
+
+Toisinaan on tarvetta käyttää vain osaa aineistosta. Jos halutaan tarkastella esimerkiksi miesten ja naisten eroja,
+voidaan muodostaa osa-aineistot, joista toinen sisältää naiset ja toinen miehet. R tarjoaa osa-aineistojen poimimiseen
+useita keinoja, joista seuraavassa on esitelty kolme.
+
+### Komennon sisällä
+
+Aineistoa voidaan rajata komentojen sisällä. Ehdollisia lauseita voidaan tehdä samanaikaisesti useampia käyttämällä
+&-operaattoria. Esimerkiksi seuraavassa on taulukoitu vain korkeasti koulutetut naiset.
+
+```{r}
+table(ess$b30[ess$f2_1 == 2 & ess$b30 < 7])
+```
+
+### Uuden aineiston luominen operaattorien avulla
+
+Edellisen esimerkin kohdalla osa-aineiston poiminta koskee vain yhtä komentoa.
+Koska R mahdollistaa useiden aineistojen käyttämisen samanaikaisesti ja uusien aineistojen luominen
+on verrattain vaivatonta, on usein viisaampaa muodostaa kokonaan uusi aineisto, jolla operoidaan. Näin
+vältytään esimerkiksi aineiston sekoittumisen ja/tai pilaantumisen riskeiltä.
+Seuraavassa oneritelty miehet omaksi aineistokseen ehdollisella lauseella.
+
+```{r}
+ess_m <- ess[ess$f2_1 == 1, ]
+```
+
+### Uuden aineiston luominen komennon avulla
+
+Sama voidaan tehdä myös `subset`-komennon avulla.
+
+```{r}
+ess_f <- subset(ess, f2_1 == 2)
 ```
