@@ -348,31 +348,16 @@ Tietoa aineistosta ja sen muuttujista saa `?swiss`-komennon avulla.
     -   FSD3217 European Social Survey 2016: Suomen aineiston on
         Tietoarkiston kautta vapaasti käytettävissä ilman
         rekisteröitymistä.
--   **[Lataa aineisto](http://urn.fi/urn:nbn:fi:fsd:T-FSD3217)**
-    seuraavaan harjoituskertaan mennessä
--   Aineisto kannattaa tallentaa omaan (UEFin) o365 OneDriveen, jolloin
-    se on käytettävissä kaikilla työasemilla
-
-
-
--   Ohjeet löytyvät [täältä](https://www.fsd.tuni.fi/fi/aineistot/taustatietoa/spss-portable-r/)
+-   **[Lataa aineisto](http://urn.fi/urn:nbn:fi:fsd:T-FSD3217)** ja tallenna se työkansioosi
+-   Aineisto kannattaa tallentaa omaan (UEFin) o365 OneDriveen, jolloin se on käytettävissä kaikilla työasemilla
 
 ### Aineiston ottaminen käyttöön
 
-```{r eval = FALSE}
-# Asennetaan "memisc"-niminen paketti
-install.packages('memisc')
+Kun aineisto on työkansiossa, sen saa käyttöön `read.csv` -komennolla. Komennossa kerrotaan, että vastaajien arvoja erottaa
+puolipiste (`sep = ";"`) ja tiedoston ensimmäinen rivi sisältää muuttujien nimet (`header = TRUE`).
 
-# Otetaan käyttöön kyseinen paketti
-library(memisc)
-
-# Ladataan aineisto R:ään, korjaa polku tiedostoon oikeaksi eli
-# laita "D:/data.por" tilalle se tiedostopolku, johon talletit datan
-ds <- as.data.set(spss.portable.file("D:/data.por")) 
-
-# Muutetaan heti useammin käytettyyn dataframe-muotoon
-df <- as.data.frame(ds)
-
+```{r}
+ess <- read.csv("ess2016.csv", sep = ";", header = TRUE)
 ```
 
 ## Valmiin aineiston tarkastelu
@@ -409,7 +394,7 @@ R:ssä ei kuitenkaan ole tähän helppoa keinoa, vaan nimet on muutettava käsin
 seuraavanlaisella koodilla.
 
 ```{r}
-# names(ess)[names(ess) == "f2_1"] <- "sukupuoli"
+names(ess)[names(ess) == "f2_1"] <- "sukupuoli"
 ```
 
 Puretaan edellinen osiin selkeyden vuoksi. Käytännössä komennossa on kyse arvojen sijoittamisesta ess-aineistoon.
@@ -421,19 +406,37 @@ HUOM! Hakasulkeissa voisi yhtä hyvin käyttää sarakkeen numeroa (=176), mutta
 Muuttujan sarakkeen numeron saa etsittyä esimerkiksi seuraavalla komennolla:
 
 ```{r}
-which(names(ess) == "b30")
+which(names(ess) == "f11")
+names(ess)[208] <- "sivsaat"
+```
+
+### Muuttujien mitta-asteikon muuttaminen
+
+R on tarkempi siitä, minkälaisia muuttujia analyyseissa käytetään. Muuttujan mitta-asteikko vaikuttaa esimerkiksi kuvailevien tunnuslukujen ja graafien tulostamiseen. Lähtökohtaisesti kaikki muuttujat ESS-aineistossa ovat välimatka-asteikollisia ja seuraavassa muutetaan tällä kurssilla käytettävät muuttujat luokittelu- tai järjestysasteikollisiksi. Huomaa, että kolmen ensimmäisen muuttujat kohdalla on astus `order = TRUE`, joka asettaa muuttujat järjestysasteikollisiksi. Jälkimmäisistä tämä puuttuu ja muuttujista tulee luokitteluasteikollisia.
+
+```{r}
+ess$ilmasto <- factor(ess$d24, order = TRUE)
+ess$terveys <- factor(ess$c7, order = TRUE)
+ess$turvallisuus <- factor(ess$c6, order = TRUE)
+
+ess$sivsaat <- factor(ess$f11)
+ess$sukupuoli <- factor(ess$f2_1)
+ess$koulutus <- factor(ess$f15)
+ess$asuinymp <- factor(ess$f14)
+ess$elake <- factor(ess$f17a_6)
 ```
 
 ## Muuttujien arvojen muuttaminen
 
+### Puuttuvien arvojen luominen
+
 Juuri tuotu aineisto on täysin koskematon eikä R tiedä, mitkä arvot ovat
-esimerkiksi puuttuvia arvoja. Tarkastellaan seuraavassa muuttujaa b30,
-"Kuinka tyytyväinen olet siihen, kuinka demokratia toimii Suomessa?".
-Vastausvaihtoehtojen tulisi vaihdella välillä 0-10, mutta havaitaan
+esimerkiksi puuttuvia arvoja. Tarkastellaan seuraavassa muuttujaa c1,
+"Kuinka onnellinen olet?". Vastausvaihtoehtojen tulisi vaihdella välillä 0-10, mutta havaitaan
 joukossa olevan myös muitakin arvoja.
 
 ```{r}
-table(ess$b30)
+table(ess$c1)
 ```
 
 Huomataan, että arvot vaihtelevat välillä 1--99. ESS:n ohjekirjan mukaan
@@ -441,7 +444,7 @@ arvo 99 on koodattu tarkoittamaan "En osaa sanoa" -vaihtoehtoa.
 Sijoitetaan arvo NA niihin soluihin, joiden arvo on 99.
 
 ```{r}
-ess$b30[ess$b30 == 99] <- NA
+ess$b30[ess$c1 == 99] <- NA
 ```
 
 Sama operaatio voidaan tehdä hiukan mutkikkaamin replace-komennolla.
@@ -449,8 +452,8 @@ Komento sijoittaa aineiston sarakkeeseen b30 (ess\$b30) kyseisen
 sarakkeen, jonka arvot 99 on korvattu NA:lla.
 
 ```{r}
-ess$b30 <- replace(ess$b30, ess$b30 == 99, NA)
-table(ess$b30)
+ess$c1 <- replace(ess$c1, ess$c1 == 99, NA)
+table(ess$c1)
 ```
 
 ## Uuden muuttujan luominen aineistoon

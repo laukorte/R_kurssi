@@ -1,5 +1,7 @@
 # Harjoituskerta 2
 
+Tällä harjoituskerralla tutustutuaan aineiston tarkastelemiseen tunnuslukujen ja graafien avulla sekä muuttujien muokkaamiseen ja uusien muuttujien luomiseen.
+
 ```{r, echo = FALSE}
 luo_kurssiaikataulu(3)
 ```
@@ -54,7 +56,7 @@ ess$f15[ess$f15 == 99] <- NA
 ```
 
 ```{r}
-table(ess$a2, ess$b30)
+table(ess$f2_1, ess$b30)
 
 # Yksittäinen muuttuja voidaan myös kopioda omaksi muuttujakseen ja ottaa frekvenssit siitä
 
@@ -63,25 +65,49 @@ table(internet)
 
 ```
 
-## Kuvailevat tunnusluvut
+## Kuvailevat tunnusluvut epäjatkuvaluonteisille muuttujille
 
-Seuraavassa käydään läpi aineiston kuvailua sekä graafisesti että numeroin.
+### Moodi ja mediaani
+
+Moodi eli yleisimmin esiintyvä arvo saadaan esille jo aiemmin käytetyllä `summary()` -komennolla. Tarkastellaan esimerkiksi siviilisäädyn moodia.
+
+```{r}
+summary(ess$sivsaat)
+```
+
+Kun puuttuvat arvot (=NA ja 9) jätetään laskuista, suurin osa vastaajista on vastannut 6 eli "Ei mikään edellä mainituista".
+
+Järjestysasteikollisen keskikohtaa voidaan kuvata mediaanilla. Se on keskimmäinen arvo, kun muuttujat on laitettu suuruusjärjestykseen. Esimerkiksi ilmastoahdistusta mittaavaan muuttujan mediaani saadaan seuraavasti:
+
+```{r}
+median(ess$d24, na.rm = T)
+```
+R on varovainen puuttuvien arvojen suhteen eikä laske mediaania, jos
+mukana on puuttuvia arvoja (NA = Not Available). R siis pitää huolen
+siitä, ettei käyttäjä hölmöile. On mietittävä, vaikuttavatko puuttuvat
+arvot tulokseen ja/tai tulkintaan. Jos ei, R:n voi käskeä laskemaan
+keskiarvon ja -hajonnan ilman puuttuvia arvoja asetukselle `na.rm = TRUE`
+-asetuksella. Tämä jättää puuttuvat arvot huomiotta. Huomaa, että asetusta
+on käytetty myös seuraavissa komennoissa.
+
+### Range
+
+```{r}
+range(ess$d24, na.rm = T)
+```
+
+## Kuvailevat tunnusluvut jatkuvaluonteisille muuttujille
 
 ### Keskiarvon ja -hajonnan laskeminen
 
-Yritetään laskea muuttujalle B30 keskiarvo ja -hajonta
+Laskea muuttujalle B30 keskiarvo ja -hajonta
 
 ```{r}
 mean(ess$b30)
 sd(ess$b30)
 ```
 
-R on varovainen puuttuvien arvojen suhteen eikä laske keskiarvoa, jos
-mukana on puuttuvia arvoja (NA = Not Available). R siis pitää huolen
-siitä, ettei käyttäjä hölmöile. On mietittävä, vaikuttavatko puuttuvat
-arvot tulokseen ja/tai tulkintaan. Jos ei, R:n voi käskeä laskemaan
-keskiarvon ja -hajonnan ilman puuttuvia arvoja na.rm = TRUE
--asetuksella. Tämä jättää puuttuvat arvot huomiotta.
+Huomaa, että tässä komennossa on käytetty `na.rm = T` -asetusta, koska R ei automaattisesti tiedä mitä puuttuville arvoille pitäisi tehdä.
 
 ```{r}
 mean(ess$b30, na.rm = TRUE)
@@ -162,7 +188,7 @@ plot(sukupuoli)
 ```{r}
 taulukko <- table(ess$f2_1, ess$b30)
 taulukko
-  prop.table(taulukko)
+prop.table(taulukko)
 ```
 
 ### Frekvenssijakaumat {.unnumbered}
@@ -181,14 +207,17 @@ prop.table(frekvenssitaulu)
 ```{r out.width="100%"}
 # Muutetaan kuvan marginaaleja
 par(mar=c(10, 4, 4, 4))
+
 # Jaetaan merkkijonot useammalle riville, niin näkyvät paremmin kuvassa
 levels(df$F11) <- str_wrap(levels(df$F11), 20)
 
 frekvenssitaulu <- table(df$F11, useNA = "always")
+
 # las-parametri vaihtaa x-akselin labeleiden suunnan, space-parametrilla muutetaan
 # pylväiden etäisyyksiä, cex.names-parametrilla muutetaan x-akselin tekstin kokoa
 barplot(frekvenssitaulu, las = 2, space = c(0.5), cex.names = 0.75)
 ```
+Huomaa, että kaksi ensimmäistä komentoa ovat vain alustavia toimenpiteitä ja kuvio tehdään kahdella viimeisellä komennolla.
 
 <!-- Osa-aineiston poimiminen alkaa -->
 
@@ -225,4 +254,47 @@ Sama voidaan tehdä myös `subset`-komennon avulla.
 
 ```{r}
 ess_f <- subset(ess, f2_1 == 2)
+```
+
+<!-- MUUTTUJIEN MUOKKAAMINEN ALKAA -->
+
+## Muuttujien muokkaaminen
+
+### Iän laskeminen syntymävuoden perusteella
+
+Ikä on useissa analyyseissa käytetty taustamuuttuja. ESS-kyselyssä ei kuitenkaan ole kysytty ikää, vaan vastaajan syntyvuosi, jonka perusteella ikä on laskettavissa (= kyselyn keräämisvuosi - vastaajan syntymävuosi). Seuraavassa lasketaan vastaajan ikä.
+
+```{r}
+table(ess$f3_1)
+ess$ikä <- 2016 - ess$f3_1
+table(ess$ikä)
+```
+
+### Muuttujan arvojen korvaaminen/muuttaminen
+
+Seuraavassa luodaan aineistoon uusi muuttuja, c_muut, ja siirretään siihen  viisiportaisen Likert-asteikon arvot niin, että arvot 1 ja 2 ovat 1, 3 ovat 3, 4 ja 5 ovat 3. Samalla muutetaan arvo 9 puuttuvaksi arvoksi.
+
+```{r}
+ess$c_muut <- ess$c43
+table(ess$c_muut)
+
+ess$c_muut[ess$c43 == 9] <- NA
+ess$c_muut[ess$c43 == 2] <- 1
+ess$c_muut[ess$c43 == 3] <- 2
+ess$c_muut[ess$c43 == 4 | ess$c43 == 5] <- 3
+table(ess$c_muut)
+```
+
+Edellisessä esimerkissä muokattava muuttuja on viisiportainen ja arvot on helppo muuttaa "käsin". Jos muokataan muuttujaa, jossa on useampia arvoja, on kätevämpää määritellä lukujoukko `%in%`-operaattorilla, jonka perusteella muutokset tehdään. Seuraavassa muutetaan ikä-muuttujan arvot ikäluokiksi siten, että luokkia muodostuu neljä:
+  * 1 = 30-vuotiaat ja nuoremmat
+  * 2 = 31-50-vuotiaat
+  * 3 = 51-65-vuotiaat
+  * 4 = 66-vuotiaat ja vanhemmat
+  
+```{r}
+ess$ikäluok[ess$ikä %in% c(0:30)] <- 1
+ess$ikäluok[ess$ikä %in% c(31:50)] <- 2
+ess$ikäluok[ess$ikä %in% c(51:65)] <- 3
+ess$ikäluok[ess$ikä %in% c(66:120)] <- 4
+table(ess$ikä)
 ```
