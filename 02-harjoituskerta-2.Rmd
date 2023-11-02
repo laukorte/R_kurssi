@@ -56,7 +56,7 @@ ess$f15[ess$f15 == 99] <- NA
 ```
 
 ```{r}
-table(ess$f2_1, ess$b30)
+table(ess$sukupuoli, ess$b30)
 
 # Yksittäinen muuttuja voidaan myös kopioda omaksi muuttujakseen ja ottaa frekvenssit siitä
 
@@ -176,7 +176,7 @@ jonka takia kuviosta tuli hajontakuvio. Seuraavassa tehdään uusi muuttuja suku
 luokkamuuttujaksi.
 
 ```{r}
-sukupuoli <- as.factor(ess$f2_1)
+sukupuoli <- as.factor(ess$sukupuoli)
 plot(sukupuoli)
 ```
 
@@ -186,7 +186,7 @@ plot(sukupuoli)
 ### Ristiintaulukointi
 
 ```{r}
-taulukko <- table(ess$f2_1, ess$b30)
+taulukko <- table(ess$sukupuoli, ess$b30)
 taulukko
 prop.table(taulukko)
 ```
@@ -233,7 +233,7 @@ Aineistoa voidaan rajata komentojen sisällä. Ehdollisia lauseita voidaan tehd�
 &-operaattoria. Esimerkiksi seuraavassa on taulukoitu vain korkeasti koulutetut naiset.
 
 ```{r}
-table(ess$b30[ess$f2_1 == 2 & ess$b30 < 7])
+table(ess$b30[ess$sukupuoli == 2 & ess$b30 < 7])
 ```
 
 ### Uuden aineiston luominen operaattorien avulla
@@ -245,7 +245,7 @@ vältytään esimerkiksi aineiston sekoittumisen ja/tai pilaantumisen riskeiltä
 Seuraavassa oneritelty miehet omaksi aineistokseen ehdollisella lauseella.
 
 ```{r}
-ess_m <- ess[ess$f2_1 == 1, ]
+ess_m <- ess[ess$sukupuoli == 1, ]
 ```
 
 ### Uuden aineiston luominen komennon avulla
@@ -253,7 +253,7 @@ ess_m <- ess[ess$f2_1 == 1, ]
 Sama voidaan tehdä myös `subset`-komennon avulla.
 
 ```{r}
-ess_f <- subset(ess, f2_1 == 2)
+ess_f <- subset(ess, sukupuoli == 2)
 ```
 
 <!-- MUUTTUJIEN MUOKKAAMINEN ALKAA -->

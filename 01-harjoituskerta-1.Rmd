@@ -419,8 +419,8 @@ ess$ilmasto <- factor(ess$d24, order = TRUE)
 ess$terveys <- factor(ess$c7, order = TRUE)
 ess$turvallisuus <- factor(ess$c6, order = TRUE)
 
-ess$sivsaat <- factor(ess$f11)
-ess$sukupuoli <- factor(ess$f2_1)
+ess$sivsaat <- factor(ess$sivsaat)
+ess$sukupuoli <- factor(ess$sukupuoli)
 ess$koulutus <- factor(ess$f15)
 ess$asuinymp <- factor(ess$f14)
 ess$elake <- factor(ess$f17a_6)
@@ -462,8 +462,8 @@ Aineistoon voidaan luoda uusia muuttujia helposti. Seuraavassa luodaan ensin muu
 jolle asetetaan arvoksi vain puuttuvia vastauksia, jonka jälkeen se lisätään ess-data kehikkoon.
 
 ```{r}
-sukupuoli <- NA
-ess$sukupuoli <- sukupuoli
+asema <- NA
+ess$asema <- asema
 ```
 
 ## Muuttujan poistaminen aineistosta
@@ -471,7 +471,7 @@ ess$sukupuoli <- sukupuoli
 Muuttuja tai muuttujia voidaan poistaa aineistosta samalla logiikalla.
 
 ```{r}
-ess$sukupuoli <- NULL
+ess$asema <- NULL
 ```
 
 
