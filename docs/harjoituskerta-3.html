@@ -29,7 +29,7 @@ The HTML output format for this example is bookdown::gitbook,</p>" />
 <meta name="author" content="Terhi Auvinen, Samuli Koponen, Lauri Kortelainen &amp; Antti Kouvo" />
 
 
-<meta name="date" content="2023-11-02" />
+<meta name="date" content="2023-11-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -224,9 +224,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3" data-path="harjoituskerta-3.html"><a href="harjoituskerta-3.html"><i class="fa fa-check"></i><b>3</b> Harjoituskerta 3</a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="harjoituskerta-3.html"><a href="harjoituskerta-3.html#muuttujien-muunnokset"><i class="fa fa-check"></i><b>3.1</b> Muuttujien muunnokset</a></li>
-<li class="chapter" data-level="3.2" data-path="harjoituskerta-3.html"><a href="harjoituskerta-3.html#ristiintaulukointi-1"><i class="fa fa-check"></i><b>3.2</b> Ristiintaulukointi</a>
+<li class="chapter" data-level="3.2" data-path="harjoituskerta-3.html"><a href="harjoituskerta-3.html#aineiston-luominen"><i class="fa fa-check"></i><b>3.2</b> Aineiston luominen</a></li>
+<li class="chapter" data-level="3.3" data-path="harjoituskerta-3.html"><a href="harjoituskerta-3.html#ristiintaulukointi-1"><i class="fa fa-check"></i><b>3.3</b> Ristiintaulukointi</a>
 <ul>
-<li class="chapter" data-level="3.2.1" data-path="harjoituskerta-3.html"><a href="harjoituskerta-3.html#ristiintaulukointi-ja-chi2-testi"><i class="fa fa-check"></i><b>3.2.1</b> Ristiintaulukointi ja <span class="math inline">\(\chi^2\)</span>-testi</a></li>
+<li class="chapter" data-level="3.3.1" data-path="harjoituskerta-3.html"><a href="harjoituskerta-3.html#ristiintaulukointi-ja-chi2-testi"><i class="fa fa-check"></i><b>3.3.1</b> Ristiintaulukointi ja <span class="math inline">\(\chi^2\)</span>-testi</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="harjoituskerta-4.html"><a href="harjoituskerta-4.html"><i class="fa fa-check"></i><b>4</b> Harjoituskerta 4</a></li>
@@ -338,155 +339,134 @@ Kertausta ja ohjausta ryhmätehtävään
 </ul></li>
 </ul></li>
 </ul>
-<div id="harjoitus-a" class="section level4 unnumbered hasAnchor">
-<h4>Harjoitus a:<a href="harjoituskerta-3.html#harjoitus-a" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>Uudelleenluokitellaan muuttuja <strong>C7</strong>.</p>
-<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="harjoituskerta-3.html#cb128-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb128-2"><a href="harjoituskerta-3.html#cb128-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Varmistetaan, että muuttuja C7 on luokaltaan faktori</span></span>
-<span id="cb128-3"><a href="harjoituskerta-3.html#cb128-3" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(df<span class="sc">$</span>C7)</span></code></pre></div>
-<pre><code>## [1] &quot;factor&quot;</code></pre>
-<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="harjoituskerta-3.html#cb130-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Muuttujan frekvenssijakauma</span></span>
-<span id="cb130-2"><a href="harjoituskerta-3.html#cb130-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(df<span class="sc">$</span>C7, <span class="at">useNA =</span> <span class="st">&quot;always&quot;</span>)</span></code></pre></div>
-<pre><code>## 
-##  Erittäin hyvä           Hyvä   Kohtuullinen          Huono Erittäin huono     Kieltäytyy            EOS           &lt;NA&gt; 
-##            423            895            519             76             10              1              1              0</code></pre>
-<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="harjoituskerta-3.html#cb132-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tehdään aineistoon kopio muuttujasta C7 ja asetetaan sen nimeksi terveys</span></span>
-<span id="cb132-2"><a href="harjoituskerta-3.html#cb132-2" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>terveys <span class="ot">&lt;-</span> df<span class="sc">$</span>C7</span>
-<span id="cb132-3"><a href="harjoituskerta-3.html#cb132-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Tutkitaan funktion levels-avulla faktorin tasoja</span></span>
-<span id="cb132-4"><a href="harjoituskerta-3.html#cb132-4" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(df<span class="sc">$</span>terveys)</span></code></pre></div>
-<pre><code>## [1] &quot;Erittäin hyvä&quot;  &quot;Hyvä&quot;           &quot;Kohtuullinen&quot;   &quot;Huono&quot;          &quot;Erittäin huono&quot; &quot;Kieltäytyy&quot;     &quot;EOS&quot;</code></pre>
-<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="harjoituskerta-3.html#cb134-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Yhdistetään luokat Huono ja Erittäin huono</span></span>
-<span id="cb134-2"><a href="harjoituskerta-3.html#cb134-2" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(df<span class="sc">$</span>terveys)[<span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">5</span>)] <span class="ot">&lt;-</span> <span class="st">&quot;Huono tai erittäin huono&quot;</span></span>
-<span id="cb134-3"><a href="harjoituskerta-3.html#cb134-3" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(df<span class="sc">$</span>terveys, <span class="at">useNA =</span> <span class="st">&quot;always&quot;</span>)</span></code></pre></div>
-<pre><code>## 
-##            Erittäin hyvä                     Hyvä             Kohtuullinen Huono tai erittäin huono               Kieltäytyy 
-##                      423                      895                      519                       86                        1 
-##                      EOS                     &lt;NA&gt; 
-##                        1                        0</code></pre>
 </div>
-<div id="harjoitus-b" class="section level4 unnumbered hasAnchor">
-<h4>Harjoitus b:<a href="harjoituskerta-3.html#harjoitus-b" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>Muodostetaan kurssin harjoitusainestoon ikämuuttuja, joka kertoo henkilön iän vuonna 2022.</p>
-<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="harjoituskerta-3.html#cb136-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>ika_v22 <span class="ot">&lt;-</span> <span class="dv">2022</span> <span class="sc">-</span> df<span class="sc">$</span>F3_1</span></code></pre></div>
-<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##   21.00   40.00   57.00   55.94   71.00  104.00</code></pre>
-<p><img src="_main_files/figure-html/unnamed-chunk-71-1.png" width="672" /></p>
-</div>
+<div id="aineiston-luominen" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Aineiston luominen<a href="harjoituskerta-3.html#aineiston-luominen" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Seuraavassa muodostetaan kurssin aineisto yhdeksi datakehikoksi. Tulostetaan ensin muuttujien nimet, josta poimitaan tarvittavat.</p>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="harjoituskerta-3.html#cb128-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(ess)</span></code></pre></div>
+<pre><code>##   [1] &quot;fsd_no&quot;       &quot;fsd_vr&quot;       &quot;fsd_id&quot;       &quot;fsd_li&quot;       &quot;a1_min&quot;       &quot;a2&quot;           &quot;a3_min&quot;       &quot;a4&quot;          
+##   [9] &quot;a5&quot;           &quot;a6&quot;           &quot;b1&quot;           &quot;b2&quot;           &quot;b3&quot;           &quot;b4&quot;           &quot;b5&quot;           &quot;b6&quot;          
+##  [17] &quot;b7&quot;           &quot;b8&quot;           &quot;b9&quot;           &quot;b10&quot;          &quot;b11&quot;          &quot;b12&quot;          &quot;b13&quot;          &quot;b14&quot;         
+##  [25] &quot;b15&quot;          &quot;b16&quot;          &quot;b17&quot;          &quot;b18&quot;          &quot;b19&quot;          &quot;b20&quot;          &quot;b21&quot;          &quot;b22&quot;         
+##  [33] &quot;b23&quot;          &quot;b24&quot;          &quot;b25&quot;          &quot;b26&quot;          &quot;b27&quot;          &quot;b28&quot;          &quot;b29&quot;          &quot;b30&quot;         
+##  [41] &quot;b31&quot;          &quot;b32&quot;          &quot;b33&quot;          &quot;b33a&quot;         &quot;b34&quot;          &quot;b35&quot;          &quot;b36&quot;          &quot;b37&quot;         
+##  [49] &quot;b38&quot;          &quot;b39&quot;          &quot;b40&quot;          &quot;b41&quot;          &quot;b42&quot;          &quot;b43&quot;          &quot;c1&quot;           &quot;c2&quot;          
+##  [57] &quot;c3&quot;           &quot;c4&quot;           &quot;c5&quot;           &quot;c6&quot;           &quot;c7&quot;           &quot;c8&quot;           &quot;c9&quot;           &quot;c10&quot;         
+##  [65] &quot;c11&quot;          &quot;c12&quot;          &quot;c13&quot;          &quot;c14&quot;          &quot;c15&quot;          &quot;c16&quot;          &quot;c17&quot;          &quot;c18&quot;         
+##  [73] &quot;c19_1&quot;        &quot;c19_2&quot;        &quot;c19_3&quot;        &quot;c19_4&quot;        &quot;c19_5&quot;        &quot;c19_6&quot;        &quot;c19_7&quot;        &quot;c19_8&quot;       
+##  [81] &quot;c19_9&quot;        &quot;c19_10&quot;       &quot;c20&quot;          &quot;c22&quot;          &quot;c24&quot;          &quot;c25_1&quot;        &quot;c25_2&quot;        &quot;c26&quot;         
+##  [89] &quot;c27&quot;          &quot;c29&quot;          &quot;c32&quot;          &quot;c33&quot;          &quot;c34&quot;          &quot;c35&quot;          &quot;c36&quot;          &quot;c37&quot;         
+##  [97] &quot;c38&quot;          &quot;c39&quot;          &quot;c40&quot;          &quot;c41&quot;          &quot;c42&quot;          &quot;c43&quot;          &quot;c44&quot;          &quot;d1&quot;          
+## [105] &quot;d2&quot;           &quot;d3&quot;           &quot;d4&quot;           &quot;d5&quot;           &quot;d6&quot;           &quot;d7&quot;           &quot;d8&quot;           &quot;d9&quot;          
+## [113] &quot;d10&quot;          &quot;d11&quot;          &quot;d12&quot;          &quot;d13&quot;          &quot;d14&quot;          &quot;d15&quot;          &quot;d16&quot;          &quot;d17&quot;         
+## [121] &quot;d18&quot;          &quot;d19&quot;          &quot;d21&quot;          &quot;d22&quot;          &quot;d23&quot;          &quot;d24&quot;          &quot;d25&quot;          &quot;d26&quot;         
+## [129] &quot;d27&quot;          &quot;d28&quot;          &quot;d29&quot;          &quot;d30&quot;          &quot;d31&quot;          &quot;d32&quot;          &quot;e1&quot;           &quot;e2&quot;          
+## [137] &quot;e3&quot;           &quot;e4&quot;           &quot;e5&quot;           &quot;e6&quot;           &quot;e7&quot;           &quot;e8&quot;           &quot;e9&quot;           &quot;e10&quot;         
+## [145] &quot;e11&quot;          &quot;e12&quot;          &quot;e13&quot;          &quot;e14&quot;          &quot;e15&quot;          &quot;e16&quot;          &quot;e17&quot;          &quot;e18&quot;         
+## [153] &quot;e20&quot;          &quot;e21&quot;          &quot;e22&quot;          &quot;e23&quot;          &quot;e24&quot;          &quot;e25&quot;          &quot;e26&quot;          &quot;e27&quot;         
+## [161] &quot;e28&quot;          &quot;e29&quot;          &quot;e30&quot;          &quot;e31&quot;          &quot;e32&quot;          &quot;e33&quot;          &quot;e34&quot;          &quot;e35&quot;         
+## [169] &quot;e36&quot;          &quot;e37&quot;          &quot;e38&quot;          &quot;e39&quot;          &quot;e40&quot;          &quot;e41&quot;          &quot;f1&quot;           &quot;sukupuoli&quot;   
+## [177] &quot;f3_1&quot;         &quot;f1_2&quot;         &quot;f2_2&quot;         &quot;f3_2&quot;         &quot;f4_2&quot;         &quot;f1_3&quot;         &quot;f2_3&quot;         &quot;f3_3&quot;        
+## [185] &quot;f4_3&quot;         &quot;f1_4&quot;         &quot;f2_4&quot;         &quot;f3_4&quot;         &quot;f4_4&quot;         &quot;f1_5&quot;         &quot;f2_5&quot;         &quot;f3_5&quot;        
+## [193] &quot;f4_5&quot;         &quot;f1_6&quot;         &quot;f2_6&quot;         &quot;f3_6&quot;         &quot;f4_6&quot;         &quot;f1_7&quot;         &quot;f2_7&quot;         &quot;f3_7&quot;        
+## [201] &quot;f4_7&quot;         &quot;f5&quot;           &quot;f6&quot;           &quot;f7&quot;           &quot;f8&quot;           &quot;f9&quot;           &quot;f10&quot;          &quot;sivsaat&quot;     
+## [209] &quot;f12&quot;          &quot;f13&quot;          &quot;f14&quot;          &quot;f15&quot;          &quot;f16&quot;          &quot;f17a_1&quot;       &quot;f17a_2&quot;       &quot;f17a_3&quot;      
+## [217] &quot;f17a_4&quot;       &quot;f17a_5&quot;       &quot;f17a_6&quot;       &quot;f17a_7&quot;       &quot;f17a_8&quot;       &quot;f17a_9&quot;       &quot;f17b&quot;         &quot;f17c&quot;        
+## [225] &quot;f17d&quot;         &quot;f18&quot;          &quot;f19&quot;          &quot;f20&quot;          &quot;f21&quot;          &quot;f22&quot;          &quot;f23&quot;          &quot;f24&quot;         
+## [233] &quot;f25&quot;          &quot;f26&quot;          &quot;f27&quot;          &quot;f28&quot;          &quot;f29&quot;          &quot;f30&quot;          &quot;f31&quot;          &quot;f32&quot;         
+## [241] &quot;f33&quot;          &quot;f35&quot;          &quot;f36&quot;          &quot;f37&quot;          &quot;f38&quot;          &quot;f39&quot;          &quot;f40&quot;          &quot;f41&quot;         
+## [249] &quot;f42&quot;          &quot;f43&quot;          &quot;f44&quot;          &quot;f45a_1&quot;       &quot;f45a_2&quot;       &quot;f45a_3&quot;       &quot;f45a_4&quot;       &quot;f45a_5&quot;      
+## [257] &quot;f45a_6&quot;       &quot;f45a_7&quot;       &quot;f45a_8&quot;       &quot;f45a_9&quot;       &quot;f45b&quot;         &quot;f45c&quot;         &quot;f45d&quot;         &quot;f46&quot;         
+## [265] &quot;f47&quot;          &quot;f50&quot;          &quot;f51&quot;          &quot;f52&quot;          &quot;f53&quot;          &quot;f55&quot;          &quot;f56&quot;          &quot;f57&quot;         
+## [273] &quot;f59&quot;          &quot;f60&quot;          &quot;f61_1&quot;        &quot;f61_2&quot;        &quot;h1a&quot;          &quot;h1b&quot;          &quot;h1c&quot;          &quot;h1d&quot;         
+## [281] &quot;h1e&quot;          &quot;h1f&quot;          &quot;h1g&quot;          &quot;h1h&quot;          &quot;h1i&quot;          &quot;h1j&quot;          &quot;h1k&quot;          &quot;h1l&quot;         
+## [289] &quot;h1m&quot;          &quot;h1n&quot;          &quot;h1o&quot;          &quot;h1p&quot;          &quot;h1q&quot;          &quot;h1r&quot;          &quot;h1s&quot;          &quot;h1t&quot;         
+## [297] &quot;h1u&quot;          &quot;i1&quot;           &quot;i2&quot;           &quot;i3&quot;           &quot;i4&quot;           &quot;i5&quot;           &quot;i6&quot;           &quot;i7&quot;          
+## [305] &quot;i8&quot;           &quot;i9&quot;           &quot;i10&quot;          &quot;bv1&quot;          &quot;paino&quot;        &quot;ilmasto&quot;      &quot;terveys&quot;      &quot;turvallisuus&quot;
+## [313] &quot;koulutus&quot;     &quot;asuinymp&quot;     &quot;elake&quot;        &quot;ikä&quot;          &quot;c_muut&quot;       &quot;ikäluok&quot;</code></pre>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="harjoituskerta-3.html#cb130-1" aria-hidden="true" tabindex="-1"></a>aineisto <span class="ot">&lt;-</span> ess[, <span class="fu">c</span>(<span class="st">&quot;a3_min&quot;</span>, <span class="st">&quot;b26&quot;</span>, <span class="st">&quot;b27&quot;</span>, <span class="st">&quot;b6&quot;</span>, <span class="st">&quot;b7&quot;</span>, <span class="st">&quot;b8&quot;</span>, <span class="st">&quot;b9&quot;</span>, <span class="st">&quot;b10&quot;</span>, <span class="st">&quot;b11&quot;</span>, <span class="st">&quot;b12&quot;</span>, <span class="st">&quot;c1&quot;</span>, <span class="st">&quot;c6&quot;</span>, <span class="st">&quot;c7&quot;</span>, <span class="st">&quot;d24&quot;</span>, <span class="st">&quot;e4&quot;</span>, <span class="st">&quot;sivsaat&quot;</span>, <span class="st">&quot;f14&quot;</span>, <span class="st">&quot;f15&quot;</span>, <span class="st">&quot;f17a_6&quot;</span>, <span class="st">&quot;sukupuoli&quot;</span>)]</span>
+<span id="cb130-2"><a href="harjoituskerta-3.html#cb130-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(aineisto)</span></code></pre></div>
+<pre><code>##  [1] &quot;a3_min&quot;    &quot;b26&quot;       &quot;b27&quot;       &quot;b6&quot;        &quot;b7&quot;        &quot;b8&quot;        &quot;b9&quot;        &quot;b10&quot;       &quot;b11&quot;       &quot;b12&quot;      
+## [11] &quot;c1&quot;        &quot;c6&quot;        &quot;c7&quot;        &quot;d24&quot;       &quot;e4&quot;        &quot;sivsaat&quot;   &quot;f14&quot;       &quot;f15&quot;       &quot;f17a_6&quot;    &quot;sukupuoli&quot;</code></pre>
+<p>Tarkastellaan seuraavaksi aineistoa ja erityisesti muuttujien maksimiarvoja, jotka kertovat siitä, ovatko puuttuvat arvot asetettu oikein.</p>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="harjoituskerta-3.html#cb132-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(aineisto)</span></code></pre></div>
+<pre><code>##      a3_min           b26              b27               b6               b7               b8               b9        
+##  Min.   :  0.0   Min.   : 0.000   Min.   : 0.000   Min.   : 0.000   Min.   : 0.000   Min.   : 0.000   Min.   : 0.000  
+##  1st Qu.: 30.0   1st Qu.: 5.000   1st Qu.: 8.000   1st Qu.: 4.000   1st Qu.: 6.000   1st Qu.: 8.000   1st Qu.: 3.000  
+##  Median :120.0   Median : 6.000   Median : 8.000   Median : 6.000   Median : 8.000   Median : 9.000   Median : 5.000  
+##  Mean   :137.1   Mean   : 8.583   Mean   : 8.072   Mean   : 5.894   Mean   : 7.746   Mean   : 8.316   Mean   : 4.981  
+##  3rd Qu.:180.0   3rd Qu.: 7.000   3rd Qu.: 9.000   3rd Qu.: 7.000   3rd Qu.: 9.000   3rd Qu.: 9.000   3rd Qu.: 6.000  
+##  Max.   :630.0   Max.   :99.000   Max.   :99.000   Max.   :99.000   Max.   :99.000   Max.   :99.000   Max.   :99.000  
+##                                                                                                                       
+##       b10              b11              b12               c1               c6              c7             d24       
+##  Min.   : 0.000   Min.   : 0.000   Min.   : 0.000   Min.   : 0.000   Min.   :1.000   Min.   :1.000   Min.   :1.000  
+##  1st Qu.: 3.000   1st Qu.: 4.000   1st Qu.: 5.000   1st Qu.: 8.000   1st Qu.:1.000   1st Qu.:2.000   1st Qu.:3.000  
+##  Median : 5.000   Median : 6.000   Median : 7.000   Median : 8.000   Median :2.000   Median :2.000   Median :3.000  
+##  Mean   : 5.241   Mean   : 7.367   Mean   : 8.361   Mean   : 8.145   Mean   :1.674   Mean   :2.151   Mean   :3.074  
+##  3rd Qu.: 7.000   3rd Qu.: 7.000   3rd Qu.: 8.000   3rd Qu.: 9.000   3rd Qu.:2.000   3rd Qu.:3.000   3rd Qu.:4.000  
+##  Max.   :99.000   Max.   :99.000   Max.   :99.000   Max.   :10.000   Max.   :9.000   Max.   :9.000   Max.   :9.000  
+##                                                     NA&#39;s   :3                                        NA&#39;s   :10     
+##        e4           sivsaat         f14             f15             f17a_6       sukupuoli
+##  Min.   : 0.00   6      :630   Min.   :1.000   Min.   : 1.000   Min.   :0.0000   1:961    
+##  1st Qu.: 4.00   4      :230   1st Qu.:2.000   1st Qu.: 4.000   1st Qu.:0.0000   2:964    
+##  Median : 5.00   5      :122   Median :3.000   Median : 5.000   Median :0.0000            
+##  Mean   : 5.67   1      : 24   Mean   :2.985   Mean   : 6.553   Mean   :0.3081            
+##  3rd Qu.: 7.00   2      : 11   3rd Qu.:4.000   3rd Qu.: 9.000   3rd Qu.:1.0000            
+##  Max.   :99.00   (Other):  9   Max.   :9.000   Max.   :15.000   Max.   :1.0000            
+##                  NA&#39;s   :899                   NA&#39;s   :2</code></pre>
+<p>Muuttujat näyttäisivät sisältävän myös puuttuvat arvot, joten muutetaan ne <code>NA</code> -arvolla.</p>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="harjoituskerta-3.html#cb134-1" aria-hidden="true" tabindex="-1"></a>aineisto<span class="sc">$</span>b26[ess<span class="sc">$</span>b26 <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">98</span>, <span class="dv">99</span>)] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb134-2"><a href="harjoituskerta-3.html#cb134-2" aria-hidden="true" tabindex="-1"></a>aineisto<span class="sc">$</span>b27[ess<span class="sc">$</span>b27 <span class="sc">==</span> <span class="dv">99</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb134-3"><a href="harjoituskerta-3.html#cb134-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb134-4"><a href="harjoituskerta-3.html#cb134-4" aria-hidden="true" tabindex="-1"></a>aineisto<span class="sc">$</span>b6[ess<span class="sc">$</span>b6 <span class="sc">==</span> <span class="dv">99</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb134-5"><a href="harjoituskerta-3.html#cb134-5" aria-hidden="true" tabindex="-1"></a>aineisto<span class="sc">$</span>b7[ess<span class="sc">$</span>b7 <span class="sc">==</span> <span class="dv">99</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb134-6"><a href="harjoituskerta-3.html#cb134-6" aria-hidden="true" tabindex="-1"></a>aineisto<span class="sc">$</span>b8[ess<span class="sc">$</span>b8 <span class="sc">==</span> <span class="dv">99</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb134-7"><a href="harjoituskerta-3.html#cb134-7" aria-hidden="true" tabindex="-1"></a>aineisto<span class="sc">$</span>b9[ess<span class="sc">$</span>b9 <span class="sc">==</span> <span class="dv">99</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb134-8"><a href="harjoituskerta-3.html#cb134-8" aria-hidden="true" tabindex="-1"></a>aineisto<span class="sc">$</span>b10[ess<span class="sc">$</span>b10 <span class="sc">==</span> <span class="dv">99</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb134-9"><a href="harjoituskerta-3.html#cb134-9" aria-hidden="true" tabindex="-1"></a>aineisto<span class="sc">$</span>b11[ess<span class="sc">$</span>b11 <span class="sc">==</span> <span class="dv">99</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb134-10"><a href="harjoituskerta-3.html#cb134-10" aria-hidden="true" tabindex="-1"></a>aineisto<span class="sc">$</span>b12[ess<span class="sc">$</span>b12 <span class="sc">==</span> <span class="dv">99</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb134-11"><a href="harjoituskerta-3.html#cb134-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb134-12"><a href="harjoituskerta-3.html#cb134-12" aria-hidden="true" tabindex="-1"></a>aineisto<span class="sc">$</span>c1[ess<span class="sc">$</span>c1 <span class="sc">==</span> <span class="dv">99</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb134-13"><a href="harjoituskerta-3.html#cb134-13" aria-hidden="true" tabindex="-1"></a>aineisto<span class="sc">$</span>c6[ess<span class="sc">$</span>c6 <span class="sc">==</span> <span class="dv">9</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb134-14"><a href="harjoituskerta-3.html#cb134-14" aria-hidden="true" tabindex="-1"></a>aineisto<span class="sc">$</span>c7[ess<span class="sc">$</span>c7 <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">8</span>, <span class="dv">9</span>)] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb134-15"><a href="harjoituskerta-3.html#cb134-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb134-16"><a href="harjoituskerta-3.html#cb134-16" aria-hidden="true" tabindex="-1"></a>aineisto<span class="sc">$</span>d24[ess<span class="sc">$</span>d24 <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">8</span>, <span class="dv">9</span>)] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb134-17"><a href="harjoituskerta-3.html#cb134-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb134-18"><a href="harjoituskerta-3.html#cb134-18" aria-hidden="true" tabindex="-1"></a>aineisto<span class="sc">$</span>e4[ess<span class="sc">$</span>e4 <span class="sc">==</span> <span class="dv">99</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb134-19"><a href="harjoituskerta-3.html#cb134-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb134-20"><a href="harjoituskerta-3.html#cb134-20" aria-hidden="true" tabindex="-1"></a>aineisto<span class="sc">$</span>f14[ess<span class="sc">$</span>f14 <span class="sc">==</span> <span class="dv">9</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb134-21"><a href="harjoituskerta-3.html#cb134-21" aria-hidden="true" tabindex="-1"></a>aineisto<span class="sc">$</span>f15[ess<span class="sc">$</span>f15 <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">98</span>, <span class="dv">99</span>)] <span class="ot">&lt;-</span> <span class="cn">NA</span></span></code></pre></div>
+<p>Toistaiseksi olemme nojautuneet muuttujien tulkinnoissa data dictionaryyn tai European Social Surveyn koodikirjaan. R tukee myös muuttujien arvojen nimeämistä. Ensimmäisellä harjoituskerralla muutimme joitakin muutimme joitakin muuttujia luokittelu- tai järjestysasteikollisiksi <code>factor()</code>-komennolla. Tässä yhteydessä muuttujan arvoille voidaan määrittää myös sisältö. Tehdään ensin uusi vektori f14-muuttujasta ja tarkastellaan sen sisältöä.</p>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="harjoituskerta-3.html#cb135-1" aria-hidden="true" tabindex="-1"></a>f14 <span class="ot">&lt;-</span> <span class="fu">factor</span>(aineisto<span class="sc">$</span>f14)</span>
+<span id="cb135-2"><a href="harjoituskerta-3.html#cb135-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(f14)</span></code></pre></div>
+<pre><code>## f14
+##   1   2   3   4   5 
+## 440 243 528 341 371</code></pre>
+<p>Tällaisenaan numerot eivät kerro äkkinäiselle mitään, joten liitetään parilla lisäasetuksella numeroihin arvot helpottamaan niiden tulkitsemista. Huomaa, että seuraava korvaa kysymättä edellä tehdyn muuttujan! Komennossa ensimmäinen asetus, <code>levels</code>, määrittää tasojen määrän ja <code>labels</code> niiden sisällön. Levels voisi olla myös muotoa <code>c(1, 2, 3, 4, 5)</code>, mutta määrän kasvaessa oikopolut osoittautuvat arvokkaiksi.</p>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="harjoituskerta-3.html#cb137-1" aria-hidden="true" tabindex="-1"></a>f14 <span class="ot">&lt;-</span> <span class="fu">factor</span>(aineisto<span class="sc">$</span>f14, <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>), <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Suuri kaupunki&quot;</span>, <span class="st">&quot;Suuren kaupungin lähiö&quot;</span>, <span class="st">&quot;Pieni/keskikokoinen kaupunki&quot;</span>, <span class="st">&quot;Pienempi taajama&quot;</span>, <span class="st">&quot;Maaseutu&quot;</span>))</span></code></pre></div>
 <div id="harjoitus-c" class="section level4 unnumbered hasAnchor">
 <h4>Harjoitus c:<a href="harjoituskerta-3.html#harjoitus-c" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>Luokitellaan juuri luotu ikämuuttuja neljään luokkaan.</p>
-<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="harjoituskerta-3.html#cb138-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Käytetään cut-funktiota tähän</span></span>
-<span id="cb138-2"><a href="harjoituskerta-3.html#cb138-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Kts. ?cut</span></span>
-<span id="cb138-3"><a href="harjoituskerta-3.html#cb138-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb138-4"><a href="harjoituskerta-3.html#cb138-4" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>ika_kategorinen <span class="ot">&lt;-</span> <span class="fu">cut</span>(df<span class="sc">$</span>ika_v22, <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">30</span>, <span class="dv">50</span>, <span class="dv">65</span>, <span class="cn">Inf</span>), <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;luokka1_30_tai_alle&quot;</span>, <span class="st">&quot;luokka2_31_50&quot;</span>, <span class="st">&quot;luokka3_51_65&quot;</span>, <span class="st">&quot;luokka4_yli66&quot;</span>),  <span class="at">include.lowest =</span> <span class="cn">TRUE</span>) </span>
-<span id="cb138-5"><a href="harjoituskerta-3.html#cb138-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Piirretään kuvaaja</span></span>
-<span id="cb138-6"><a href="harjoituskerta-3.html#cb138-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(df<span class="sc">$</span>ika_kategorinen)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-72-1.png" width="672" /></p>
+<p>Seuraavassa luokitellaan aiemin luotu luotu ikämuuttuja neljään luokkaan.</p>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="harjoituskerta-3.html#cb138-1" aria-hidden="true" tabindex="-1"></a>ess<span class="sc">$</span>ika_luok <span class="ot">&lt;-</span> <span class="fu">cut</span>(ess<span class="sc">$</span>ikä, <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">30</span>, <span class="dv">50</span>, <span class="dv">65</span>, <span class="cn">Inf</span>), <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;luokka1_30_tai_alle&quot;</span>, <span class="st">&quot;luokka2_31_50&quot;</span>, <span class="st">&quot;luokka3_51_65&quot;</span>, <span class="st">&quot;luokka4_yli66&quot;</span>),  <span class="at">include.lowest =</span> <span class="cn">TRUE</span>) </span>
+<span id="cb138-2"><a href="harjoituskerta-3.html#cb138-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Piirretään kuvaaja</span></span>
+<span id="cb138-3"><a href="harjoituskerta-3.html#cb138-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ess<span class="sc">$</span>ika_luok)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-66-1.png" width="672" /></p>
 <div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="harjoituskerta-3.html#cb139-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Frekvenssijakauma</span></span>
 <span id="cb139-2"><a href="harjoituskerta-3.html#cb139-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb139-3"><a href="harjoituskerta-3.html#cb139-3" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(df<span class="sc">$</span>ika_kategorinen)</span></code></pre></div>
-<pre><code>## 
-## luokka1_30_tai_alle       luokka2_31_50       luokka3_51_65       luokka4_yli66 
-##                 215                 548                 495                 667</code></pre>
-<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="harjoituskerta-3.html#cb141-1" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.table</span>(<span class="fu">table</span>(df<span class="sc">$</span>ika_kategorinen))</span></code></pre></div>
-<pre><code>## 
-## luokka1_30_tai_alle       luokka2_31_50       luokka3_51_65       luokka4_yli66 
-##           0.1116883           0.2846753           0.2571429           0.3464935</code></pre>
+<span id="cb139-3"><a href="harjoituskerta-3.html#cb139-3" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(ess<span class="sc">$</span>ika_kategorinen)</span></code></pre></div>
+<pre><code>## &lt; table of extent 0 &gt;</code></pre>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="harjoituskerta-3.html#cb141-1" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.table</span>(<span class="fu">table</span>(ess<span class="sc">$</span>ika_kategorinen))</span></code></pre></div>
+<pre><code>## numeric(0)</code></pre>
 </div>
 </div>
-<div id="ristiintaulukointi-1" class="section level2 hasAnchor" number="3.2">
-<h2><span class="header-section-number">3.2</span> Ristiintaulukointi<a href="harjoituskerta-3.html#ristiintaulukointi-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="ristiintaulukointi-1" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> Ristiintaulukointi<a href="harjoituskerta-3.html#ristiintaulukointi-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="harjoitus" class="section level4 unnumbered hasAnchor">
 <h4>Harjoitus:<a href="harjoituskerta-3.html#harjoitus" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>Tarkastellaan,o onko miesten ja naisten välillä eroa sen suhteen, mikä on korkein koulutus, jonka vastaaja on suorittanut</p>
-<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="harjoituskerta-3.html#cb143-1" aria-hidden="true" tabindex="-1"></a>koul_sp <span class="ot">&lt;-</span> <span class="fu">table</span>(df<span class="sc">$</span>F15, df<span class="sc">$</span>F2_1)</span>
-<span id="cb143-2"><a href="harjoituskerta-3.html#cb143-2" aria-hidden="true" tabindex="-1"></a>koul_sp</span></code></pre></div>
-<pre><code>##                                                                  
-##                                                                   Mies Nainen
-##   Vähemmän kuin peruskoulun ala-aste tai vähemmän kuin kansakoulu   13     10
-##   Peruskoulun ala-aste, kansakoulu tai kansalaiskoulu               95     98
-##   Peruskoulun yläaste tai keskikoulu                                82     84
-##   Lukio, ylioppilastutkinto                                         59     60
-##   Ammatillinen perustutkinto, ammattitutkinto                      285    223
-##   Sekä ylioppilas- että ammattitutkinto                             32     37
-##   Erikoisammattitutkinto                                            32     13
-##   Ammatillinen opistoasteen tutkinto                               113    109
-##   Amm.kork.koulu tai amm. korkea-asteen tutkinto                    77    108
-##   Alempi korkeakoulututkinto, kandidaatin tutkinto                  34     77
-##   Ylempi ammattikorkeakoulututkinto                                 13     22
-##   Ylempi korkeakoulututkinto                                       110    106
-##   Lisensiaatin tutkinto                                              5      9
-##   Tohtorin tutkinto                                                  8      7
-##   Joku muu                                                           2      0
-##   Kieltäytyy                                                         0      0
-##   EOS                                                                1      1</code></pre>
-<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="harjoituskerta-3.html#cb145-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Huom. margin-argumentin arvo 2, jonka avulla lasketaan koulutuksen prosentuaalinen</span></span>
-<span id="cb145-2"><a href="harjoituskerta-3.html#cb145-2" aria-hidden="true" tabindex="-1"></a><span class="co"># jakautuminen sukupuolittain</span></span>
-<span id="cb145-3"><a href="harjoituskerta-3.html#cb145-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ?prop.table</span></span>
-<span id="cb145-4"><a href="harjoituskerta-3.html#cb145-4" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.table</span>(koul_sp, <span class="at">margin =</span> <span class="dv">2</span>)</span></code></pre></div>
-<pre><code>##                                                                  
-##                                                                          Mies      Nainen
-##   Vähemmän kuin peruskoulun ala-aste tai vähemmän kuin kansakoulu 0.013527575 0.010373444
-##   Peruskoulun ala-aste, kansakoulu tai kansalaiskoulu             0.098855359 0.101659751
-##   Peruskoulun yläaste tai keskikoulu                              0.085327784 0.087136929
-##   Lukio, ylioppilastutkinto                                       0.061394381 0.062240664
-##   Ammatillinen perustutkinto, ammattitutkinto                     0.296566077 0.231327801
-##   Sekä ylioppilas- että ammattitutkinto                           0.033298647 0.038381743
-##   Erikoisammattitutkinto                                          0.033298647 0.013485477
-##   Ammatillinen opistoasteen tutkinto                              0.117585848 0.113070539
-##   Amm.kork.koulu tai amm. korkea-asteen tutkinto                  0.080124870 0.112033195
-##   Alempi korkeakoulututkinto, kandidaatin tutkinto                0.035379813 0.079875519
-##   Ylempi ammattikorkeakoulututkinto                               0.013527575 0.022821577
-##   Ylempi korkeakoulututkinto                                      0.114464100 0.109958506
-##   Lisensiaatin tutkinto                                           0.005202914 0.009336100
-##   Tohtorin tutkinto                                               0.008324662 0.007261411
-##   Joku muu                                                        0.002081165 0.000000000
-##   Kieltäytyy                                                      0.000000000 0.000000000
-##   EOS                                                             0.001040583 0.001037344</code></pre>
-<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="harjoituskerta-3.html#cb147-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Koulutus muuttujan frekvenssijakauma - onko syytä yhdistellä luokkia?</span></span>
-<span id="cb147-2"><a href="harjoituskerta-3.html#cb147-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(df<span class="sc">$</span>F15, <span class="at">useNA =</span> <span class="st">&quot;always&quot;</span>)</span></code></pre></div>
-<pre><code>## 
-## Vähemmän kuin peruskoulun ala-aste tai vähemmän kuin kansakoulu             Peruskoulun ala-aste, kansakoulu tai kansalaiskoulu 
-##                                                              23                                                             193 
-##                              Peruskoulun yläaste tai keskikoulu                                       Lukio, ylioppilastutkinto 
-##                                                             166                                                             119 
-##                     Ammatillinen perustutkinto, ammattitutkinto                           Sekä ylioppilas- että ammattitutkinto 
-##                                                             508                                                              69 
-##                                          Erikoisammattitutkinto                              Ammatillinen opistoasteen tutkinto 
-##                                                              45                                                             222 
-##                  Amm.kork.koulu tai amm. korkea-asteen tutkinto                Alempi korkeakoulututkinto, kandidaatin tutkinto 
-##                                                             185                                                             111 
-##                               Ylempi ammattikorkeakoulututkinto                                      Ylempi korkeakoulututkinto 
-##                                                              35                                                             216 
-##                                           Lisensiaatin tutkinto                                               Tohtorin tutkinto 
-##                                                              14                                                              15 
-##                                                        Joku muu                                                      Kieltäytyy 
-##                                                               2                                                               0 
-##                                                             EOS                                                            &lt;NA&gt; 
-##                                                               2                                                               0</code></pre>
-<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="harjoituskerta-3.html#cb149-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tehdään uusi koulutus-muuttuja, jossa luokkia on yhdistelty</span></span>
-<span id="cb149-2"><a href="harjoituskerta-3.html#cb149-2" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>koulutus <span class="ot">&lt;-</span> df<span class="sc">$</span>F15</span>
-<span id="cb149-3"><a href="harjoituskerta-3.html#cb149-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Luokitellaan uudelleen</span></span>
-<span id="cb149-4"><a href="harjoituskerta-3.html#cb149-4" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(df<span class="sc">$</span>koulutus) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Perusaste&quot;</span>, <span class="st">&quot;Perusaste&quot;</span>, <span class="st">&quot;Perusaste&quot;</span>,</span>
-<span id="cb149-5"><a href="harjoituskerta-3.html#cb149-5" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;Toinen_aste&quot;</span>,<span class="st">&quot;Toinen_aste&quot;</span>, <span class="st">&quot;Toinen_aste&quot;</span>,<span class="st">&quot;Toinen_aste&quot;</span>,  <span class="st">&quot;Toinen_aste&quot;</span>,</span>
-<span id="cb149-6"><a href="harjoituskerta-3.html#cb149-6" aria-hidden="true" tabindex="-1"></a>                     <span class="st">&quot;Alempi_korkea&quot;</span>, <span class="st">&quot;Alempi_korkea&quot;</span>,</span>
-<span id="cb149-7"><a href="harjoituskerta-3.html#cb149-7" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;Ylempi_korkea&quot;</span>,<span class="st">&quot;Ylempi_korkea&quot;</span>,</span>
-<span id="cb149-8"><a href="harjoituskerta-3.html#cb149-8" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;Lisensiaatti_tohtori&quot;</span>, <span class="st">&quot;Lisensiaatti_tohtori&quot;</span>, </span>
-<span id="cb149-9"><a href="harjoituskerta-3.html#cb149-9" aria-hidden="true" tabindex="-1"></a>                    <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>)</span>
-<span id="cb149-10"><a href="harjoituskerta-3.html#cb149-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb149-11"><a href="harjoituskerta-3.html#cb149-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Uuden koulutusmuuttujan ja sukupuolen ristiintaulkointi</span></span>
-<span id="cb149-12"><a href="harjoituskerta-3.html#cb149-12" aria-hidden="true" tabindex="-1"></a>uusi_koul_sp <span class="ot">&lt;-</span> <span class="fu">table</span>(df<span class="sc">$</span>koulutus, df<span class="sc">$</span>F2_1)</span>
-<span id="cb149-13"><a href="harjoituskerta-3.html#cb149-13" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.table</span>(uusi_koul_sp, <span class="dv">2</span>)</span></code></pre></div>
-<pre><code>##                       
-##                              Mies     Nainen
-##   Perusaste            0.19832985 0.19937695
-##   Toinen_aste          0.54384134 0.45898235
-##   Alempi_korkea        0.11586639 0.19210800
-##   Ylempi_korkea        0.12839248 0.13291796
-##   Lisensiaatti_tohtori 0.01356994 0.01661475</code></pre>
+<p>Tarkastellaan, onko miesten ja naisten välillä eroa sen suhteen, mikä on korkein koulutus, jonka vastaaja on suorittanut</p>
 </div>
-<div id="ristiintaulukointi-ja-chi2-testi" class="section level3 hasAnchor" number="3.2.1">
-<h3><span class="header-section-number">3.2.1</span> Ristiintaulukointi ja <span class="math inline">\(\chi^2\)</span>-testi<a href="harjoituskerta-3.html#ristiintaulukointi-ja-chi2-testi" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="ristiintaulukointi-ja-chi2-testi" class="section level3 hasAnchor" number="3.3.1">
+<h3><span class="header-section-number">3.3.1</span> Ristiintaulukointi ja <span class="math inline">\(\chi^2\)</span>-testi<a href="harjoituskerta-3.html#ristiintaulukointi-ja-chi2-testi" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>Tutkitaan onko parisuhdestatuksella (tilastollista) yhteyttä siihen, miten kokee kotitalouden tulojen riittävyyden.</li>
 <li>Tee ristiintaulukko muuttujista:
@@ -500,37 +480,37 @@ Kertausta ja ohjausta ryhmätehtävään
 </ul></li>
 <li>Lue myös <a href="Tietoarkisto">Ristiintaulukon riippumattomuustesti</a></li>
 </ul>
-<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="harjoituskerta-3.html#cb151-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(df<span class="sc">$</span>C6)</span></code></pre></div>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="harjoituskerta-3.html#cb143-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(df<span class="sc">$</span>C6)</span></code></pre></div>
 <pre><code>## 
 ## Erittäin turvalliseksi          Turvalliseksi          Turvattomaksi Erittäin turvattomaksi             Kieltäytyy 
 ##                    845                    918                    136                     20                      0 
 ##                    EOS 
 ##                      6</code></pre>
-<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="harjoituskerta-3.html#cb153-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tiputetaan tässä vaiheessa pois faktoritaso &quot;Kieltäytyy&quot;, koska siinä ei ole havaintoja</span></span>
-<span id="cb153-2"><a href="harjoituskerta-3.html#cb153-2" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(df<span class="sc">$</span>C6)[<span class="dv">5</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb153-3"><a href="harjoituskerta-3.html#cb153-3" aria-hidden="true" tabindex="-1"></a>turv_sp <span class="ot">&lt;-</span> <span class="fu">table</span>(df<span class="sc">$</span>C6, df<span class="sc">$</span>F2_1)</span>
-<span id="cb153-4"><a href="harjoituskerta-3.html#cb153-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Tehdään khiin neliötesi</span></span>
-<span id="cb153-5"><a href="harjoituskerta-3.html#cb153-5" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(turv_sp)</span></code></pre></div>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="harjoituskerta-3.html#cb145-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tiputetaan tässä vaiheessa pois faktoritaso &quot;Kieltäytyy&quot;, koska siinä ei ole havaintoja</span></span>
+<span id="cb145-2"><a href="harjoituskerta-3.html#cb145-2" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(df<span class="sc">$</span>C6)[<span class="dv">5</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb145-3"><a href="harjoituskerta-3.html#cb145-3" aria-hidden="true" tabindex="-1"></a>turv_sp <span class="ot">&lt;-</span> <span class="fu">table</span>(df<span class="sc">$</span>C6, df<span class="sc">$</span>F2_1)</span>
+<span id="cb145-4"><a href="harjoituskerta-3.html#cb145-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Tehdään khiin neliötesi</span></span>
+<span id="cb145-5"><a href="harjoituskerta-3.html#cb145-5" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(turv_sp)</span></code></pre></div>
 <pre><code>## Warning in chisq.test(turv_sp): Chi-squared approximation may be incorrect</code></pre>
 <pre><code>## 
 ##  Pearson&#39;s Chi-squared test
 ## 
 ## data:  turv_sp
 ## X-squared = 185.13, df = 4, p-value &lt; 2.2e-16</code></pre>
-<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="harjoituskerta-3.html#cb156-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Huomaa varoitus</span></span>
-<span id="cb156-2"><a href="harjoituskerta-3.html#cb156-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Poistetaan myös luokka EOS</span></span>
-<span id="cb156-3"><a href="harjoituskerta-3.html#cb156-3" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(df<span class="sc">$</span>C6)[<span class="dv">5</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb156-4"><a href="harjoituskerta-3.html#cb156-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb156-5"><a href="harjoituskerta-3.html#cb156-5" aria-hidden="true" tabindex="-1"></a>turv_sp <span class="ot">&lt;-</span> <span class="fu">table</span>(df<span class="sc">$</span>C6, df<span class="sc">$</span>F2_1)</span>
-<span id="cb156-6"><a href="harjoituskerta-3.html#cb156-6" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.table</span>(turv_sp, <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="harjoituskerta-3.html#cb148-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Huomaa varoitus</span></span>
+<span id="cb148-2"><a href="harjoituskerta-3.html#cb148-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Poistetaan myös luokka EOS</span></span>
+<span id="cb148-3"><a href="harjoituskerta-3.html#cb148-3" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(df<span class="sc">$</span>C6)[<span class="dv">5</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb148-4"><a href="harjoituskerta-3.html#cb148-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb148-5"><a href="harjoituskerta-3.html#cb148-5" aria-hidden="true" tabindex="-1"></a>turv_sp <span class="ot">&lt;-</span> <span class="fu">table</span>(df<span class="sc">$</span>C6, df<span class="sc">$</span>F2_1)</span>
+<span id="cb148-6"><a href="harjoituskerta-3.html#cb148-6" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.table</span>(turv_sp, <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>##                         
 ##                                 Mies      Nainen
 ##   Erittäin turvalliseksi 0.578125000 0.302398332
 ##   Turvalliseksi          0.395833333 0.561001043
 ##   Turvattomaksi          0.021875000 0.119916580
 ##   Erittäin turvattomaksi 0.004166667 0.016684046</code></pre>
-<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="harjoituskerta-3.html#cb158-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tehdään testi uudestaan</span></span>
-<span id="cb158-2"><a href="harjoituskerta-3.html#cb158-2" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(turv_sp)</span></code></pre></div>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="harjoituskerta-3.html#cb150-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tehdään testi uudestaan</span></span>
+<span id="cb150-2"><a href="harjoituskerta-3.html#cb150-2" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(turv_sp)</span></code></pre></div>
 <pre><code>## 
 ##  Pearson&#39;s Chi-squared test
 ## 

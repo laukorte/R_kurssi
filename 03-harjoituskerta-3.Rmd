@@ -20,61 +20,74 @@ luo_kurssiaikataulu(4)
   - Muuttujan luokkia yhdistetään usein silloin, kun luokassa on liian vähän havaintoja
     - Esim. Khiin nekiön testin oletukset eivät toteudu → Yhdistetään frekvenssiltään pienimmät luokat
     - Luokkien yhdistämisellä täytyy aina olla myös sisällöllisiä / teoreettisia perusteluja
-    
-#### Harjoitus a:{-}
 
-Uudelleenluokitellaan muuttuja **C7**.
+## Aineiston luominen
 
-```{r, echo=TRUE}
-
-library(tidyverse)
-# Varmistetaan, että muuttuja C7 on luokaltaan faktori
-class(df$C7)
-# Muuttujan frekvenssijakauma
-table(df$C7, useNA = "always")
-# Tehdään aineistoon kopio muuttujasta C7 ja asetetaan sen nimeksi terveys
-df$terveys <- df$C7
-# Tutkitaan funktion levels-avulla faktorin tasoja
-levels(df$terveys)
-# Yhdistetään luokat Huono ja Erittäin huono
-levels(df$terveys)[c(4, 5)] <- "Huono tai erittäin huono"
-table(df$terveys, useNA = "always")
-
-```
-#### Harjoitus b:{-}
-
-Muodostetaan kurssin harjoitusainestoon ikämuuttuja, joka kertoo henkilön iän vuonna 2022.
-
-```{r, echo = TRUE}
-
-df$ika_v22 <- 2022 - df$F3_1
-
-
-```
-
-```{r, echo = FALSE}
-
-summary(df$ika_v22)
-hist(df$ika_v22) 
-
-```
-
-#### Harjoitus c: {-}
-
-Luokitellaan juuri luotu ikämuuttuja neljään luokkaan.
+Seuraavassa muodostetaan kurssin aineisto yhdeksi datakehikoksi. Tulostetaan ensin muuttujien nimet, josta poimitaan tarvittavat.
 
 ```{r}
+colnames(ess)
+aineisto <- ess[, c("a3_min", "b26", "b27", "b6", "b7", "b8", "b9", "b10", "b11", "b12", "c1", "c6", "c7", "d24", "e4", "sivsaat", "f14", "f15", "f17a_6", "sukupuoli")]
+colnames(aineisto)
+```
 
-# Käytetään cut-funktiota tähän
-# Kts. ?cut
+Tarkastellaan seuraavaksi aineistoa ja erityisesti muuttujien maksimiarvoja, jotka kertovat siitä, ovatko puuttuvat arvot asetettu oikein.
 
-df$ika_kategorinen <- cut(df$ika_v22, breaks = c(0, 30, 50, 65, Inf), labels = c("luokka1_30_tai_alle", "luokka2_31_50", "luokka3_51_65", "luokka4_yli66"),  include.lowest = TRUE) 
+```{r}
+summary(aineisto)
+```
+
+Muuttujat näyttäisivät sisältävän myös puuttuvat arvot, joten muutetaan ne `NA` -arvolla.
+
+```{r}
+aineisto$b26[ess$b26 %in% c(98, 99)] <- NA
+aineisto$b27[ess$b27 == 99] <- NA
+
+aineisto$b6[ess$b6 == 99] <- NA
+aineisto$b7[ess$b7 == 99] <- NA
+aineisto$b8[ess$b8 == 99] <- NA
+aineisto$b9[ess$b9 == 99] <- NA
+aineisto$b10[ess$b10 == 99] <- NA
+aineisto$b11[ess$b11 == 99] <- NA
+aineisto$b12[ess$b12 == 99] <- NA
+
+aineisto$c1[ess$c1 == 99] <- NA
+aineisto$c6[ess$c6 == 9] <- NA
+aineisto$c7[ess$c7 %in% c(8, 9)] <- NA
+
+aineisto$d24[ess$d24 %in% c(8, 9)] <- NA
+
+aineisto$e4[ess$e4 == 99] <- NA
+
+aineisto$f14[ess$f14 == 9] <- NA
+aineisto$f15[ess$f15 %in% c(98, 99)] <- NA
+```
+
+Toistaiseksi olemme nojautuneet muuttujien tulkinnoissa data dictionaryyn tai European Social Surveyn koodikirjaan. R tukee myös muuttujien arvojen nimeämistä. Ensimmäisellä harjoituskerralla muutimme joitakin muutimme joitakin muuttujia luokittelu- tai järjestysasteikollisiksi `factor()`-komennolla. Tässä yhteydessä muuttujan arvoille voidaan määrittää myös sisältö. Tehdään ensin uusi vektori f14-muuttujasta ja tarkastellaan sen sisältöä.
+
+```{r}
+f14 <- factor(aineisto$f14)
+table(f14)
+```
+Tällaisenaan numerot eivät kerro äkkinäiselle mitään, joten liitetään parilla lisäasetuksella numeroihin arvot helpottamaan niiden tulkitsemista. Huomaa, että seuraava korvaa kysymättä edellä tehdyn muuttujan! Komennossa ensimmäinen asetus, `levels`, määrittää tasojen määrän ja `labels` niiden sisällön. Levels voisi olla myös muotoa `c(1, 2, 3, 4, 5)`, mutta määrän kasvaessa oikopolut osoittautuvat arvokkaiksi.
+
+```{r}
+f14 <- factor(aineisto$f14, levels = c(1:5), labels = c("Suuri kaupunki", "Suuren kaupungin lähiö", "Pieni/keskikokoinen kaupunki", "Pienempi taajama", "Maaseutu"))
+```
+
+    
+#### Harjoitus c: {-}
+
+Seuraavassa luokitellaan aiemin luotu luotu ikämuuttuja neljään luokkaan.
+
+```{r}
+ess$ika_luok <- cut(ess$ikä, breaks = c(0, 30, 50, 65, Inf), labels = c("luokka1_30_tai_alle", "luokka2_31_50", "luokka3_51_65", "luokka4_yli66"),  include.lowest = TRUE) 
 # Piirretään kuvaaja
-plot(df$ika_kategorinen)
+plot(ess$ika_luok)
 # Frekvenssijakauma
 
-table(df$ika_kategorinen)
-prop.table(table(df$ika_kategorinen))
+table(ess$ika_kategorinen)
+prop.table(table(ess$ika_kategorinen))
 
 ```
 
@@ -84,33 +97,10 @@ prop.table(table(df$ika_kategorinen))
 
 #### Harjoitus: {-}
 
-Tarkastellaan,o onko miesten ja naisten välillä eroa sen suhteen, mikä on korkein koulutus, jonka vastaaja on suorittanut
+Tarkastellaan, onko miesten ja naisten välillä eroa sen suhteen, mikä on korkein koulutus, jonka vastaaja on suorittanut
 
-```{r}
-koul_sp <- table(df$F15, df$F2_1)
-koul_sp
-# Huom. margin-argumentin arvo 2, jonka avulla lasketaan koulutuksen prosentuaalinen
-# jakautuminen sukupuolittain
-# ?prop.table
-prop.table(koul_sp, margin = 2)
 
-# Koulutus muuttujan frekvenssijakauma - onko syytä yhdistellä luokkia?
-table(df$F15, useNA = "always")
 
-# Tehdään uusi koulutus-muuttuja, jossa luokkia on yhdistelty
-df$koulutus <- df$F15
-# Luokitellaan uudelleen
-levels(df$koulutus) <- c("Perusaste", "Perusaste", "Perusaste",
-                    "Toinen_aste","Toinen_aste", "Toinen_aste","Toinen_aste",  "Toinen_aste",
-                     "Alempi_korkea", "Alempi_korkea",
-                    "Ylempi_korkea","Ylempi_korkea",
-                    "Lisensiaatti_tohtori", "Lisensiaatti_tohtori", 
-                    NA, NA, NA)
-
-# Uuden koulutusmuuttujan ja sukupuolen ristiintaulkointi
-uusi_koul_sp <- table(df$koulutus, df$F2_1)
-prop.table(uusi_koul_sp, 2)
-```
 ### Ristiintaulukointi ja $\chi^2$-testi
 
 - Tutkitaan onko parisuhdestatuksella (tilastollista) yhteyttä siihen, miten kokee kotitalouden tulojen riittävyyden.
