@@ -1,7 +1,86 @@
 # Harjoituskerta 4
 
-
 ```{r, echo=FALSE}
 
 luo_kurssiaikataulu(5)
+```
+
+## Tarvittavien pakettien asennus
+
+Seuraavassa käytetään joitakin komentoja, joita ei löydy R:n oletuskirjastosta. Seuraavassa asennetaan `psych`-paketti, joka sisältää persoonallisuuden, psykometriikan ja psykologian tutkimukseen liittyviä työkaluja.
+
+```{r Psych paketin asentaminen}
+install.packages("psych")
+library(psych)
+```
+
+## Korrelaatio    
+
+Kahden muuttujan välisen riippuvuuden astetta voidaan nimittää yleisessä merkityksessä **korrelaatioksi**. Kun muuttujien välillä on yhteys, muuttujan (a) poiketessa keskiarvosta myös muuttuja (b) poikkeaa keskiarvosta (joko samaan tai päinvastaiseen suuntaan). Jos korrelaatio on voimakasta, voidaan toisen muuttujan arvoista päätellä toisen muuttujan arvot melko täsmällisesti. Jos korrelaatio on heikkoa, muuttujien välillä ei ole yhteisvaihtelua.
+
+Korrelaatiokerroin kertoo riippuvuuden eli yhteyden voimakkuuden. Korrelaatiokerroin vaihtelee välillä -1 ja 1, joista ensimmäinen on täydellinen negatiivinen korrelaatio, ja jälkimmäinen täydellinen positiivinen korrelaatio. Jos kerroin on nolla, muuttujien välillä ei ole (lineaarista) yhteyttä (kts. kuva alla). Kertoimen perusteella ei kuitenkaan voida tehdä päätelmiä muuttujien välisen riippuvuuden suunnasta, ts. että x aiheuttaa y:n.
+
+### Korrelaatiokertoimen tulkinta
+
+Yhteiskuntatieteellisessä tutkimuksessa Jokivuoren ja Hietalan (2007, 37--38) mukaan pidetään jo 0.20--0.40 korrelaatiota 'selvänä' tai 'vahvana'. Se, että ihmistieteissä pidetään heikompia yhteyksiä sisällöllisesti merkittävinä, johtuu sosiaalisen todellisuuden kompleksisuudesta. Sosiaalisessa todellisuudessa ilmiötä voivat selittää monet asiat. Esimerkiksi Nummenmaan (2009) mukaan *"käyttäytymistieteissä, käytännön tutkimuksessa voidaan esimerkiksi 0.5 suuruisia korrelaatiokertoimia pitää osoituksena voimakkaasta muuttujien välisestä yhteydestä"* ja *"alle 0.1:n suuruiset korrelaatiot ovat usein käytännössä merkityksettömiä"*.
+
+Seuraavassa luodaan neljä kuviota, joissa on kuvattu kahden muuttujan välisiä korrelaatioita. Vasemmalla ylhäällä korrelaatio on noin 0.7 luokkaa ja oikealla ylhäällä noin -0.7. Alarivillä on esimerkit tapauksista, joissa korrelaatiota ei testin mukaan ole. Vasemmanpuolisessa kuvassa testi pitää paikkansa: mahdollinen pieni korrelaatio johtuu kohinasta. Oikeanpuoleisessa tilanteessa testi kuitenkin erehtyy: on selvää, että muuttujat ovat yhteydessä toisiinsa.
+
+```{r}
+par(mfrow = c(2, 2))
+
+n <- 500
+
+x <- rnorm(n)
+y <- 0.85 * x + rnorm(n)
+d <- -0.85 * x + rnorm(n)
+o <- 3*x^2 + rnorm(n)
+u <- rnorm(n)
+p <- rnorm(n)
+
+plot(x, y, pch = 16, main = round(cor(x, y), 2))
+plot(x, d, pch = 16, main = round(cor(x, d), 2))
+plot(u, p, pch = 16, main = round(cor(u, p), 2))
+plot(x, o, pch = 16, main = round(cor(x, o), 2))
+```
+### Kaksi erilaista korrelaatiokerrointa
+
+Korrelaatiokerroin valitaan sen mukaan, minkälaiset muuttujat ovat kyseessä. **Pearsonin** korrelaatiokerroin sopii kahden vähintään välimatka-asteikollisen muuttujan keskinäisen (lineaarisen) yhteyden tarkasteluun. **Spearmanin** korrelaatiokerroin soveltuu, mikäli muuttujat ovat vähintään järjestysasteikollisia ja se mittaa miten samanlainen havaintojen järjestys kahdella muuttujalla on.
+
+### Onnellisuuden ja iän välinen yhteys
+
+Tutkimusten mukaan iällä ja onnellisuudella on yhteys. Tarkastellaan seuraavaksi, löydetäänkö tästä aineistosta kyseistä yhteyttä hajontakuvion tai korrelaatioanalyysin avulla.
+
+```{r Ika ja onnellisuus}
+plot(ess$ikä, ess$c1)
+```
+
+```{r}
+cor(ess[, c("c1", "ikä")], use = "complete.obs", method = "pearson")
+```
+
+Testin mukaan yhteys on erittäin heikko. R:ssä on useita tapoja saada korrelaatiot esille. Edellä käytetty `cor`-komento tulostaa vain pelkät korrelaatiokertoimet. Jos halutaan testata, onko korrelaatio tilastollisesti merkitsevä, voidaan käyttää esimerkiksi `corr.test`-komentoa, joka tulostaa korrelaatiokertoimen, otoskoon sekä tilastollisen merkitsevyyden:
+
+```{r}
+corr.test(ess[, c("c1", "ikä")])
+```
+
+```{r}
+corr.test(ess[, c("b6", "b7", "b8", "b9", "b10", "b11", "b12")], method = "pearson")
+```
+
+Korrelaatioita voidaan tarkastella myös korrelaatiokuvion avulla, josta yhteydet nousevat helpommin esille.
+
+```{r}
+cor.plot(ess[, c("b6", "b7", "b8", "b9", "b10", "b11", "b12")])
+```
+
+## Cronbachin alpha reliabiliteetin mittana
+
+
+
+Paketin asentamisen jälkeen voidaan laskea alpha edellä esitellyille muuttujille.
+
+```{r Cronbachin alpha}
+alpha(ess[, c("b6", "b7", "b8", "b9", "b10", "b11", "b12")])
 ```
