@@ -14,7 +14,7 @@ install.packages("psych")
 library(psych)
 ```
 
-## Korrelaatio    
+## Korrelaatio
 
 Kahden muuttujan välisen riippuvuuden astetta voidaan nimittää yleisessä merkityksessä **korrelaatioksi**. Kun muuttujien välillä on yhteys, muuttujan (a) poiketessa keskiarvosta myös muuttuja (b) poikkeaa keskiarvosta (joko samaan tai päinvastaiseen suuntaan). Jos korrelaatio on voimakasta, voidaan toisen muuttujan arvoista päätellä toisen muuttujan arvot melko täsmällisesti. Jos korrelaatio on heikkoa, muuttujien välillä ei ole yhteisvaihtelua.
 
@@ -43,6 +43,7 @@ plot(x, d, pch = 16, main = round(cor(x, d), 2))
 plot(u, p, pch = 16, main = round(cor(u, p), 2))
 plot(x, o, pch = 16, main = round(cor(x, o), 2))
 ```
+
 ### Kaksi erilaista korrelaatiokerrointa
 
 Korrelaatiokerroin valitaan sen mukaan, minkälaiset muuttujat ovat kyseessä. **Pearsonin** korrelaatiokerroin sopii kahden vähintään välimatka-asteikollisen muuttujan keskinäisen (lineaarisen) yhteyden tarkasteluun. **Spearmanin** korrelaatiokerroin soveltuu, mikäli muuttujat ovat vähintään järjestysasteikollisia ja se mittaa miten samanlainen havaintojen järjestys kahdella muuttujalla on.
@@ -76,8 +77,6 @@ cor.plot(ess[, c("b6", "b7", "b8", "b9", "b10", "b11", "b12")])
 ```
 
 ## Cronbachin alpha reliabiliteetin mittana
-
-
 
 Paketin asentamisen jälkeen voidaan laskea alpha edellä esitellyille muuttujille.
 

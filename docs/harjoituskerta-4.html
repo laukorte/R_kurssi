@@ -236,7 +236,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.2" data-path="harjoituskerta-4.html"><a href="harjoituskerta-4.html#korrelaatio"><i class="fa fa-check"></i><b>4.2</b> Korrelaatio</a>
 <ul>
 <li class="chapter" data-level="4.2.1" data-path="harjoituskerta-4.html"><a href="harjoituskerta-4.html#korrelaatiokertoimen-tulkinta"><i class="fa fa-check"></i><b>4.2.1</b> Korrelaatiokertoimen tulkinta</a></li>
-<li class="chapter" data-level="4.2.2" data-path="harjoituskerta-4.html"><a href="harjoituskerta-4.html#onnellisuuden-ja-iän-välinen-yhteys"><i class="fa fa-check"></i><b>4.2.2</b> Onnellisuuden ja iän välinen yhteys</a></li>
+<li class="chapter" data-level="4.2.2" data-path="harjoituskerta-4.html"><a href="harjoituskerta-4.html#kaksi-erilaista-korrelaatiokerrointa"><i class="fa fa-check"></i><b>4.2.2</b> Kaksi erilaista korrelaatiokerrointa</a></li>
+<li class="chapter" data-level="4.2.3" data-path="harjoituskerta-4.html"><a href="harjoituskerta-4.html#onnellisuuden-ja-iän-välinen-yhteys"><i class="fa fa-check"></i><b>4.2.3</b> Onnellisuuden ja iän välinen yhteys</a></li>
 </ul></li>
 <li class="chapter" data-level="4.3" data-path="harjoituskerta-4.html"><a href="harjoituskerta-4.html#cronbachin-alpha-reliabiliteetin-mittana"><i class="fa fa-check"></i><b>4.3</b> Cronbachin alpha reliabiliteetin mittana</a></li>
 </ul></li>
@@ -333,7 +334,7 @@ Kertausta ja ohjausta ryhmätehtävään
 <pre><code>## package &#39;psych&#39; successfully unpacked and MD5 sums checked
 ## 
 ## The downloaded binary packages are in
-##  C:\Users\samuliko\AppData\Local\Temp\RtmpmWpqxJ\downloaded_packages</code></pre>
+##  C:\Users\samuliko\AppData\Local\Temp\RtmpUZjuv2\downloaded_packages</code></pre>
 <div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="harjoituskerta-4.html#cb155-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(psych)</span></code></pre></div>
 <pre><code>## Warning: package &#39;psych&#39; was built under R version 4.2.3</code></pre>
 <pre><code>## 
@@ -365,12 +366,14 @@ Kertausta ja ohjausta ryhmätehtävään
 <span id="cb159-13"><a href="harjoituskerta-4.html#cb159-13" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, d, <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">main =</span> <span class="fu">round</span>(<span class="fu">cor</span>(x, d), <span class="dv">2</span>))</span>
 <span id="cb159-14"><a href="harjoituskerta-4.html#cb159-14" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(u, p, <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">main =</span> <span class="fu">round</span>(<span class="fu">cor</span>(u, p), <span class="dv">2</span>))</span>
 <span id="cb159-15"><a href="harjoituskerta-4.html#cb159-15" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, o, <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">main =</span> <span class="fu">round</span>(<span class="fu">cor</span>(x, o), <span class="dv">2</span>))</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-69-1.png" width="672" />
-### Kaksi erilaista korrelaatiokerrointa</p>
+<p><img src="_main_files/figure-html/unnamed-chunk-69-1.png" width="672" /></p>
+</div>
+<div id="kaksi-erilaista-korrelaatiokerrointa" class="section level3 hasAnchor" number="4.2.2">
+<h3><span class="header-section-number">4.2.2</span> Kaksi erilaista korrelaatiokerrointa<a href="harjoituskerta-4.html#kaksi-erilaista-korrelaatiokerrointa" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Korrelaatiokerroin valitaan sen mukaan, minkälaiset muuttujat ovat kyseessä. <strong>Pearsonin</strong> korrelaatiokerroin sopii kahden vähintään välimatka-asteikollisen muuttujan keskinäisen (lineaarisen) yhteyden tarkasteluun. <strong>Spearmanin</strong> korrelaatiokerroin soveltuu, mikäli muuttujat ovat vähintään järjestysasteikollisia ja se mittaa miten samanlainen havaintojen järjestys kahdella muuttujalla on.</p>
 </div>
-<div id="onnellisuuden-ja-iän-välinen-yhteys" class="section level3 hasAnchor" number="4.2.2">
-<h3><span class="header-section-number">4.2.2</span> Onnellisuuden ja iän välinen yhteys<a href="harjoituskerta-4.html#onnellisuuden-ja-iän-välinen-yhteys" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="onnellisuuden-ja-iän-välinen-yhteys" class="section level3 hasAnchor" number="4.2.3">
+<h3><span class="header-section-number">4.2.3</span> Onnellisuuden ja iän välinen yhteys<a href="harjoituskerta-4.html#onnellisuuden-ja-iän-välinen-yhteys" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Tutkimusten mukaan iällä ja onnellisuudella on yhteys. Tarkastellaan seuraavaksi, löydetäänkö tästä aineistosta kyseistä yhteyttä hajontakuvion tai korrelaatioanalyysin avulla.</p>
 <div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="harjoituskerta-4.html#cb160-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ess<span class="sc">$</span>ikä, ess<span class="sc">$</span>c1)</span></code></pre></div>
 <p><img src="_main_files/figure-html/Ika%20ja%20onnellisuus-1.png" width="672" /></p>
