@@ -29,7 +29,7 @@ The HTML output format for this example is bookdown::gitbook,</p>" />
 <meta name="author" content="Terhi Auvinen, Samuli Koponen, Lauri Kortelainen &amp; Antti Kouvo" />
 
 
-<meta name="date" content="2023-11-15" />
+<meta name="date" content="2023-11-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -230,7 +230,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.3.1" data-path="harjoituskerta-3.html"><a href="harjoituskerta-3.html#ristiintaulukointi-ja-chi2-testi"><i class="fa fa-check"></i><b>3.3.1</b> Ristiintaulukointi ja <span class="math inline">\(\chi^2\)</span>-testi</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="harjoituskerta-4.html"><a href="harjoituskerta-4.html"><i class="fa fa-check"></i><b>4</b> Harjoituskerta 4</a></li>
+<li class="chapter" data-level="4" data-path="harjoituskerta-4.html"><a href="harjoituskerta-4.html"><i class="fa fa-check"></i><b>4</b> Harjoituskerta 4</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="harjoituskerta-4.html"><a href="harjoituskerta-4.html#tarvittavien-pakettien-asennus"><i class="fa fa-check"></i><b>4.1</b> Tarvittavien pakettien asennus</a></li>
+<li class="chapter" data-level="4.2" data-path="harjoituskerta-4.html"><a href="harjoituskerta-4.html#korrelaatio"><i class="fa fa-check"></i><b>4.2</b> Korrelaatio</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="harjoituskerta-4.html"><a href="harjoituskerta-4.html#korrelaatiokertoimen-tulkinta"><i class="fa fa-check"></i><b>4.2.1</b> Korrelaatiokertoimen tulkinta</a></li>
+<li class="chapter" data-level="4.2.2" data-path="harjoituskerta-4.html"><a href="harjoituskerta-4.html#onnellisuuden-ja-iän-välinen-yhteys"><i class="fa fa-check"></i><b>4.2.2</b> Onnellisuuden ja iän välinen yhteys</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="harjoituskerta-4.html"><a href="harjoituskerta-4.html#cronbachin-alpha-reliabiliteetin-mittana"><i class="fa fa-check"></i><b>4.3</b> Cronbachin alpha reliabiliteetin mittana</a></li>
+</ul></li>
 <li class="chapter" data-level="5" data-path="harjoituskerta-5.html"><a href="harjoituskerta-5.html"><i class="fa fa-check"></i><b>5</b> Harjoituskerta 5</a></li>
 <li class="chapter" data-level="6" data-path="harjoituskerta-6.html"><a href="harjoituskerta-6.html"><i class="fa fa-check"></i><b>6</b> Harjoituskerta 6</a></li>
 <li class="divider"></li>
@@ -317,8 +326,8 @@ Kertausta ja ohjausta ryhmätehtävään
 </tbody>
 </table>
 <center>
-<div id="htmlwidget-0ea9fdede5829485e97c" style="width:100%;height:100%;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-0ea9fdede5829485e97c">{"x":{"diagram":"digraph {\n  graph [layout = dot, rankdir = TB, center=TRUE,\n  label=\n  <\n  <br/> Jakauman tarkastelu  <br/>\n    <font point-size=\"30\">Minkälainen muuttuja on kyseessä?<\/font>\n  <br/>\n  >, labelloc=top,\n  fontsize = \"40\", margin=\"1.5\"]\n  \n  node [shape = rectangle, style=\"filled\", fontname = Helvetica, fontsize = \"20\"]        \n  rec1 [label = \"Luokittelu\", fillcolor=\"#077d9e\", fontcolor=\"white\"]\n  rec2 [label = \"Järjestys\", fillcolor=\"#077d9e\", fontcolor=\"white\"]\n  rec3 [label =  \"Välimatka\", fillcolor=\"#077d9e\", fontcolor=\"white\"]\n  rec4 [label = \"Suhde\", fillcolor=\"#077d9e\", fontcolor=\"white\"]\n  rec5 [label = \"Epäjatkuvat\", fillcolor=\"#ccd8df\"]\n  rec6 [label = \"Jatkuvat\", fillcolor=\"#ccd8df\"]\n  rec7[label = \n    <\n    <br/> &#8226; Frekvenssit <br ALIGN = \"LEFT\"/> &#8226; Sijaintiluvut: moodi, mediaani<br ALIGN = \"LEFT\"/> &#8226; Pylväsdiagrammi <br ALIGN = \"LEFT\" />\n    >, fillcolor=\"#e7ecf0\"\n]\n\nrec8[label = \n    <\n    <br/> &#8226; Sijaintiluvut: moodi, mediaani, keskiarvo<br ALIGN = \"LEFT\"/> &#8226; Hajontaluvut: vaihteluväli, keskihajonta, vinous, huipukkuus<br ALIGN = \"LEFT\"/> &#8226; Histogrammi <br ALIGN = \"LEFT\" />\n    >, fillcolor=\"#e7ecf0\"\n]\n\n\n  \n  # edge definitions with the node IDs\n  rec1 -> rec5; rec2 -> rec5; rec3 -> rec6; rec4 -> rec6;\n  rec5 -> rec7; rec6 -> rec8\n  }","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-5478b678593c5763c5eb" style="width:100%;height:100%;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-5478b678593c5763c5eb">{"x":{"diagram":"digraph {\n  graph [layout = dot, rankdir = TB, center=TRUE,\n  label=\n  <\n  <br/> Jakauman tarkastelu  <br/>\n    <font point-size=\"30\">Minkälainen muuttuja on kyseessä?<\/font>\n  <br/>\n  >, labelloc=top,\n  fontsize = \"40\", margin=\"1.5\"]\n  \n  node [shape = rectangle, style=\"filled\", fontname = Helvetica, fontsize = \"20\"]        \n  rec1 [label = \"Luokittelu\", fillcolor=\"#077d9e\", fontcolor=\"white\"]\n  rec2 [label = \"Järjestys\", fillcolor=\"#077d9e\", fontcolor=\"white\"]\n  rec3 [label =  \"Välimatka\", fillcolor=\"#077d9e\", fontcolor=\"white\"]\n  rec4 [label = \"Suhde\", fillcolor=\"#077d9e\", fontcolor=\"white\"]\n  rec5 [label = \"Epäjatkuvat\", fillcolor=\"#ccd8df\"]\n  rec6 [label = \"Jatkuvat\", fillcolor=\"#ccd8df\"]\n  rec7[label = \n    <\n    <br/> &#8226; Frekvenssit <br ALIGN = \"LEFT\"/> &#8226; Sijaintiluvut: moodi, mediaani<br ALIGN = \"LEFT\"/> &#8226; Pylväsdiagrammi <br ALIGN = \"LEFT\" />\n    >, fillcolor=\"#e7ecf0\"\n]\n\nrec8[label = \n    <\n    <br/> &#8226; Sijaintiluvut: moodi, mediaani, keskiarvo<br ALIGN = \"LEFT\"/> &#8226; Hajontaluvut: vaihteluväli, keskihajonta, vinous, huipukkuus<br ALIGN = \"LEFT\"/> &#8226; Histogrammi <br ALIGN = \"LEFT\" />\n    >, fillcolor=\"#e7ecf0\"\n]\n\n\n  \n  # edge definitions with the node IDs\n  rec1 -> rec5; rec2 -> rec5; rec3 -> rec6; rec4 -> rec6;\n  rec5 -> rec7; rec6 -> rec8\n  }","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 </center>
 <p>Tarkastellaan onko miesten ja naisten (f2_1) välillä eroa sen suhteen, mikä on korkein koulutus, jonka vastaaja on suorittanut (f15). HUOM! Sukupuoli 1 = mies, 2 = nainen. Koulutus on välillä 1-15. Poistetaan siis ensin puuttuvat arvot (=99).</p>
 <div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="harjoituskerta-2.html#cb78-1" aria-hidden="true" tabindex="-1"></a>ess<span class="sc">$</span>f15[ess<span class="sc">$</span>f15 <span class="sc">==</span> <span class="dv">99</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span></code></pre></div>
