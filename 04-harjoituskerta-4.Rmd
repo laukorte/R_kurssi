@@ -9,7 +9,7 @@ luo_kurssiaikataulu(5)
 
 Seuraavassa käytetään joitakin komentoja, joita ei löydy R:n oletuskirjastosta. Seuraavassa asennetaan `psych`-paketti, joka sisältää persoonallisuuden, psykometriikan ja psykologian tutkimukseen liittyviä työkaluja.
 
-```{r Psych paketin asentaminen}
+```{r Psych-paketin asentaminen, message = FALSE}
 install.packages("psych")
 library(psych)
 ```
@@ -27,10 +27,13 @@ Yhteiskuntatieteellisessä tutkimuksessa Jokivuoren ja Hietalan (2007, 37--38) m
 Seuraavassa luodaan neljä kuviota, joissa on kuvattu kahden muuttujan välisiä korrelaatioita. Vasemmalla ylhäällä korrelaatio on noin 0.7 luokkaa ja oikealla ylhäällä noin -0.7. Alarivillä on esimerkit tapauksista, joissa korrelaatiota ei testin mukaan ole. Vasemmanpuolisessa kuvassa testi pitää paikkansa: mahdollinen pieni korrelaatio johtuu kohinasta. Oikeanpuoleisessa tilanteessa testi kuitenkin erehtyy: on selvää, että muuttujat ovat yhteydessä toisiinsa.
 
 ```{r}
+# Määritellään seuraavat kuviot piirrettäväksi samaan kuvioon
 par(mfrow = c(2, 2))
 
+# Määritellään otoksen koko
 n <- 500
 
+# Luodaan muuttujia
 x <- rnorm(n)
 y <- 0.85 * x + rnorm(n)
 d <- -0.85 * x + rnorm(n)
@@ -38,6 +41,7 @@ o <- 3*x^2 + rnorm(n)
 u <- rnorm(n)
 p <- rnorm(n)
 
+# Tehdään hajontakuviot muuttujista
 plot(x, y, pch = 16, main = round(cor(x, y), 2))
 plot(x, d, pch = 16, main = round(cor(x, d), 2))
 plot(u, p, pch = 16, main = round(cor(u, p), 2))
@@ -83,3 +87,17 @@ Paketin asentamisen jälkeen voidaan laskea alpha edellä esitellyille muuttujil
 ```{r Cronbachin alpha}
 alpha(ess[, c("b6", "b7", "b8", "b9", "b10", "b11", "b12")])
 ```
+
+## Summamuuttujan luominen
+
+Edellä on tarkasteltu edellytyksiä summamuuttujan luomiselle ja seuraavassa se tehdään kahdella eri tavalla: keskiarvona ja summana. Näillä kahdella tavalla ei ole eroa jos summumuuttujan perustana oleva aineisto on ns. täydellinen eli ei sisällä yhtään puuttuvaa arvoa. Jos puuttuvia arvoja kuitenkin on, kannattaa summamuuttuja laskea keskiarvona, koska summatessa puuttuva arvo lasketaan nollana. Näin ollen mittari vääristyy sitä enemmän alaspäin, mitä enemmän puuttuvia arvoja on. Keskiarvo voidaan sen sijaan laskea niin, että jakajana käytetään havaittujen arvojen määrää. Tämä onnistuu `na.rm = TRUE`-komennolla.
+
+```{r}
+ess$luot_kes <- rowMeans(ess[, c("b6", "b7", "b8", "b9", "b10", "b11", "b12")], na.rm = TRUE)
+ess$luot_sum <- rowSums(ess[, c("b6", "b7", "b8", "b9", "b10", "b11", "b12")], na.rm = TRUE)
+
+par(mfrow = c(1, 2))
+hist(ess$luot_kes, main = "Keskiarvo")
+hist(ess$luot_sum, main = "Summa")
+```
+

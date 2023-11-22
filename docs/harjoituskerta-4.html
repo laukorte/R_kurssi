@@ -240,6 +240,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.2.3" data-path="harjoituskerta-4.html"><a href="harjoituskerta-4.html#onnellisuuden-ja-iän-välinen-yhteys"><i class="fa fa-check"></i><b>4.2.3</b> Onnellisuuden ja iän välinen yhteys</a></li>
 </ul></li>
 <li class="chapter" data-level="4.3" data-path="harjoituskerta-4.html"><a href="harjoituskerta-4.html#cronbachin-alpha-reliabiliteetin-mittana"><i class="fa fa-check"></i><b>4.3</b> Cronbachin alpha reliabiliteetin mittana</a></li>
+<li class="chapter" data-level="4.4" data-path="harjoituskerta-4.html"><a href="harjoituskerta-4.html#summamuuttujan-luominen"><i class="fa fa-check"></i><b>4.4</b> Summamuuttujan luominen</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="harjoituskerta-5.html"><a href="harjoituskerta-5.html"><i class="fa fa-check"></i><b>5</b> Harjoituskerta 5</a></li>
 <li class="chapter" data-level="6" data-path="harjoituskerta-6.html"><a href="harjoituskerta-6.html"><i class="fa fa-check"></i><b>6</b> Harjoituskerta 6</a></li>
@@ -329,19 +330,8 @@ Kertausta ja ohjausta ryhmätehtävään
 <h2><span class="header-section-number">4.1</span> Tarvittavien pakettien asennus<a href="harjoituskerta-4.html#tarvittavien-pakettien-asennus" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Seuraavassa käytetään joitakin komentoja, joita ei löydy R:n oletuskirjastosta. Seuraavassa asennetaan <code>psych</code>-paketti, joka sisältää persoonallisuuden, psykometriikan ja psykologian tutkimukseen liittyviä työkaluja.</p>
 <div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="harjoituskerta-4.html#cb152-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;psych&quot;</span>)</span></code></pre></div>
-<pre><code>## Installing package into &#39;C:/Users/samuliko/AppData/Local/R/win-library/4.2&#39;
-## (as &#39;lib&#39; is unspecified)</code></pre>
-<pre><code>## package &#39;psych&#39; successfully unpacked and MD5 sums checked
-## 
-## The downloaded binary packages are in
-##  C:\Users\samuliko\AppData\Local\Temp\RtmpUZjuv2\downloaded_packages</code></pre>
-<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="harjoituskerta-4.html#cb155-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(psych)</span></code></pre></div>
-<pre><code>## Warning: package &#39;psych&#39; was built under R version 4.2.3</code></pre>
-<pre><code>## 
-## Attaching package: &#39;psych&#39;</code></pre>
-<pre><code>## The following objects are masked from &#39;package:ggplot2&#39;:
-## 
-##     %+%, alpha</code></pre>
+<pre><code>## Error in install.packages : Updating loaded packages</code></pre>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="harjoituskerta-4.html#cb154-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(psych)</span></code></pre></div>
 </div>
 <div id="korrelaatio" class="section level2 hasAnchor" number="4.2">
 <h2><span class="header-section-number">4.2</span> Korrelaatio<a href="harjoituskerta-4.html#korrelaatio" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -351,22 +341,26 @@ Kertausta ja ohjausta ryhmätehtävään
 <h3><span class="header-section-number">4.2.1</span> Korrelaatiokertoimen tulkinta<a href="harjoituskerta-4.html#korrelaatiokertoimen-tulkinta" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Yhteiskuntatieteellisessä tutkimuksessa Jokivuoren ja Hietalan (2007, 37–38) mukaan pidetään jo 0.20–0.40 korrelaatiota ‘selvänä’ tai ‘vahvana’. Se, että ihmistieteissä pidetään heikompia yhteyksiä sisällöllisesti merkittävinä, johtuu sosiaalisen todellisuuden kompleksisuudesta. Sosiaalisessa todellisuudessa ilmiötä voivat selittää monet asiat. Esimerkiksi Nummenmaan (2009) mukaan <em>“käyttäytymistieteissä, käytännön tutkimuksessa voidaan esimerkiksi 0.5 suuruisia korrelaatiokertoimia pitää osoituksena voimakkaasta muuttujien välisestä yhteydestä”</em> ja <em>“alle 0.1:n suuruiset korrelaatiot ovat usein käytännössä merkityksettömiä”</em>.</p>
 <p>Seuraavassa luodaan neljä kuviota, joissa on kuvattu kahden muuttujan välisiä korrelaatioita. Vasemmalla ylhäällä korrelaatio on noin 0.7 luokkaa ja oikealla ylhäällä noin -0.7. Alarivillä on esimerkit tapauksista, joissa korrelaatiota ei testin mukaan ole. Vasemmanpuolisessa kuvassa testi pitää paikkansa: mahdollinen pieni korrelaatio johtuu kohinasta. Oikeanpuoleisessa tilanteessa testi kuitenkin erehtyy: on selvää, että muuttujat ovat yhteydessä toisiinsa.</p>
-<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="harjoituskerta-4.html#cb159-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
-<span id="cb159-2"><a href="harjoituskerta-4.html#cb159-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb159-3"><a href="harjoituskerta-4.html#cb159-3" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">500</span></span>
-<span id="cb159-4"><a href="harjoituskerta-4.html#cb159-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb159-5"><a href="harjoituskerta-4.html#cb159-5" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n)</span>
-<span id="cb159-6"><a href="harjoituskerta-4.html#cb159-6" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fl">0.85</span> <span class="sc">*</span> x <span class="sc">+</span> <span class="fu">rnorm</span>(n)</span>
-<span id="cb159-7"><a href="harjoituskerta-4.html#cb159-7" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fl">0.85</span> <span class="sc">*</span> x <span class="sc">+</span> <span class="fu">rnorm</span>(n)</span>
-<span id="cb159-8"><a href="harjoituskerta-4.html#cb159-8" aria-hidden="true" tabindex="-1"></a>o <span class="ot">&lt;-</span> <span class="dv">3</span><span class="sc">*</span>x<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> <span class="fu">rnorm</span>(n)</span>
-<span id="cb159-9"><a href="harjoituskerta-4.html#cb159-9" aria-hidden="true" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n)</span>
-<span id="cb159-10"><a href="harjoituskerta-4.html#cb159-10" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n)</span>
-<span id="cb159-11"><a href="harjoituskerta-4.html#cb159-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb159-12"><a href="harjoituskerta-4.html#cb159-12" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, y, <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">main =</span> <span class="fu">round</span>(<span class="fu">cor</span>(x, y), <span class="dv">2</span>))</span>
-<span id="cb159-13"><a href="harjoituskerta-4.html#cb159-13" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, d, <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">main =</span> <span class="fu">round</span>(<span class="fu">cor</span>(x, d), <span class="dv">2</span>))</span>
-<span id="cb159-14"><a href="harjoituskerta-4.html#cb159-14" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(u, p, <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">main =</span> <span class="fu">round</span>(<span class="fu">cor</span>(u, p), <span class="dv">2</span>))</span>
-<span id="cb159-15"><a href="harjoituskerta-4.html#cb159-15" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, o, <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">main =</span> <span class="fu">round</span>(<span class="fu">cor</span>(x, o), <span class="dv">2</span>))</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-69-1.png" width="672" /></p>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="harjoituskerta-4.html#cb155-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Määritellään seuraavat kuviot piirrettäväksi samaan kuvioon</span></span>
+<span id="cb155-2"><a href="harjoituskerta-4.html#cb155-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb155-3"><a href="harjoituskerta-4.html#cb155-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb155-4"><a href="harjoituskerta-4.html#cb155-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Määritellään otoksen koko</span></span>
+<span id="cb155-5"><a href="harjoituskerta-4.html#cb155-5" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">500</span></span>
+<span id="cb155-6"><a href="harjoituskerta-4.html#cb155-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb155-7"><a href="harjoituskerta-4.html#cb155-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Luodaan muuttujia</span></span>
+<span id="cb155-8"><a href="harjoituskerta-4.html#cb155-8" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n)</span>
+<span id="cb155-9"><a href="harjoituskerta-4.html#cb155-9" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fl">0.85</span> <span class="sc">*</span> x <span class="sc">+</span> <span class="fu">rnorm</span>(n)</span>
+<span id="cb155-10"><a href="harjoituskerta-4.html#cb155-10" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fl">0.85</span> <span class="sc">*</span> x <span class="sc">+</span> <span class="fu">rnorm</span>(n)</span>
+<span id="cb155-11"><a href="harjoituskerta-4.html#cb155-11" aria-hidden="true" tabindex="-1"></a>o <span class="ot">&lt;-</span> <span class="dv">3</span><span class="sc">*</span>x<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> <span class="fu">rnorm</span>(n)</span>
+<span id="cb155-12"><a href="harjoituskerta-4.html#cb155-12" aria-hidden="true" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n)</span>
+<span id="cb155-13"><a href="harjoituskerta-4.html#cb155-13" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n)</span>
+<span id="cb155-14"><a href="harjoituskerta-4.html#cb155-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb155-15"><a href="harjoituskerta-4.html#cb155-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Tehdään hajontakuviot muuttujista</span></span>
+<span id="cb155-16"><a href="harjoituskerta-4.html#cb155-16" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, y, <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">main =</span> <span class="fu">round</span>(<span class="fu">cor</span>(x, y), <span class="dv">2</span>))</span>
+<span id="cb155-17"><a href="harjoituskerta-4.html#cb155-17" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, d, <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">main =</span> <span class="fu">round</span>(<span class="fu">cor</span>(x, d), <span class="dv">2</span>))</span>
+<span id="cb155-18"><a href="harjoituskerta-4.html#cb155-18" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(u, p, <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">main =</span> <span class="fu">round</span>(<span class="fu">cor</span>(u, p), <span class="dv">2</span>))</span>
+<span id="cb155-19"><a href="harjoituskerta-4.html#cb155-19" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, o, <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">main =</span> <span class="fu">round</span>(<span class="fu">cor</span>(x, o), <span class="dv">2</span>))</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-70-1.png" width="672" /></p>
 </div>
 <div id="kaksi-erilaista-korrelaatiokerrointa" class="section level3 hasAnchor" number="4.2.2">
 <h3><span class="header-section-number">4.2.2</span> Kaksi erilaista korrelaatiokerrointa<a href="harjoituskerta-4.html#kaksi-erilaista-korrelaatiokerrointa" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -375,14 +369,14 @@ Kertausta ja ohjausta ryhmätehtävään
 <div id="onnellisuuden-ja-iän-välinen-yhteys" class="section level3 hasAnchor" number="4.2.3">
 <h3><span class="header-section-number">4.2.3</span> Onnellisuuden ja iän välinen yhteys<a href="harjoituskerta-4.html#onnellisuuden-ja-iän-välinen-yhteys" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Tutkimusten mukaan iällä ja onnellisuudella on yhteys. Tarkastellaan seuraavaksi, löydetäänkö tästä aineistosta kyseistä yhteyttä hajontakuvion tai korrelaatioanalyysin avulla.</p>
-<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="harjoituskerta-4.html#cb160-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ess<span class="sc">$</span>ikä, ess<span class="sc">$</span>c1)</span></code></pre></div>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="harjoituskerta-4.html#cb156-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ess<span class="sc">$</span>ikä, ess<span class="sc">$</span>c1)</span></code></pre></div>
 <p><img src="_main_files/figure-html/Ika%20ja%20onnellisuus-1.png" width="672" /></p>
-<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="harjoituskerta-4.html#cb161-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(ess[, <span class="fu">c</span>(<span class="st">&quot;c1&quot;</span>, <span class="st">&quot;ikä&quot;</span>)], <span class="at">use =</span> <span class="st">&quot;complete.obs&quot;</span>, <span class="at">method =</span> <span class="st">&quot;pearson&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="harjoituskerta-4.html#cb157-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(ess[, <span class="fu">c</span>(<span class="st">&quot;c1&quot;</span>, <span class="st">&quot;ikä&quot;</span>)], <span class="at">use =</span> <span class="st">&quot;complete.obs&quot;</span>, <span class="at">method =</span> <span class="st">&quot;pearson&quot;</span>)</span></code></pre></div>
 <pre><code>##              c1         ikä
 ## c1   1.00000000 -0.02875502
 ## ikä -0.02875502  1.00000000</code></pre>
 <p>Testin mukaan yhteys on erittäin heikko. R:ssä on useita tapoja saada korrelaatiot esille. Edellä käytetty <code>cor</code>-komento tulostaa vain pelkät korrelaatiokertoimet. Jos halutaan testata, onko korrelaatio tilastollisesti merkitsevä, voidaan käyttää esimerkiksi <code>corr.test</code>-komentoa, joka tulostaa korrelaatiokertoimen, otoskoon sekä tilastollisen merkitsevyyden:</p>
-<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="harjoituskerta-4.html#cb163-1" aria-hidden="true" tabindex="-1"></a><span class="fu">corr.test</span>(ess[, <span class="fu">c</span>(<span class="st">&quot;c1&quot;</span>, <span class="st">&quot;ikä&quot;</span>)])</span></code></pre></div>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="harjoituskerta-4.html#cb159-1" aria-hidden="true" tabindex="-1"></a><span class="fu">corr.test</span>(ess[, <span class="fu">c</span>(<span class="st">&quot;c1&quot;</span>, <span class="st">&quot;ikä&quot;</span>)])</span></code></pre></div>
 <pre><code>## Warning in abbreviate(dimnames(ans)[[2L]], minlength = abbr.colnames): abbreviate used with non-ASCII chars</code></pre>
 <pre><code>## Call:corr.test(x = ess[, c(&quot;c1&quot;, &quot;ikä&quot;)])
 ## Correlation matrix 
@@ -399,20 +393,27 @@ Kertausta ja ohjausta ryhmätehtävään
 ## ikä 0.21 0.00
 ## 
 ##  To see confidence intervals of the correlations, print with the short=FALSE option</code></pre>
-<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="harjoituskerta-4.html#cb166-1" aria-hidden="true" tabindex="-1"></a><span class="fu">corr.test</span>(ess[, <span class="fu">c</span>(<span class="st">&quot;b6&quot;</span>, <span class="st">&quot;b7&quot;</span>, <span class="st">&quot;b8&quot;</span>, <span class="st">&quot;b9&quot;</span>, <span class="st">&quot;b10&quot;</span>, <span class="st">&quot;b11&quot;</span>, <span class="st">&quot;b12&quot;</span>)], <span class="at">method =</span> <span class="st">&quot;pearson&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="harjoituskerta-4.html#cb162-1" aria-hidden="true" tabindex="-1"></a><span class="fu">corr.test</span>(ess[, <span class="fu">c</span>(<span class="st">&quot;b6&quot;</span>, <span class="st">&quot;b7&quot;</span>, <span class="st">&quot;b8&quot;</span>, <span class="st">&quot;b9&quot;</span>, <span class="st">&quot;b10&quot;</span>, <span class="st">&quot;b11&quot;</span>, <span class="st">&quot;b12&quot;</span>)], <span class="at">method =</span> <span class="st">&quot;pearson&quot;</span>)</span></code></pre></div>
 <pre><code>## Call:corr.test(x = ess[, c(&quot;b6&quot;, &quot;b7&quot;, &quot;b8&quot;, &quot;b9&quot;, &quot;b10&quot;, &quot;b11&quot;, &quot;b12&quot;)], 
 ##     method = &quot;pearson&quot;)
 ## Correlation matrix 
 ##       b6   b7   b8   b9  b10  b11  b12
-## b6  1.00 0.35 0.39 0.58 0.64 0.18 0.25
-## b7  0.35 1.00 0.43 0.39 0.31 0.28 0.25
-## b8  0.39 0.43 1.00 0.31 0.25 0.10 0.11
-## b9  0.58 0.39 0.31 1.00 0.67 0.20 0.27
-## b10 0.64 0.31 0.25 0.67 1.00 0.23 0.27
-## b11 0.18 0.28 0.10 0.20 0.23 1.00 0.45
-## b12 0.25 0.25 0.11 0.27 0.27 0.45 1.00
+## b6  1.00 0.62 0.44 0.78 0.73 0.66 0.53
+## b7  0.62 1.00 0.58 0.54 0.52 0.50 0.49
+## b8  0.44 0.58 1.00 0.38 0.36 0.34 0.38
+## b9  0.78 0.54 0.38 1.00 0.86 0.71 0.53
+## b10 0.73 0.52 0.36 0.86 1.00 0.74 0.56
+## b11 0.66 0.50 0.34 0.71 0.74 1.00 0.68
+## b12 0.53 0.49 0.38 0.53 0.56 0.68 1.00
 ## Sample Size 
-## [1] 1925
+##       b6   b7   b8   b9  b10  b11  b12
+## b6  1922 1912 1921 1919 1917 1879 1884
+## b7  1912 1913 1913 1911 1908 1875 1878
+## b8  1921 1913 1923 1919 1916 1879 1883
+## b9  1919 1911 1919 1920 1916 1878 1883
+## b10 1917 1908 1916 1916 1917 1876 1881
+## b11 1879 1875 1879 1878 1876 1880 1859
+## b12 1884 1878 1883 1883 1881 1859 1884
 ## Probability values (Entries above the diagonal are adjusted for multiple tests.) 
 ##     b6 b7 b8 b9 b10 b11 b12
 ## b6   0  0  0  0   0   0   0
@@ -425,46 +426,57 @@ Kertausta ja ohjausta ryhmätehtävään
 ## 
 ##  To see confidence intervals of the correlations, print with the short=FALSE option</code></pre>
 <p>Korrelaatioita voidaan tarkastella myös korrelaatiokuvion avulla, josta yhteydet nousevat helpommin esille.</p>
-<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="harjoituskerta-4.html#cb168-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.plot</span>(ess[, <span class="fu">c</span>(<span class="st">&quot;b6&quot;</span>, <span class="st">&quot;b7&quot;</span>, <span class="st">&quot;b8&quot;</span>, <span class="st">&quot;b9&quot;</span>, <span class="st">&quot;b10&quot;</span>, <span class="st">&quot;b11&quot;</span>, <span class="st">&quot;b12&quot;</span>)])</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-73-1.png" width="672" /></p>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="harjoituskerta-4.html#cb164-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.plot</span>(ess[, <span class="fu">c</span>(<span class="st">&quot;b6&quot;</span>, <span class="st">&quot;b7&quot;</span>, <span class="st">&quot;b8&quot;</span>, <span class="st">&quot;b9&quot;</span>, <span class="st">&quot;b10&quot;</span>, <span class="st">&quot;b11&quot;</span>, <span class="st">&quot;b12&quot;</span>)])</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-74-1.png" width="672" /></p>
 </div>
 </div>
 <div id="cronbachin-alpha-reliabiliteetin-mittana" class="section level2 hasAnchor" number="4.3">
 <h2><span class="header-section-number">4.3</span> Cronbachin alpha reliabiliteetin mittana<a href="harjoituskerta-4.html#cronbachin-alpha-reliabiliteetin-mittana" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Paketin asentamisen jälkeen voidaan laskea alpha edellä esitellyille muuttujille.</p>
-<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="harjoituskerta-4.html#cb169-1" aria-hidden="true" tabindex="-1"></a><span class="fu">alpha</span>(ess[, <span class="fu">c</span>(<span class="st">&quot;b6&quot;</span>, <span class="st">&quot;b7&quot;</span>, <span class="st">&quot;b8&quot;</span>, <span class="st">&quot;b9&quot;</span>, <span class="st">&quot;b10&quot;</span>, <span class="st">&quot;b11&quot;</span>, <span class="st">&quot;b12&quot;</span>)])</span></code></pre></div>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="harjoituskerta-4.html#cb165-1" aria-hidden="true" tabindex="-1"></a><span class="fu">alpha</span>(ess[, <span class="fu">c</span>(<span class="st">&quot;b6&quot;</span>, <span class="st">&quot;b7&quot;</span>, <span class="st">&quot;b8&quot;</span>, <span class="st">&quot;b9&quot;</span>, <span class="st">&quot;b10&quot;</span>, <span class="st">&quot;b11&quot;</span>, <span class="st">&quot;b12&quot;</span>)])</span></code></pre></div>
 <pre><code>## Number of categories should be increased  in order to count frequencies.</code></pre>
 <pre><code>## 
 ## Reliability analysis   
 ## Call: alpha(x = ess[, c(&quot;b6&quot;, &quot;b7&quot;, &quot;b8&quot;, &quot;b9&quot;, &quot;b10&quot;, &quot;b11&quot;, &quot;b12&quot;)])
 ## 
 ##   raw_alpha std.alpha G6(smc) average_r S/N    ase mean  sd median_r
-##       0.68      0.77    0.79      0.33 3.4 0.0099  6.8 5.2     0.28
+##        0.9       0.9    0.91      0.57 9.1 0.0032    6 1.7     0.54
 ## 
 ##     95% confidence boundaries 
 ##          lower alpha upper
-## Feldt     0.66  0.68   0.7
-## Duhachek  0.66  0.68   0.7
+## Feldt      0.9   0.9  0.91
+## Duhachek   0.9   0.9  0.91
 ## 
 ##  Reliability if an item is dropped:
-##     raw_alpha std.alpha G6(smc) average_r S/N alpha se var.r med.r
-## b6       0.65      0.72    0.73      0.30 2.6    0.011 0.020  0.27
-## b7       0.63      0.74    0.76      0.33 2.9    0.011 0.033  0.27
-## b8       0.68      0.77    0.77      0.35 3.3    0.010 0.025  0.28
-## b9       0.63      0.72    0.73      0.30 2.6    0.011 0.019  0.27
-## b10      0.63      0.72    0.72      0.30 2.6    0.011 0.017  0.28
-## b11      0.67      0.77    0.78      0.36 3.4    0.011 0.025  0.31
-## b12      0.64      0.77    0.77      0.35 3.3    0.012 0.028  0.31
+##     raw_alpha std.alpha G6(smc) average_r  S/N alpha se var.r med.r
+## b6       0.88      0.88    0.89      0.54  7.1   0.0041 0.023  0.53
+## b7       0.90      0.89    0.90      0.58  8.2   0.0035 0.029  0.55
+## b8       0.91      0.91    0.91      0.63 10.1   0.0032 0.014  0.62
+## b9       0.88      0.88    0.88      0.54  7.0   0.0042 0.017  0.52
+## b10      0.88      0.88    0.88      0.54  7.1   0.0041 0.016  0.53
+## b11      0.88      0.88    0.89      0.55  7.4   0.0040 0.022  0.53
+## b12      0.90      0.89    0.90      0.58  8.4   0.0035 0.026  0.58
 ## 
 ##  Item statistics 
-##        n raw.r std.r r.cor r.drop mean   sd
-## b6  1925  0.59  0.74  0.71   0.50  5.9  4.3
-## b7  1925  0.61  0.66  0.57   0.45  7.7  7.5
-## b8  1925  0.40  0.57  0.45   0.32  8.3  3.4
-## b9  1925  0.62  0.75  0.73   0.52  5.0  5.3
-## b10 1925  0.63  0.74  0.72   0.50  5.2  6.4
-## b11 1925  0.73  0.54  0.42   0.43  7.4 14.4
-## b12 1925  0.73  0.57  0.46   0.47  8.4 13.5</code></pre>
+##        n raw.r std.r r.cor r.drop mean  sd
+## b6  1922  0.86  0.86  0.84   0.80  5.7 2.3
+## b7  1913  0.76  0.77  0.71   0.66  7.2 2.1
+## b8  1923  0.60  0.63  0.53   0.49  8.2 1.6
+## b9  1920  0.87  0.86  0.86   0.81  4.7 2.2
+## b10 1917  0.87  0.86  0.86   0.81  4.8 2.2
+## b11 1880  0.84  0.83  0.81   0.77  5.2 2.3
+## b12 1884  0.76  0.75  0.69   0.65  6.4 2.1</code></pre>
+</div>
+<div id="summamuuttujan-luominen" class="section level2 hasAnchor" number="4.4">
+<h2><span class="header-section-number">4.4</span> Summamuuttujan luominen<a href="harjoituskerta-4.html#summamuuttujan-luominen" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Edellä on tarkasteltu edellytyksiä summamuuttujan luomiselle ja seuraavassa se tehdään kahdella eri tavalla: keskiarvona ja summana. Näillä kahdella tavalla ei ole eroa jos summumuuttujan perustana oleva aineisto on ns. täydellinen eli ei sisällä yhtään puuttuvaa arvoa. Jos puuttuvia arvoja kuitenkin on, kannattaa summamuuttuja laskea keskiarvona, koska summatessa puuttuva arvo lasketaan nollana. Näin ollen mittari vääristyy sitä enemmän alaspäin, mitä enemmän puuttuvia arvoja on. Keskiarvo voidaan sen sijaan laskea niin, että jakajana käytetään havaittujen arvojen määrää. Tämä onnistuu <code>na.rm = TRUE</code>-komennolla.</p>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="harjoituskerta-4.html#cb168-1" aria-hidden="true" tabindex="-1"></a>ess<span class="sc">$</span>luot_kes <span class="ot">&lt;-</span> <span class="fu">rowMeans</span>(ess[, <span class="fu">c</span>(<span class="st">&quot;b6&quot;</span>, <span class="st">&quot;b7&quot;</span>, <span class="st">&quot;b8&quot;</span>, <span class="st">&quot;b9&quot;</span>, <span class="st">&quot;b10&quot;</span>, <span class="st">&quot;b11&quot;</span>, <span class="st">&quot;b12&quot;</span>)], <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb168-2"><a href="harjoituskerta-4.html#cb168-2" aria-hidden="true" tabindex="-1"></a>ess<span class="sc">$</span>luot_sum <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(ess[, <span class="fu">c</span>(<span class="st">&quot;b6&quot;</span>, <span class="st">&quot;b7&quot;</span>, <span class="st">&quot;b8&quot;</span>, <span class="st">&quot;b9&quot;</span>, <span class="st">&quot;b10&quot;</span>, <span class="st">&quot;b11&quot;</span>, <span class="st">&quot;b12&quot;</span>)], <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb168-3"><a href="harjoituskerta-4.html#cb168-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb168-4"><a href="harjoituskerta-4.html#cb168-4" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb168-5"><a href="harjoituskerta-4.html#cb168-5" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(ess<span class="sc">$</span>luot_kes, <span class="at">main =</span> <span class="st">&quot;Keskiarvo&quot;</span>)</span>
+<span id="cb168-6"><a href="harjoituskerta-4.html#cb168-6" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(ess<span class="sc">$</span>luot_sum, <span class="at">main =</span> <span class="st">&quot;Summa&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-75-1.png" width="672" /></p>
 
 </div>
 </div>

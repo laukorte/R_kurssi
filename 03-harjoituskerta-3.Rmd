@@ -40,27 +40,27 @@ summary(aineisto)
 Muuttujat näyttäisivät sisältävän myös puuttuvat arvot, joten muutetaan ne `NA` -arvolla.
 
 ```{r}
-aineisto$b26[ess$b26 %in% c(98, 99)] <- NA
-aineisto$b27[ess$b27 == 99] <- NA
+ess$b26[ess$b26 %in% c(98, 99)] <- NA
+ess$b27[ess$b27 == 99] <- NA
 
-aineisto$b6[ess$b6 == 99] <- NA
-aineisto$b7[ess$b7 == 99] <- NA
-aineisto$b8[ess$b8 == 99] <- NA
-aineisto$b9[ess$b9 == 99] <- NA
-aineisto$b10[ess$b10 == 99] <- NA
-aineisto$b11[ess$b11 == 99] <- NA
-aineisto$b12[ess$b12 == 99] <- NA
+ess$b6[ess$b6 == 99] <- NA
+ess$b7[ess$b7 == 99] <- NA
+ess$b8[ess$b8 == 99] <- NA
+ess$b9[ess$b9 == 99] <- NA
+ess$b10[ess$b10 == 99] <- NA
+ess$b11[ess$b11 == 99] <- NA
+ess$b12[ess$b12 == 99] <- NA
 
-aineisto$c1[ess$c1 == 99] <- NA
-aineisto$c6[ess$c6 == 9] <- NA
-aineisto$c7[ess$c7 %in% c(8, 9)] <- NA
+ess$c1[ess$c1 == 99] <- NA
+ess$c6[ess$c6 == 9] <- NA
+ess$c7[ess$c7 %in% c(8, 9)] <- NA
 
-aineisto$d24[ess$d24 %in% c(8, 9)] <- NA
+ess$d24[ess$d24 %in% c(8, 9)] <- NA
 
-aineisto$e4[ess$e4 == 99] <- NA
+ess$e4[ess$e4 == 99] <- NA
 
-aineisto$f14[ess$f14 == 9] <- NA
-aineisto$f15[ess$f15 %in% c(98, 99)] <- NA
+ess$f14[ess$f14 == 9] <- NA
+ess$f15[ess$f15 %in% c(98, 99)] <- NA
 ```
 
 Toistaiseksi olemme nojautuneet muuttujien tulkinnoissa data dictionaryyn tai European Social Surveyn koodikirjaan. R tukee myös muuttujien arvojen nimeämistä. Ensimmäisellä harjoituskerralla muutimme joitakin muutimme joitakin muuttujia luokittelu- tai järjestysasteikollisiksi `factor()`-komennolla. Tässä yhteydessä muuttujan arvoille voidaan määrittää myös sisältö. Tehdään ensin uusi vektori f14-muuttujasta ja tarkastellaan sen sisältöä.

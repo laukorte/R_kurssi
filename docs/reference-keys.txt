@@ -53,5 +53,6 @@ korrelaatiokertoimen-tulkinta
 kaksi-erilaista-korrelaatiokerrointa
 onnellisuuden-ja-iän-välinen-yhteys
 cronbachin-alpha-reliabiliteetin-mittana
+summamuuttujan-luominen
 harjoituskerta-5
 harjoituskerta-6
