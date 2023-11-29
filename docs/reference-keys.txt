@@ -55,4 +55,11 @@ onnellisuuden-ja-iän-välinen-yhteys
 cronbachin-alpha-reliabiliteetin-mittana
 summamuuttujan-luominen
 harjoituskerta-5
+pakettien-asennus
+keskiarvotestit
+levenen-testi
+hauskaa-rllä
+itsenäinen-narjoitus
+yksisuuntainen-varianssianalyysi-eli-anova
+harjoitus-poliittinen-orientaatio-ja-työttömien-elintavat
 harjoituskerta-6

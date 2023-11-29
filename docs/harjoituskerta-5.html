@@ -29,7 +29,7 @@ The HTML output format for this example is bookdown::gitbook,</p>" />
 <meta name="author" content="Terhi Auvinen, Samuli Koponen, Lauri Kortelainen &amp; Antti Kouvo" />
 
 
-<meta name="date" content="2023-11-22" />
+<meta name="date" content="2023-11-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -242,7 +242,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3" data-path="harjoituskerta-4.html"><a href="harjoituskerta-4.html#cronbachin-alpha-reliabiliteetin-mittana"><i class="fa fa-check"></i><b>4.3</b> Cronbachin alpha reliabiliteetin mittana</a></li>
 <li class="chapter" data-level="4.4" data-path="harjoituskerta-4.html"><a href="harjoituskerta-4.html#summamuuttujan-luominen"><i class="fa fa-check"></i><b>4.4</b> Summamuuttujan luominen</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="harjoituskerta-5.html"><a href="harjoituskerta-5.html"><i class="fa fa-check"></i><b>5</b> Harjoituskerta 5</a></li>
+<li class="chapter" data-level="5" data-path="harjoituskerta-5.html"><a href="harjoituskerta-5.html"><i class="fa fa-check"></i><b>5</b> Harjoituskerta 5</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="harjoituskerta-5.html"><a href="harjoituskerta-5.html#pakettien-asennus"><i class="fa fa-check"></i><b>5.1</b> Pakettien asennus</a></li>
+<li class="chapter" data-level="5.2" data-path="harjoituskerta-5.html"><a href="harjoituskerta-5.html#keskiarvotestit"><i class="fa fa-check"></i><b>5.2</b> Keskiarvotestit</a></li>
+<li class="chapter" data-level="5.3" data-path="harjoituskerta-5.html"><a href="harjoituskerta-5.html#levenen-testi"><i class="fa fa-check"></i><b>5.3</b> Levenen testi</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="harjoituskerta-5.html"><a href="harjoituskerta-5.html#hauskaa-rllä"><i class="fa fa-check"></i><b>5.3.1</b> Hauskaa R:llä</a></li>
+<li class="chapter" data-level="5.3.2" data-path="harjoituskerta-5.html"><a href="harjoituskerta-5.html#itsenäinen-narjoitus"><i class="fa fa-check"></i><b>5.3.2</b> Itsenäinen narjoitus</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="harjoituskerta-5.html"><a href="harjoituskerta-5.html#yksisuuntainen-varianssianalyysi-eli-anova"><i class="fa fa-check"></i><b>5.4</b> Yksisuuntainen varianssianalyysi eli ANOVA</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="harjoituskerta-5.html"><a href="harjoituskerta-5.html#harjoitus-poliittinen-orientaatio-ja-työttömien-elintavat"><i class="fa fa-check"></i><b>5.4.1</b> Harjoitus: Poliittinen orientaatio ja työttömien elintavat</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="6" data-path="harjoituskerta-6.html"><a href="harjoituskerta-6.html"><i class="fa fa-check"></i><b>6</b> Harjoituskerta 6</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -326,7 +339,199 @@ Kertausta ja ohjausta ryhmätehtävään
 </tr>
 </tbody>
 </table>
+<div id="pakettien-asennus" class="section level2 hasAnchor" number="5.1">
+<h2><span class="header-section-number">5.1</span> Pakettien asennus<a href="harjoituskerta-5.html#pakettien-asennus" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<!--
+`# ``{r}
+# install.packages("car")
+# library(car)
+```
+-->
+</div>
+<div id="keskiarvotestit" class="section level2 hasAnchor" number="5.2">
+<h2><span class="header-section-number">5.2</span> Keskiarvotestit<a href="harjoituskerta-5.html#keskiarvotestit" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Keskiarvotestit on jaoteltavissa tarkasteltavien ryhmien määrän mukaan:
+* Yksi → yhden otoksen t-testi * Kaksi → riippumattomien otosten tai
+toistettujen mittausten t-testi * Monta → ANOVA</p>
+<p>Riippumattomien otosten t-testi käytetään, kun halutaan tutkia,
+eroavatko kahden toisistaan riippumattoman ryhmän keskiarvot toisistaan
+(perusjoukossa) (Nummenmaa 2009, 175). Riippuvat otokset = samoja
+henkilöitä on mitattu kaksi eri kertaa Tällöin riippumattomien otosten
+t-testi testaa hypoteesia “ryhmien keskiarvot ovat samat” ja
+vastahypoteesi on muotoa “ryhmien keskiarvot eroavat toisistaan”.
+Oletukset: Selitettävän muuttujan tulee olla vähintään
+välimatka-asteikollinen Riippuvan muuttujan jakaumat molemmissa ryhmissä
+noudattavat normaalijakaumaa Ekstraa: normaalisuustesti SPSS:ssä (ks.</p>
+<p>Otoskoon tulee olla riittävän suuri (yli 30) Riippuvan muuttujan
+varianssit ovat yhtä suuret (lähellä toisiaan) → Levenen testi</p>
+</div>
+<div id="levenen-testi" class="section level2 hasAnchor" number="5.3">
+<h2><span class="header-section-number">5.3</span> Levenen testi<a href="harjoituskerta-5.html#levenen-testi" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Muuttujien varianssi voi vaihdella ryhmien välillä. Jos varianssi on
+suurta, keskiarvon erojen tulkinta on vaikea. Seuraavassa kuviossa on
+pyritty havainnollistamaan tätä. Ensimmäisessä kuviossa varianssit ovat
+suurempia ja on vaikea sanoa, eroavatko esimerkiksi sinisen ja vihreän
+jakauman keskiarvot toisistaan. Alemmassa kuviossa on samat keskiarvot,
+mutta pienempi varianssi. Kuviosta nähdään välittömästi, miten
+keskiarvot eroavat toisistaan.</p>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="harjoituskerta-5.html#cb166-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">10</span>, <span class="dv">10</span>, <span class="at">length =</span> <span class="dv">100</span>)</span>
+<span id="cb166-2"><a href="harjoituskerta-5.html#cb166-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb166-3"><a href="harjoituskerta-5.html#cb166-3" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>))</span>
+<span id="cb166-4"><a href="harjoituskerta-5.html#cb166-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, <span class="fu">dnorm</span>(x, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>),</span>
+<span id="cb166-5"><a href="harjoituskerta-5.html#cb166-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">&quot;l&quot;</span>,</span>
+<span id="cb166-6"><a href="harjoituskerta-5.html#cb166-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">lwd =</span> <span class="dv">2</span>,</span>
+<span id="cb166-7"><a href="harjoituskerta-5.html#cb166-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb166-8"><a href="harjoituskerta-5.html#cb166-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">6</span>, <span class="dv">6</span>))</span>
+<span id="cb166-9"><a href="harjoituskerta-5.html#cb166-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb166-10"><a href="harjoituskerta-5.html#cb166-10" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(x, <span class="fu">dnorm</span>(x, <span class="at">mean =</span> <span class="fl">1.5</span>, <span class="at">sd =</span> <span class="fl">1.25</span>))</span>
+<span id="cb166-11"><a href="harjoituskerta-5.html#cb166-11" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(x, <span class="fu">dnorm</span>(x, <span class="at">mean =</span> <span class="sc">-</span><span class="fl">1.5</span>, <span class="at">sd =</span> <span class="dv">2</span>))</span>
+<span id="cb166-12"><a href="harjoituskerta-5.html#cb166-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb166-13"><a href="harjoituskerta-5.html#cb166-13" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">6</span>, <span class="dv">6</span>, <span class="at">length =</span> <span class="dv">100</span>)</span>
+<span id="cb166-14"><a href="harjoituskerta-5.html#cb166-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb166-15"><a href="harjoituskerta-5.html#cb166-15" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(y, <span class="fu">dnorm</span>(y, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="fl">0.5</span>),</span>
+<span id="cb166-16"><a href="harjoituskerta-5.html#cb166-16" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">&quot;l&quot;</span>,</span>
+<span id="cb166-17"><a href="harjoituskerta-5.html#cb166-17" aria-hidden="true" tabindex="-1"></a>     <span class="at">lwd =</span> <span class="dv">2</span>,</span>
+<span id="cb166-18"><a href="harjoituskerta-5.html#cb166-18" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb166-19"><a href="harjoituskerta-5.html#cb166-19" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">6</span>, <span class="dv">6</span>))</span>
+<span id="cb166-20"><a href="harjoituskerta-5.html#cb166-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb166-21"><a href="harjoituskerta-5.html#cb166-21" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(y, <span class="fu">dnorm</span>(y, <span class="at">mean =</span> <span class="fl">1.5</span>, <span class="at">sd =</span> <span class="fl">0.6</span>))</span>
+<span id="cb166-22"><a href="harjoituskerta-5.html#cb166-22" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(y, <span class="fu">dnorm</span>(y, <span class="at">mean =</span> <span class="sc">-</span><span class="fl">1.5</span>, <span class="at">sd =</span> <span class="fl">0.7</span>))</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-76-1.png" width="672" /></p>
+<p>Tästä syystä ennen keskiarvotestejä tehdään Levenen testi, jolla
+selvitetään, eroavatko keskiarvot toisistaan. Tarkastellaan seuraavaksi,
+onko naisten ja miesten kokemassa onnellisuudessa eroja. Ensin tehdään
+Levenen testi, jonka perusteella valitaan sopiva t-testi.</p>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="harjoituskerta-5.html#cb167-1" aria-hidden="true" tabindex="-1"></a><span class="fu">leveneTest</span>(ess<span class="sc">$</span>c1 <span class="sc">~</span> ess<span class="sc">$</span>sukupuoli)</span></code></pre></div>
+<pre><code>## Levene&#39;s Test for Homogeneity of Variance (center = median)
+##         Df F value Pr(&gt;F)
+## group    1  1.5516 0.2131
+##       1920</code></pre>
+<p>Testin p-arvo on 0.21 eli reilusti yli halutun 0.05 rajan. Testi ei siis
+anna syytä hylätä nollahypoteesia (= variansseissa ei ole eroa), jonka
+mukaan varianssit eivät eroa toisistaan, joten tehdään t-testi pitäen
+variansseja yhtäsuurina. Testin peruskomento on <code>t.test(x, y)</code>.</p>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="harjoituskerta-5.html#cb169-1" aria-hidden="true" tabindex="-1"></a>c1f <span class="ot">&lt;-</span> ess<span class="sc">$</span>c1[ess<span class="sc">$</span>sukup <span class="sc">==</span> <span class="dv">1</span>]</span>
+<span id="cb169-2"><a href="harjoituskerta-5.html#cb169-2" aria-hidden="true" tabindex="-1"></a>c1m <span class="ot">&lt;-</span> ess<span class="sc">$</span>c1[ess<span class="sc">$</span>sukup <span class="sc">==</span> <span class="dv">2</span>]</span>
+<span id="cb169-3"><a href="harjoituskerta-5.html#cb169-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb169-4"><a href="harjoituskerta-5.html#cb169-4" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(c1f, c1m, <span class="at">var.equal =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## 
+##  Two Sample t-test
+## 
+## data:  c1f and c1m
+## t = -4.2514, df = 1920, p-value = 2.226e-05
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -0.4066461 -0.1499046
+## sample estimates:
+## mean of x mean of y 
+##  8.005214  8.283489</code></pre>
+<p>Jos ryhmien arvoja ei halua erotella omiksi muuttujikseen, testi voidaan
+tehdä myös komennolla
+<code>t.test(ess$c1[ess$sukupuoli == 1], ess$c1[ess$sukupuoli == 2], var.equal = TRUE)</code>.</p>
+<div id="hauskaa-rllä" class="section level3 hasAnchor" number="5.3.1">
+<h3><span class="header-section-number">5.3.1</span> Hauskaa R:llä<a href="harjoituskerta-5.html#hauskaa-rllä" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Seuraavalla koodilla simuloidaan aineisto kahdesta ryhmästä (n = 20),
+joiden keskiarvot ovat 100 ja 110. Samalla tehdään t-testi, jolla
+testaan erojen tilastollista merkitsevyyttä.</p>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="harjoituskerta-5.html#cb171-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb171-2"><a href="harjoituskerta-5.html#cb171-2" aria-hidden="true" tabindex="-1"></a>parvo <span class="ot">&lt;-</span> <span class="fu">numeric</span>(<span class="dv">1000</span>)</span>
+<span id="cb171-3"><a href="harjoituskerta-5.html#cb171-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb171-4"><a href="harjoituskerta-5.html#cb171-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>) {</span>
+<span id="cb171-5"><a href="harjoituskerta-5.html#cb171-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb171-6"><a href="harjoituskerta-5.html#cb171-6" aria-hidden="true" tabindex="-1"></a>  dist1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb171-7"><a href="harjoituskerta-5.html#cb171-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">ao =</span> <span class="fu">rnorm</span>(n, <span class="dv">100</span>, <span class="dv">15</span>),</span>
+<span id="cb171-8"><a href="harjoituskerta-5.html#cb171-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">luokka =</span> <span class="fu">as.factor</span>(<span class="fu">rep</span>(<span class="dv">1</span>, n))</span>
+<span id="cb171-9"><a href="harjoituskerta-5.html#cb171-9" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb171-10"><a href="harjoituskerta-5.html#cb171-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb171-11"><a href="harjoituskerta-5.html#cb171-11" aria-hidden="true" tabindex="-1"></a>  dist2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb171-12"><a href="harjoituskerta-5.html#cb171-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">ao =</span> <span class="fu">rnorm</span>(n, <span class="dv">110</span>, <span class="dv">15</span>),</span>
+<span id="cb171-13"><a href="harjoituskerta-5.html#cb171-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">luokka =</span> <span class="fu">as.factor</span>(<span class="fu">rep</span>(<span class="dv">0</span>, n))</span>
+<span id="cb171-14"><a href="harjoituskerta-5.html#cb171-14" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb171-15"><a href="harjoituskerta-5.html#cb171-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb171-16"><a href="harjoituskerta-5.html#cb171-16" aria-hidden="true" tabindex="-1"></a>  distribution <span class="ot">&lt;-</span> <span class="fu">rbind</span>(dist1, dist2)</span>
+<span id="cb171-17"><a href="harjoituskerta-5.html#cb171-17" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb171-18"><a href="harjoituskerta-5.html#cb171-18" aria-hidden="true" tabindex="-1"></a>  test <span class="ot">&lt;-</span> <span class="fu">t.test</span>(distribution<span class="sc">$</span>ao <span class="sc">~</span> distribution<span class="sc">$</span>luokka)</span>
+<span id="cb171-19"><a href="harjoituskerta-5.html#cb171-19" aria-hidden="true" tabindex="-1"></a>  parvo[i] <span class="ot">&lt;-</span> test<span class="sc">$</span>p.value</span>
+<span id="cb171-20"><a href="harjoituskerta-5.html#cb171-20" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+</div>
+<div id="itsenäinen-narjoitus" class="section level3 hasAnchor" number="5.3.2">
+<h3><span class="header-section-number">5.3.2</span> Itsenäinen narjoitus<a href="harjoituskerta-5.html#itsenäinen-narjoitus" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Tarkastele riippumattomien otosten t-testillä, onko naisten ja miesten
+luottamuksessa eroa.</p>
+</div>
+</div>
+<div id="yksisuuntainen-varianssianalyysi-eli-anova" class="section level2 hasAnchor" number="5.4">
+<h2><span class="header-section-number">5.4</span> Yksisuuntainen varianssianalyysi eli ANOVA<a href="harjoituskerta-5.html#yksisuuntainen-varianssianalyysi-eli-anova" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Varianssianalyysillä voidaan tutkia, onko selitettävän muuttujan
+keskiarvot tilastollisesti merkitsevästi erisuuruisia selittävän
+muuttujan eri luokissa. Yksisuuntaista varianssianalyysia (ANOVA)
+käytetään, kun tarkasteltavia ryhmiä on enemmän kuin kaksi (= monta) ja
+selitettävästä muuttujasta tulee voida järkevästi laskea (aritmeettinen)
+keskiarvo. ANOVAssa on vain yksi selittävä muuttuja, joka kuvaa
+havaintoyksikköjen jakautumista luokkiin.</p>
+<p>Varianssianalyysin nollahypoteesi on, että ryhmien keskiarvot
+(populaatiossa) ovat samat. Vastahypoteesi on useimmiten muotoa
+“joidenkin ryhmien välillä on eroa”. Jos verrattavista ryhmistä jonkun
+keskiarvo poikkeaa muista, tehdään (suunniteltuja) kontrastivertailuja
+tai käytetään (suunnittelemattomia) Post Hoc -testejä sen
+selvittämiseksi, mitkä ryhmäkeskiarvot poikkeavat toisistaan. Post Hoc
+-testejä käytetään, jos ei ole ennakkotietoa siitä, mitkä ryhmät
+eroaisivat toisistaan. Kontrastivertailuja kannattaa käyttää, jos
+ennakkokäsitys on.</p>
+<p>Yksisuuntaisessa varianssianalyysissa on kolme vaihetta:</p>
+<ol style="list-style-type: decimal">
+<li>Ryhmien varianssin tarkastelu</li>
+</ol>
+<ul>
+<li>Jos varianssit eivät eroa ryhmien välillä, siirrytään tulosten tulkintaan</li>
+<li>Jos varianssit eroavat ryhmien välillä, tehdään Brown-Forsythe-testi, jonka jälkeen siirrytään tulosten tulkintaan</li>
+</ul>
+<ol start="2" style="list-style-type: decimal">
+<li>Testataan, onko ryhmien keskiarvoissa eroa</li>
+</ol>
+<ul>
+<li>Jos ANOVAn (tai Brown-Forsythe –testin) tulos p &lt; 0.05, nollahypoteesi hylätään ja päätellään, että ryhmäkeskiarvoissa on eroa</li>
+</ul>
+<ol start="3" style="list-style-type: decimal">
+<li>Jos kyllä: testataan post hoc -testeillä, minkä ryhmän/ryhmien välillä eroa on</li>
+</ol>
+<div id="harjoitus-poliittinen-orientaatio-ja-työttömien-elintavat" class="section level3 hasAnchor" number="5.4.1">
+<h3><span class="header-section-number">5.4.1</span> Harjoitus: Poliittinen orientaatio ja työttömien elintavat<a href="harjoituskerta-5.html#harjoitus-poliittinen-orientaatio-ja-työttömien-elintavat" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Tarkastellaan seuraavaksi, eroavatko poliittisen vasemmiston, keskustan ja oikeiston käsitykset työttömien elintavoista toisistaan. Jaotellaan ensin poliittinen orientaatio (b26) kolmeen luokkaan.</p>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="harjoituskerta-5.html#cb172-1" aria-hidden="true" tabindex="-1"></a>ess<span class="sc">$</span>e5[ess<span class="sc">$</span>e5 <span class="sc">==</span> <span class="dv">99</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb172-2"><a href="harjoituskerta-5.html#cb172-2" aria-hidden="true" tabindex="-1"></a>ess<span class="sc">$</span>politik <span class="ot">&lt;-</span> <span class="fu">cut</span>(ess<span class="sc">$</span>b26, <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">7</span>, <span class="dv">10</span>), <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Vasemmisto&quot;</span>, <span class="st">&quot;Keskusta&quot;</span>, <span class="st">&quot;Oikeisto&quot;</span>),  <span class="at">include.lowest =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p>Seuraavaksi tarkastellaan ryhmien välisiä variansseja Levenen testillä.</p>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="harjoituskerta-5.html#cb173-1" aria-hidden="true" tabindex="-1"></a><span class="fu">leveneTest</span>(ess<span class="sc">$</span>e5 <span class="sc">~</span> ess<span class="sc">$</span>politik, <span class="at">center =</span> <span class="st">&quot;mean&quot;</span>)</span></code></pre></div>
+<pre><code>## Levene&#39;s Test for Homogeneity of Variance (center = &quot;mean&quot;)
+##         Df F value  Pr(&gt;F)  
+## group    2  3.1002 0.04527 *
+##       1853                  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>Levenen testin mukaan varianssit eroavat toisistaan, joten teemme ANOVAn sen mukaisesti. Malli tallennetaan omaksi “muuttujaksi”, jotta sitä voidaan käyttää mahdollisissa post hoc -testeissä.</p>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="harjoituskerta-5.html#cb175-1" aria-hidden="true" tabindex="-1"></a>malli <span class="ot">&lt;-</span> <span class="fu">oneway.test</span>(ess<span class="sc">$</span>e5 <span class="sc">~</span> ess<span class="sc">$</span>politik, <span class="at">var.equal =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb175-2"><a href="harjoituskerta-5.html#cb175-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(malli)</span></code></pre></div>
+<pre><code>## 
+##  One-way analysis of means (not assuming equal variances)
+## 
+## data:  ess$e5 and ess$politik
+## F = 24.628, num df = 2.00, denom df = 297.55, p-value = 1.266e-10</code></pre>
+<p>Keskiarvoissa on testin mukaan eroja, joten seuraavaksi tarkastellaan parittaisia eroja.</p>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="harjoituskerta-5.html#cb177-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pairwise.t.test</span>(ess<span class="sc">$</span>e5, ess<span class="sc">$</span>politik, <span class="at">p.adj =</span> <span class="st">&quot;bonf&quot;</span>)</span></code></pre></div>
+<pre><code>## 
+##  Pairwise comparisons using t tests with pooled SD 
+## 
+## data:  ess$e5 and ess$politik 
+## 
+##          Vasemmisto Keskusta
+## Keskusta 2.6e-06    -       
+## Oikeisto 5.9e-12    1.0e-05 
+## 
+## P value adjustment method: bonferroni</code></pre>
+<p>Tulosten mukaan kaikkien luokkien keskiarvot eroavat toisistaan tilastollisesti merkitsevällä tavalla.</p>
 
+</div>
+</div>
 </div>
             </section>
 

@@ -274,7 +274,6 @@ vektorin arvoilla 2, "kissa", 5?
 
 ```{r harj1, exercise=TRUE}
 c(1, "kissa")
-
 ```
 
 ### Datakehikko

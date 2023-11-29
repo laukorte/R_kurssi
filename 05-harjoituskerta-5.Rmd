@@ -1,7 +1,193 @@
-# Harjoituskerta 5
+---
+editor_options: 
+  markdown: 
+    wrap: 72
+---
 
+# Harjoituskerta 5
 
 ```{r, echo=FALSE}
 
 luo_kurssiaikataulu(6)
 ```
+
+## Pakettien asennus
+
+<!--
+`# ``{r}
+# install.packages("car")
+# library(car)
+```
+-->
+
+## Keskiarvotestit
+
+Keskiarvotestit on jaoteltavissa tarkasteltavien ryhmien määrän mukaan:
+\* Yksi → yhden otoksen t-testi \* Kaksi → riippumattomien otosten tai
+toistettujen mittausten t-testi \* Monta → ANOVA
+
+Riippumattomien otosten t-testi käytetään, kun halutaan tutkia,
+eroavatko kahden toisistaan riippumattoman ryhmän keskiarvot toisistaan
+(perusjoukossa) (Nummenmaa 2009, 175). Riippuvat otokset = samoja
+henkilöitä on mitattu kaksi eri kertaa Tällöin riippumattomien otosten
+t-testi testaa hypoteesia "ryhmien keskiarvot ovat samat" ja
+vastahypoteesi on muotoa "ryhmien keskiarvot eroavat toisistaan".
+Oletukset: Selitettävän muuttujan tulee olla vähintään
+välimatka-asteikollinen Riippuvan muuttujan jakaumat molemmissa ryhmissä
+noudattavat normaalijakaumaa Ekstraa: normaalisuustesti SPSS:ssä (ks.
+
+Otoskoon tulee olla riittävän suuri (yli 30) Riippuvan muuttujan
+varianssit ovat yhtä suuret (lähellä toisiaan) → Levenen testi
+
+## Levenen testi
+
+Muuttujien varianssi voi vaihdella ryhmien välillä. Jos varianssi on
+suurta, keskiarvon erojen tulkinta on vaikea. Seuraavassa kuviossa on
+pyritty havainnollistamaan tätä. Ensimmäisessä kuviossa varianssit ovat
+suurempia ja on vaikea sanoa, eroavatko esimerkiksi sinisen ja vihreän
+jakauman keskiarvot toisistaan. Alemmassa kuviossa on samat keskiarvot,
+mutta pienempi varianssi. Kuviosta nähdään välittömästi, miten
+keskiarvot eroavat toisistaan.
+
+```{r}
+x <- seq(-10, 10, length = 100)
+
+par(mfrow = c(2, 1))
+plot(x, dnorm(x, mean = 0, sd = 1),
+     type = "l",
+     lwd = 2,
+     ylab = "",
+     xlim = c(-6, 6))
+
+lines(x, dnorm(x, mean = 1.5, sd = 1.25))
+lines(x, dnorm(x, mean = -1.5, sd = 2))
+
+y <- seq(-6, 6, length = 100)
+
+plot(y, dnorm(y, mean = 0, sd = 0.5),
+     type = "l",
+     lwd = 2,
+     ylab = "",
+     xlim = c(-6, 6))
+
+lines(y, dnorm(y, mean = 1.5, sd = 0.6))
+lines(y, dnorm(y, mean = -1.5, sd = 0.7))
+```
+
+Tästä syystä ennen keskiarvotestejä tehdään Levenen testi, jolla
+selvitetään, eroavatko keskiarvot toisistaan. Tarkastellaan seuraavaksi,
+onko naisten ja miesten kokemassa onnellisuudessa eroja. Ensin tehdään
+Levenen testi, jonka perusteella valitaan sopiva t-testi.
+
+```{r}
+leveneTest(ess$c1 ~ ess$sukupuoli)
+```
+
+Testin p-arvo on 0.21 eli reilusti yli halutun 0.05 rajan. Testi ei siis
+anna syytä hylätä nollahypoteesia (= variansseissa ei ole eroa), jonka
+mukaan varianssit eivät eroa toisistaan, joten tehdään t-testi pitäen
+variansseja yhtäsuurina. Testin peruskomento on `t.test(x, y)`.
+
+```{r}
+c1f <- ess$c1[ess$sukup == 1]
+c1m <- ess$c1[ess$sukup == 2]
+
+t.test(c1f, c1m, var.equal = TRUE)
+```
+
+Jos ryhmien arvoja ei halua erotella omiksi muuttujikseen, testi voidaan
+tehdä myös komennolla
+`t.test(ess$c1[ess$sukupuoli == 1], ess$c1[ess$sukupuoli == 2], var.equal = TRUE)`.
+
+### Hauskaa R:llä
+
+Seuraavalla koodilla simuloidaan aineisto kahdesta ryhmästä (n = 20),
+joiden keskiarvot ovat 100 ja 110. Samalla tehdään t-testi, jolla
+testaan erojen tilastollista merkitsevyyttä.
+
+```{r}
+n <- 10
+parvo <- numeric(1000)
+
+for (i in 1:1000) {
+  
+  dist1 <- data.frame(
+    ao = rnorm(n, 100, 15),
+    luokka = as.factor(rep(1, n))
+  )
+  
+  dist2 <- data.frame(
+    ao = rnorm(n, 110, 15),
+    luokka = as.factor(rep(0, n))
+  )
+
+  distribution <- rbind(dist1, dist2)
+  
+  test <- t.test(distribution$ao ~ distribution$luokka)
+  parvo[i] <- test$p.value
+}
+```
+
+### Itsenäinen narjoitus
+
+Tarkastele riippumattomien otosten t-testillä, onko naisten ja miesten
+luottamuksessa eroa.
+
+## Yksisuuntainen varianssianalyysi eli ANOVA
+
+Varianssianalyysillä voidaan tutkia, onko selitettävän muuttujan
+keskiarvot tilastollisesti merkitsevästi erisuuruisia selittävän
+muuttujan eri luokissa. Yksisuuntaista varianssianalyysia (ANOVA)
+käytetään, kun tarkasteltavia ryhmiä on enemmän kuin kaksi (= monta) ja
+selitettävästä muuttujasta tulee voida järkevästi laskea (aritmeettinen)
+keskiarvo. ANOVAssa on vain yksi selittävä muuttuja, joka kuvaa
+havaintoyksikköjen jakautumista luokkiin.
+
+Varianssianalyysin nollahypoteesi on, että ryhmien keskiarvot
+(populaatiossa) ovat samat. Vastahypoteesi on useimmiten muotoa
+"joidenkin ryhmien välillä on eroa". Jos verrattavista ryhmistä jonkun
+keskiarvo poikkeaa muista, tehdään (suunniteltuja) kontrastivertailuja
+tai käytetään (suunnittelemattomia) Post Hoc -testejä sen
+selvittämiseksi, mitkä ryhmäkeskiarvot poikkeavat toisistaan. Post Hoc
+-testejä käytetään, jos ei ole ennakkotietoa siitä, mitkä ryhmät
+eroaisivat toisistaan. Kontrastivertailuja kannattaa käyttää, jos
+ennakkokäsitys on.
+
+Yksisuuntaisessa varianssianalyysissa on kolme vaihetta:
+
+1. Ryhmien varianssin tarkastelu
+  + Jos varianssit eivät eroa ryhmien välillä, siirrytään tulosten tulkintaan
+  + Jos varianssit eroavat ryhmien välillä, tehdään Brown-Forsythe-testi, jonka jälkeen siirrytään tulosten tulkintaan
+2. Testataan, onko ryhmien keskiarvoissa eroa
+  + Jos ANOVAn (tai Brown-Forsythe --testin) tulos p < 0.05, nollahypoteesi hylätään ja päätellään, että ryhmäkeskiarvoissa on eroa
+3. Jos kyllä: testataan post hoc -testeillä, minkä ryhmän/ryhmien välillä eroa on
+
+### Harjoitus: Poliittinen orientaatio ja työttömien elintavat
+
+Tarkastellaan seuraavaksi, eroavatko poliittisen vasemmiston, keskustan ja oikeiston käsitykset työttömien elintavoista toisistaan. Jaotellaan ensin poliittinen orientaatio (b26) kolmeen luokkaan.
+
+```{r ANOVA ja Levene}
+ess$e5[ess$e5 == 99] <- NA
+ess$politik <- cut(ess$b26, breaks = c(0, 2, 7, 10), labels = c("Vasemmisto", "Keskusta", "Oikeisto"),  include.lowest = TRUE)
+```
+
+Seuraavaksi tarkastellaan ryhmien välisiä variansseja Levenen testillä.
+
+```{r Levene_toinen}
+leveneTest(ess$e5 ~ ess$politik, center = "mean")
+```
+
+Levenen testin mukaan varianssit eroavat toisistaan, joten teemme ANOVAn sen mukaisesti. Malli tallennetaan omaksi "muuttujaksi", jotta sitä voidaan käyttää mahdollisissa post hoc -testeissä.
+
+```{r}
+malli <- oneway.test(ess$e5 ~ ess$politik, var.equal = FALSE)
+print(malli)
+```
+
+Keskiarvoissa on testin mukaan eroja, joten seuraavaksi tarkastellaan parittaisia eroja.
+
+```{r}
+pairwise.t.test(ess$e5, ess$politik, p.adj = "bonf")
+```
+
+Tulosten mukaan kaikkien luokkien keskiarvot eroavat toisistaan tilastollisesti merkitsevällä tavalla.

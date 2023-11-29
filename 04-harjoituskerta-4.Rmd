@@ -9,10 +9,12 @@ luo_kurssiaikataulu(5)
 
 Seuraavassa käytetään joitakin komentoja, joita ei löydy R:n oletuskirjastosta. Seuraavassa asennetaan `psych`-paketti, joka sisältää persoonallisuuden, psykometriikan ja psykologian tutkimukseen liittyviä työkaluja.
 
-```{r Psych-paketin asentaminen, message = FALSE}
-install.packages("psych")
-library(psych)
-```
+<!--
+# ```{r Psych-paketin asentaminen, message = FALSE}
+# install.packages("psych")
+# library(psych)
+# ```
+-->
 
 ## Korrelaatio
 
